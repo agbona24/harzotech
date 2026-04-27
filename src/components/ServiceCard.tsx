@@ -81,6 +81,20 @@ export function ServiceCard({ service }: { service: Service }) {
           {service.summary}
         </p>
 
+        {/* Outcome tags */}
+        {service.tags && service.tags.length > 0 && (
+          <div className="relative mt-4 flex flex-wrap gap-1.5">
+            {service.tags.map((tag) => (
+              <span
+                key={tag}
+                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wide ${v.iconBg} ${v.iconText} ring-1 ring-inset ring-current/20`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
         {service.href ? (
           <div className="relative mt-5 border-t border-slate-100 pt-4">
             <Link
