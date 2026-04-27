@@ -1,3 +1,4 @@
+import type React from "react";
 import { HeroBackground } from "@/components/HeroBackground";
 import { ClientsMarquee } from "@/components/ClientsMarquee";
 import { WhyHarzotech } from "@/components/WhyHarzotech";
@@ -15,6 +16,8 @@ import { site } from "@/data/site";
 import { ScrollCarousel } from "@/components/ScrollCarousel";
 import { AIAutomationWidget } from "@/components/AIAutomationWidget";
 import { ServiceCard } from "@/components/ServiceCard";
+import { WebsiteTypesWidget } from "@/components/WebsiteTypesWidget";
+import { SoftwareSystemsWidget } from "@/components/SoftwareSystemsWidget";
 import { ProjectCard } from "@/components/ProjectCard";
 import { FadeIn } from "@/components/Motion";
 import { HeroServicesPanel } from "@/components/HeroServicesPanel";
@@ -24,8 +27,6 @@ import {
   Briefcase,
   Building,
   Building2,
-  CheckCircle2,
-  Code2,
   Coffee,
   ExternalLink,
   Factory,
@@ -80,11 +81,11 @@ export default function Home() {
   return (
     <div>
       {/* ── 1. Hero ────────────────────────────────────────────── */}
-      <Section variant="dark" className="relative flex min-h-screen flex-col overflow-hidden pt-24 pb-0 sm:pt-28">
+      <Section variant="dark" className="relative flex min-h-screen flex-col overflow-hidden pt-20 pb-0 sm:pt-28">
         <HeroBackground />
 
         <Container>
-          <div className="relative grid gap-16 lg:grid-cols-2 lg:items-center">
+          <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
             {/* Left */}
             <div>
               <FadeIn>
@@ -95,8 +96,8 @@ export default function Home() {
               </FadeIn>
 
               <FadeIn delay={0.08}>
-                <h1 className="mt-6 font-bold tracking-tight text-white leading-[1.08]">
-                  <span className="block text-5xl sm:text-6xl">
+                <h1 className="mt-5 font-bold tracking-tight text-white leading-[1.1]">
+                  <span className="block text-[2.6rem] sm:text-5xl lg:text-6xl">
                     Transforming Ideas into{" "}
                     <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">
                       Digital Reality.
@@ -106,7 +107,7 @@ export default function Home() {
               </FadeIn>
 
               <FadeIn delay={0.16}>
-                <p className="mt-6 max-w-xl text-base leading-8 text-slate-300">
+                <p className="mt-5 max-w-xl text-[15px] leading-7 text-slate-300 sm:text-base sm:leading-8">
                   Harzotech is a technology company that builds premium websites,
                   custom software, AI automation systems, SEO visibility, and digital
                   growth engines — so your business works smarter and scales faster.
@@ -114,19 +115,33 @@ export default function Home() {
               </FadeIn>
 
               <FadeIn delay={0.24}>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <ButtonLink href="/contact?intent=start-project" variant="cta">
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                  <ButtonLink href="/contact?intent=start-project" variant="cta" className="w-full justify-center sm:w-auto">
                     Start a Project →
                   </ButtonLink>
-                  <ButtonLink href="/projects" variant="outline-white">
+                  <ButtonLink href="/projects" variant="outline-white" className="w-full justify-center sm:w-auto">
                     View Our Work
                   </ButtonLink>
                 </div>
               </FadeIn>
+
+              {/* Mobile trust chips */}
+              <FadeIn delay={0.32}>
+                <div className="mt-8 flex flex-wrap gap-2 lg:hidden">
+                  {["50+ Projects", "10+ Years", "24/7 Automation"].map((s) => (
+                    <span key={s} className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-400">
+                      <span className="h-1 w-1 rounded-full bg-brand-blue-400" />
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </FadeIn>
             </div>
 
-            {/* Right: Services panel */}
-            <HeroServicesPanel />
+            {/* Right: Services panel — desktop only */}
+            <div className="hidden lg:block">
+              <HeroServicesPanel />
+            </div>
           </div>
         </Container>
 
@@ -137,9 +152,9 @@ export default function Home() {
             style={{ animation: "marquee 32s linear infinite" }}
           >
             {[...marqueeStats, ...marqueeStats].map((t, i) => (
-              <div key={i} className="flex shrink-0 items-center gap-3 px-10 py-4">
+              <div key={i} className="flex shrink-0 items-center gap-3 px-8 py-3.5 sm:px-10 sm:py-4">
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue-400" />
-                <span className="whitespace-nowrap text-sm font-semibold text-slate-300">{t}</span>
+                <span className="whitespace-nowrap text-xs font-semibold text-slate-300 sm:text-sm">{t}</span>
               </div>
             ))}
           </div>
@@ -155,26 +170,26 @@ export default function Home() {
               <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-700" />
               <p className="text-xs font-semibold tracking-[0.18em] uppercase text-brand-blue-700">Who We Are</p>
             </div>
-            <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
               More Than an IT Company —{" "}
               <span className="text-brand-blue-700">A Digital Growth Partner</span>
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-600">
+            <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-7 text-slate-600 sm:text-base sm:leading-8">
               Harzotech combines technology, design, automation, SEO, software development,
               and business strategy to create digital solutions that solve real business problems.
             </p>
           </div>
 
-          <div className="relative mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="relative mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-4 sm:grid-cols-4">
             {[
               { value: "10+",  label: "Years Experience",    color: "text-brand-blue-700" },
               { value: "50+",  label: "Projects Delivered",  color: "text-brand-red-700"  },
               { value: "8+",   label: "Industries Served",   color: "text-navy-800"       },
               { value: "24/7", label: "Automation Systems",  color: "text-emerald-700"    },
             ].map((s) => (
-              <div key={s.label} className="group rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-                <p className={`text-4xl font-black tracking-tight ${s.color}`}>{s.value}</p>
-                <p className="mt-2 text-xs font-medium text-slate-500">{s.label}</p>
+              <div key={s.label} className="group rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+                <p className={`text-3xl sm:text-4xl font-black tracking-tight ${s.color}`}>{s.value}</p>
+                <p className="mt-1.5 text-[11px] sm:text-xs font-medium text-slate-500">{s.label}</p>
               </div>
             ))}
           </div>
@@ -197,10 +212,10 @@ export default function Home() {
                 <p className="text-xs font-semibold tracking-[0.18em] uppercase text-brand-blue-300">About</p>
                 <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-300" />
               </div>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
                 Built on Experience, Strategy, and Innovation
               </h2>
-              <p className="mt-5 text-base leading-8 text-slate-300">
+              <p className="mt-4 text-[15px] leading-7 text-slate-300 sm:text-base sm:leading-8">
                 Harzotech Nig Ltd is a privately owned technology solutions company helping
                 businesses simplify operations, strengthen their digital presence, and scale
                 through reliable digital systems.
@@ -263,14 +278,14 @@ export default function Home() {
         <Container>
           <div className="relative flex flex-col gap-12">
             {/* Header row with "View All" CTA */}
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <SectionHeading
                 eyebrow="Services"
                 title="Technology Services Designed for Business Growth"
                 description="Build credibility, reduce manual work, improve operations, and increase visibility with technology that supports long-term growth."
               />
               <div className="shrink-0">
-                <ButtonLink href="/services" variant="secondary">View All Services</ButtonLink>
+                <ButtonLink href="/services" variant="secondary" className="w-full sm:w-auto">View All Services</ButtonLink>
               </div>
             </div>
             {/* Horizontal scroll row */}
@@ -281,7 +296,7 @@ export default function Home() {
               cardWidth={288}
             >
               {services.map((s) => (
-                <div key={s.id} className="w-72 shrink-0 snap-start">
+                <div key={s.id} className="w-[82vw] shrink-0 snap-start sm:w-72">
                   <ServiceCard service={s} />
                 </div>
               ))}
@@ -297,14 +312,14 @@ export default function Home() {
           <div className="relative flex flex-col gap-8">
 
             {/* Header */}
-            <div className="flex items-end justify-between gap-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <SectionHeading
                 eyebrow="Projects"
                 title="Selected Work"
                 dark
               />
-              <div className="shrink-0 pb-1">
-                <ButtonLink href="/projects" variant="secondary">View All 50+ Projects</ButtonLink>
+              <div className="shrink-0">
+                <ButtonLink href="/projects" variant="secondary" className="w-full sm:w-auto">View All 50+ Projects</ButtonLink>
               </div>
             </div>
 
@@ -316,7 +331,7 @@ export default function Home() {
               cardWidth={288}
             >
               {projects.slice(0, 10).map((p) => (
-                <div key={p.slug} className="w-64 shrink-0 snap-start sm:w-72">
+                <div key={p.slug} className="w-[78vw] shrink-0 snap-start sm:w-72">
                   {p.url ? (
                     <a
                       href={p.url}
@@ -391,7 +406,7 @@ export default function Home() {
                 description="Reduce manual work, improve customer communication, manage leads, confirm appointments, automate responses, and streamline daily operations."
                 dark
               />
-              <div className="mt-7 grid gap-2.5">
+              <div className="mt-6 grid gap-2 sm:gap-2.5">
                 {[
                   "AI voice agents",
                   "WhatsApp automation",
@@ -401,14 +416,14 @@ export default function Home() {
                   "Customer support automation",
                   "Google Sheets, Airtable, Zapier, n8n, Twilio, and OpenAI integrations",
                 ].map((f) => (
-                  <div key={f} className="flex items-start gap-2.5 text-sm text-slate-300">
+                  <div key={f} className="flex items-start gap-2.5 rounded-xl border border-white/[0.06] bg-white/[0.03] px-3 py-2.5 text-sm text-slate-300">
                     <Zap className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue-300" />
                     <span>{f}</span>
                   </div>
                 ))}
               </div>
-              <div className="mt-8">
-                <ButtonLink href="/ai-automation" variant="cta">Explore AI Automation →</ButtonLink>
+              <div className="mt-7">
+                <ButtonLink href="/ai-automation" variant="cta" className="w-full sm:w-auto">Explore AI Automation →</ButtonLink>
               </div>
             </div>
 
@@ -421,26 +436,8 @@ export default function Home() {
       <Section>
         <Container>
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="order-2 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm lg:order-1">
-              <div className="flex items-center gap-1.5 border-b border-slate-100 bg-slate-50 px-4 py-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-                <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                <div className="ml-3 flex-1 rounded-full bg-slate-200 px-3 py-1 text-[11px] text-slate-400">
-                  harzotech.com/your-business
-                </div>
-              </div>
-              <div className="p-5">
-                <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400">Website types we build</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {["Business websites","Corporate websites","Landing pages","E-commerce websites","Real estate websites","Healthcare websites","SaaS websites","SEO-ready websites"].map((item) => (
-                    <div key={item} className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5">
-                      <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-brand-blue-700" />
-                      <p className="text-xs font-medium text-slate-700">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <div className="order-2 lg:order-1">
+              <WebsiteTypesWidget />
             </div>
 
             <div className="order-1 lg:order-2">
@@ -448,16 +445,16 @@ export default function Home() {
                 <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-700" />
                 <p className="text-xs font-semibold tracking-[0.18em] uppercase text-brand-blue-700">Website Development</p>
               </div>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl lg:text-4xl">
                 Websites Built With Strategy, Not Just Design
               </h2>
-              <p className="mt-5 text-base leading-8 text-slate-600">
+              <p className="mt-4 text-[15px] leading-7 text-slate-600 sm:text-base sm:leading-8">
                 A website should build trust, explain your offer clearly, guide users to take
                 action, and support your business goals. Harzotech builds with structure, SEO,
                 performance, responsiveness, conversion, and brand credibility in mind.
               </p>
-              <div className="mt-8">
-                <ButtonLink href="/website-development" variant="secondary">Explore Website Development</ButtonLink>
+              <div className="mt-7">
+                <ButtonLink href="/website-development" variant="secondary" className="w-full sm:w-auto">Explore Website Development</ButtonLink>
               </div>
             </div>
           </div>
@@ -473,38 +470,20 @@ export default function Home() {
                 <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-700" />
                 <p className="text-xs font-semibold tracking-[0.18em] uppercase text-brand-blue-700">Software Development</p>
               </div>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl lg:text-4xl">
                 Custom Software That Solves Real Business Problems
               </h2>
-              <p className="mt-5 text-base leading-8 text-slate-600">
+              <p className="mt-4 text-[15px] leading-7 text-slate-600 sm:text-base sm:leading-8">
                 Harzotech develops software systems that help businesses manage operations,
                 customers, sales, inventory, bookings, payments, staff, and reporting from
                 one reliable platform.
               </p>
-              <div className="mt-8">
-                <ButtonLink href="/software-development" variant="secondary">Explore Software Development</ButtonLink>
+              <div className="mt-7">
+                <ButtonLink href="/software-development" variant="secondary" className="w-full sm:w-auto">Explore Software Development</ButtonLink>
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-              <div className="border-b border-slate-100 bg-navy-950 px-5 py-3.5">
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-                  <p className="text-xs font-semibold text-slate-300">Harzotech System Suite</p>
-                </div>
-              </div>
-              <div className="p-5">
-                <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400">Systems we build</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {["POS systems","Inventory systems","Restaurant systems","Hotel systems","School management","Hospital & pharmacy","Booking systems","CRM dashboards","SaaS platforms","Admin portals"].map((item) => (
-                    <div key={item} className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5">
-                      <Code2 className="h-3.5 w-3.5 shrink-0 text-brand-blue-700" />
-                      <p className="text-xs font-medium text-slate-700">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <SoftwareSystemsWidget />
           </div>
         </Container>
       </Section>
@@ -525,15 +504,17 @@ export default function Home() {
               align="center"
               dark
             />
-            <div className="relative mt-14">
+            <div className="relative mt-10 sm:mt-14">
+              {/* Desktop connector line */}
               <div className="absolute left-[10%] right-[10%] top-8 hidden h-px bg-gradient-to-r from-transparent via-white/15 to-transparent lg:block" />
-              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+              {/* Mobile: horizontal scroll, Desktop: grid */}
+              <div className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory lg:grid lg:grid-cols-5 lg:gap-8 lg:overflow-visible lg:pb-0">
                 {processSteps.map((s, idx) => (
-                  <div key={s.title} className="flex flex-col items-center text-center">
-                    <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-brand-blue-500/40 bg-gradient-to-br from-brand-blue-700/25 to-brand-blue-900/10 text-2xl font-black text-brand-blue-300">
+                  <div key={s.title} className="flex w-[72vw] shrink-0 snap-start flex-col items-center rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 text-center sm:w-64 lg:w-auto lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0">
+                    <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-brand-blue-500/40 bg-gradient-to-br from-brand-blue-700/25 to-brand-blue-900/10 text-xl font-black text-brand-blue-300 sm:h-16 sm:w-16 sm:text-2xl">
                       {idx + 1}
                     </div>
-                    <div className="mt-5">
+                    <div className="mt-4">
                       <p className="text-sm font-semibold text-white">{s.title}</p>
                       <p className="mt-2 text-sm leading-6 text-slate-400">{s.description}</p>
                     </div>
@@ -555,62 +536,68 @@ export default function Home() {
               description="Experience across multiple sectors — with solutions tailored to each industry's operational realities and customer behaviour."
             />
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {[
-              { name: "Healthcare",              Icon: Activity      },
-              { name: "Real Estate",             Icon: Building2     },
-              { name: "Hospitality",             Icon: Coffee        },
-              { name: "Education",               Icon: GraduationCap },
-              { name: "E-commerce",              Icon: ShoppingBag   },
-              { name: "Logistics",               Icon: Truck         },
-              { name: "Consulting",              Icon: Briefcase     },
-              { name: "Manufacturing",           Icon: Factory       },
-              { name: "Financial Services",      Icon: Landmark      },
-              { name: "NGOs",                    Icon: HeartHandshake},
-              { name: "Corporate Organizations", Icon: Building      },
-              { name: "Startups & SMEs",         Icon: Rocket        },
-            ].map(({ name, Icon }, i) => (
-              <div
-                key={name}
-                className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-brand-blue-200 hover:shadow-md"
-              >
+          {/* Row 1 — scrolls left */}
+          {/* Row 2 — scrolls right */}
+          {(() => {
+            const row1 = [
+              { name: "Healthcare",              Icon: Activity,       accent: "blue" },
+              { name: "E-commerce",              Icon: ShoppingBag,    accent: "red"  },
+              { name: "Real Estate",             Icon: Building2,      accent: "blue" },
+              { name: "Financial Services",      Icon: Landmark,       accent: "red"  },
+              { name: "Hospitality",             Icon: Coffee,         accent: "blue" },
+              { name: "Logistics",               Icon: Truck,          accent: "red"  },
+            ];
+            const row2 = [
+              { name: "Education",               Icon: GraduationCap,  accent: "red"  },
+              { name: "Manufacturing",           Icon: Factory,        accent: "blue" },
+              { name: "Consulting",              Icon: Briefcase,      accent: "red"  },
+              { name: "Corporate Organizations", Icon: Building,       accent: "blue" },
+              { name: "NGOs",                    Icon: HeartHandshake, accent: "red"  },
+              { name: "Startups & SMEs",         Icon: Rocket,         accent: "blue" },
+            ];
+            const Card = ({ name, Icon, accent }: { name: string; Icon: React.ElementType; accent: string }) => (
+              <div className={`flex shrink-0 items-center gap-3 rounded-2xl border px-5 py-3.5 shadow-sm ${
+                accent === "blue"
+                  ? "border-brand-blue-100 bg-white"
+                  : "border-brand-red-100 bg-white"
+              }`}>
                 <div className={`shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-xl ${
-                  i % 2 === 0
+                  accent === "blue"
                     ? "bg-brand-blue-50 text-brand-blue-700"
                     : "bg-brand-red-50 text-brand-red-700"
                 }`}>
                   <Icon className="h-4 w-4" />
                 </div>
-                <p className="text-sm font-semibold text-slate-800">{name}</p>
+                <p className="whitespace-nowrap text-sm font-semibold text-slate-800">{name}</p>
               </div>
-            ))}
-          </div>
+            );
+            return (
+              <div className="mt-10 flex flex-col gap-3 overflow-hidden">
+                {/* Row 1: left */}
+                <div className="flex w-max" style={{ animation: "marquee 28s linear infinite" }}>
+                  {[...row1, ...row1].map((item, i) => (
+                    <div key={i} className="mx-2"><Card {...item} /></div>
+                  ))}
+                </div>
+                {/* Row 2: right */}
+                <div className="flex w-max" style={{ animation: "marquee-reverse 32s linear infinite" }}>
+                  {[...row2, ...row2].map((item, i) => (
+                    <div key={i} className="mx-2"><Card {...item} /></div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </Container>
       </Section>
 
       {/* ── 12. Founder ───────────────────────────────────────── */}
       <Section>
         <Container>
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
-              <div className="flex items-center gap-2.5">
-                <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-700" />
-                <p className="text-xs font-semibold tracking-[0.18em] uppercase text-brand-blue-700">Leadership</p>
-              </div>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                Led by Experience, Strategy, and Innovation
-              </h2>
-              <p className="mt-5 text-base leading-8 text-slate-600">
-                {`Harzotech is led by ${site.founder.name}, an IT specialist, developer, AI enthusiast, and digital strategist with over 10 years of experience helping businesses use technology to improve visibility, operations, and growth.`}
-              </p>
-              <div className="relative mt-7 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-                <div className="pointer-events-none absolute -top-5 left-5 select-none text-6xl font-black leading-none text-brand-blue-100">&ldquo;</div>
-                <p className="relative text-sm leading-7 italic text-slate-700">{site.founder.quote}</p>
-              </div>
-            </div>
-
-            <div className="flex justify-center">
-              <div className="relative w-64 overflow-hidden rounded-3xl border border-slate-200 shadow-md">
+          <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+            {/* CEO image — top on mobile, right on desktop */}
+            <div className="flex justify-center lg:order-2">
+              <div className="relative w-56 overflow-hidden rounded-3xl border border-slate-200 shadow-md sm:w-64">
                 <Image
                   src="/ceo.png"
                   alt={`${site.founder.name} — Founder & CEO, Harzotech`}
@@ -622,6 +609,24 @@ export default function Home() {
                   <p className="text-sm font-bold text-white">{site.founder.name}</p>
                   <p className="mt-0.5 text-xs text-slate-400">{site.founder.title}</p>
                 </div>
+              </div>
+            </div>
+
+            {/* Text — below image on mobile, left on desktop */}
+            <div className="lg:order-1">
+              <div className="flex items-center gap-2.5">
+                <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-700" />
+                <p className="text-xs font-semibold tracking-[0.18em] uppercase text-brand-blue-700">Leadership</p>
+              </div>
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl lg:text-4xl">
+                Led by Experience, Strategy, and Innovation
+              </h2>
+              <p className="mt-4 text-[15px] leading-7 text-slate-600 sm:text-base sm:leading-8">
+                {`Harzotech is led by ${site.founder.name}, an IT specialist, developer, AI enthusiast, and digital strategist with over 10 years of experience helping businesses use technology to improve visibility, operations, and growth.`}
+              </p>
+              <div className="relative mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
+                <div className="pointer-events-none absolute -top-5 left-5 select-none text-6xl font-black leading-none text-brand-blue-100">&ldquo;</div>
+                <p className="relative text-sm leading-7 italic text-slate-700">{site.founder.quote}</p>
               </div>
             </div>
           </div>
@@ -643,7 +648,7 @@ export default function Home() {
             <div className="relative mt-12 -mx-4 sm:-mx-6 lg:-mx-8">
               <div className="flex gap-5 overflow-x-auto scroll-smooth px-4 pb-3 sm:px-6 lg:px-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory">
                 {testimonials.map((t, idx) => (
-                  <div key={`${t.company}-${idx}`} className="relative flex w-80 shrink-0 snap-start flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm">
+                  <div key={`${t.company}-${idx}`} className="relative flex w-[85vw] shrink-0 snap-start flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm sm:w-80 sm:p-7">
                     <div className="pointer-events-none absolute right-5 top-3 select-none text-7xl font-black leading-none text-white/[0.04]">&ldquo;</div>
                     {t.logo && (
                       <div className="mb-5 flex h-12 items-center">

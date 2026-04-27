@@ -4,13 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import {
   Mic, Phone, PhoneOff, Volume2,
   MessageCircle, Users, Bot,
-  Check, CheckCheck, Send,
+  Send, Calendar, Receipt, Headphones, ArrowRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ─── Types ──────────────────────────────────────────────────────── */
 type Role = "agent" | "user";
-type TabId = "voice" | "whatsapp" | "leadbot";
+type ChatSide = "bot" | "customer";
+type TabId = "voice" | "whatsapp" | "leadbot" | "appointment" | "crm" | "invoice" | "support";
 
 /* ─── Voice script ───────────────────────────────────────────────── */
 const VOICE_SCRIPT: { role: Role; text: string; delay: number }[] = [
@@ -50,6 +51,57 @@ const LEAD_SCRIPT: { side: "bot" | "visitor"; text: string; delay: number }[] = 
   { side: "visitor", text: "Maria Santos · maria@bistrosantos.com", delay: 13200 },
   { side: "bot",     text: "Thanks Maria! 🎉 Your brief has been sent to our team. Expect a proposal within 24 hours. Check your inbox!", delay: 15000 },
 ];
+
+/* ─── Appointment script ──────────────────────────────────── */
+const APPT_SCRIPT: { side: ChatSide; text: string; delay: number }[] = [
+  { side: "bot",      text: "Hi! Book with LuxeBarbers. What service?", delay: 500 },
+  { side: "customer", text: "Full haircut + beard trim", delay: 2200 },
+  { side: "bot",      text: "Got it (45 min). Preferred day?", delay: 3400 },
+  { side: "customer", text: "Saturday morning", delay: 5200 },
+  { side: "bot",      text: "Saturday slots:\n\n9:00 AM  |  10:30 AM  |  11:00 AM", delay: 6400 },
+  { side: "customer", text: "10:30 AM", delay: 8200 },
+  { side: "bot",      text: "Name and number for confirmation?", delay: 9400 },
+  { side: "customer", text: "Emeka - 0802 345 6789", delay: 11200 },
+  { side: "bot",      text: "Booked! Saturday 10:30 AM at LuxeBarbers. SMS reminder sent + calendar updated.", delay: 13000 },
+];
+
+/* ─── Support script ─────────────────────────────────────────── */
+const SUPPORT_SCRIPT: { side: ChatSide; text: string; delay: number }[] = [
+  { side: "bot",      text: "Hi! I can answer questions, raise tickets, or connect you to our team.", delay: 500 },
+  { side: "customer", text: "My dashboard isn't loading after the update.", delay: 2400 },
+  { side: "bot",      text: "Let me check our knowledge base...", delay: 3600 },
+  { side: "bot",      text: "Common fix: clear cache & hard-reload (Ctrl+Shift+R). Did that help?", delay: 5400 },
+  { side: "customer", text: "Still broken.", delay: 7200 },
+  { side: "bot",      text: "Raising a priority ticket. Ticket #HZ-4821 created. Confirmation sent to your email.", delay: 8400 },
+  { side: "bot",      text: "Connecting to a technical agent - avg wait: 3 min.", delay: 10800 },
+  { side: "bot",      text: "Agent Tunde has joined. He can see your ticket details.", delay: 13000 },
+];
+
+/* ─── CRM data ─────────────────────────────────────────────────── */
+const CRM_STAGES = ["New Lead", "Qualified", "Proposal", "Negotiation", "Won"];
+const CRM_EVENTS: { stageIdx: number; event: string; detail: string; delay: number }[] = [
+  { stageIdx: 0, event: "Lead captured",    detail: "Maria Santos via web form",              delay: 800   },
+  { stageIdx: 0, event: "Welcome email",    detail: "Auto-sent - opened in 4 min",            delay: 2000  },
+  { stageIdx: 1, event: "Lead qualified",   detail: "Budget $1k-$3k - timeline 6 wks",        delay: 3600  },
+  { stageIdx: 1, event: "CRM updated",      detail: "Moved to Qualified - tagged #web",       delay: 5000  },
+  { stageIdx: 2, event: "Proposal sent",    detail: "PDF + pricing deck delivered",           delay: 6600  },
+  { stageIdx: 2, event: "Follow-up queued", detail: "Auto follow-up in 3 days if no reply",  delay: 8200  },
+  { stageIdx: 3, event: "Client replied",   detail: "Requesting minor revisions",             delay: 10000 },
+  { stageIdx: 3, event: "Revised sent",     detail: "Updated proposal emailed",              delay: 11600 },
+  { stageIdx: 4, event: "Deal won!",         detail: "Invoice triggered - Onboarding started", delay: 13400 },
+];
+
+/* ─── Invoice steps ────────────────────────────────────────────── */
+const INVOICE_STEPS: { icon: string; label: string; detail: string; delay: number }[] = [
+  { icon: "check", label: "Job marked complete",    detail: "By technician via mobile app",            delay: 800   },
+  { icon: "doc",   label: "Invoice auto-generated", detail: "INV-2024-0087 - $1,850 - Net 7",          delay: 2400  },
+  { icon: "mail",  label: "Invoice emailed",         detail: "Sent to client@buildcraft.co",            delay: 4000  },
+  { icon: "chat",  label: "WhatsApp reminder sent",  detail: "Payment link included",                   delay: 5600  },
+  { icon: "card",  label: "Payment received",        detail: "$1,850 - Stripe - 6 hrs after send",     delay: 7800  },
+  { icon: "doc2",  label: "Receipt emailed",         detail: "Auto-sent + bookkeeping entry created",  delay: 9400  },
+  { icon: "chart", label: "Dashboard updated",       detail: "Revenue +$1,850 - Invoice closed",       delay: 11000 },
+];
+const INVOICE_EMOJIS: Record<string, string> = { check: "\u2705", doc: "\ud83e\uddfe", mail: "\ud83d\udce7", chat: "\ud83d\udcac", card: "\ud83d\udcb3", doc2: "\ud83e\uddfe", chart: "\ud83d\udcca" };
 
 /* ─── Waveform ───────────────────────────────────────────────────── */
 function Waveform({ active, color }: { active: boolean; color: string }) {
@@ -192,36 +244,31 @@ function VoiceTab() {
   );
 }
 
-/* ─── WhatsApp tab ───────────────────────────────────────────────── */
-function WhatsAppTab() {
-  const [messages, setMessages] = useState<typeof WA_SCRIPT>([]);
+/* ─── Generic chat hook ──────────────────────────────────────────── */
+function useChat<T extends { side: string; delay: number }>(script: T[]) {
+  const [messages, setMessages] = useState<T[]>([]);
   const [running, setRunning] = useState(false);
   const [done, setDone] = useState(false);
   const [typing, setTyping] = useState(false);
-  const chatRef = useRef<HTMLDivElement>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
-
   useEffect(() => {
     if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [messages, typing]);
 
-  const start = () => {
+  const startChat = (botSide: string) => {
     timers.current.forEach(clearTimeout); timers.current = [];
     setMessages([]); setRunning(true); setDone(false); setTyping(false);
-
-    WA_SCRIPT.forEach((msg, i) => {
-      if (msg.side === "bot") {
-        timers.current.push(setTimeout(() => setTyping(true), msg.delay - 700));
+    script.forEach((msg) => {
+      if (msg.side === botSide) {
+        timers.current.push(setTimeout(() => setTyping(true), Math.max(0, msg.delay - 700)));
       }
-      timers.current.push(setTimeout(() => {
-        setTyping(false);
-        setMessages((p) => [...p, msg]);
-      }, msg.delay));
+      timers.current.push(setTimeout(() => { setTyping(false); setMessages((p) => [...p, msg]); }, msg.delay));
     });
-
-    timers.current.push(setTimeout(() => { setRunning(false); setDone(true); }, WA_SCRIPT[WA_SCRIPT.length - 1].delay + 1800));
+    const lastDelay = script[script.length - 1].delay;
+    timers.current.push(setTimeout(() => { setRunning(false); setDone(true); }, lastDelay + 1800));
   };
 
   const reset = () => {
@@ -229,179 +276,230 @@ function WhatsAppTab() {
     setMessages([]); setRunning(false); setDone(false); setTyping(false);
   };
 
+  return { messages, running, done, typing, chatRef, startChat, reset };
+}
+
+/* ─── Generic Chat Tab ───────────────────────────────────────────── */
+interface ChatTabProps {
+  script: { side: string; text: string; delay: number }[];
+  botSide?: string;
+  headerBg: string;
+  headerEmoji: string;
+  headerTitle: string;
+  headerSub: string;
+  headerIcon: React.ReactNode;
+  botBubble: string;
+  customerBubble: string;
+  typingBubble: string;
+  typingDot: string;
+  inputPlaceholder: string;
+  runningPlaceholder: string;
+  btnColor: string;
+  btnHover: string;
+  emptyMsg: React.ReactNode;
+  doneFooter: string;
+  idleFooter: string;
+}
+
+function ChatTab({
+  script, botSide = "bot", headerBg, headerEmoji, headerTitle, headerSub, headerIcon,
+  botBubble, customerBubble, typingBubble, typingDot,
+  inputPlaceholder, runningPlaceholder, btnColor, btnHover,
+  emptyMsg, doneFooter, idleFooter,
+}: ChatTabProps) {
+  const { messages, running, done, typing, chatRef, startChat, reset } = useChat(script);
   return (
     <div className="flex flex-col">
-      {/* WA header */}
-      <div className="flex items-center gap-3 border-b border-white/[0.06] bg-[#075E54]/30 px-4 py-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366]/20 text-lg">🏪</div>
+      <div className={`flex items-center gap-3 border-b border-white/[0.06] ${headerBg} px-4 py-3`}>
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-lg border border-white/10">{headerEmoji}</div>
         <div className="flex-1">
-          <p className="text-sm font-semibold text-white">StyleHaus Official</p>
-          <p className="text-[11px] text-emerald-400">● Online · WhatsApp Business</p>
+          <p className="text-sm font-semibold text-white">{headerTitle}</p>
+          <p className="text-[11px] text-slate-400">{headerSub}</p>
         </div>
-        <MessageCircle className="h-4 w-4 text-[#25D366]" />
+        {headerIcon}
       </div>
-
-      {/* Chat */}
-      <div ref={chatRef} className="h-56 overflow-y-auto bg-[#0a1a14]/60 px-3 py-3 space-y-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div ref={chatRef} className="h-52 overflow-y-auto px-3 py-3 space-y-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {messages.length === 0 && !running && !done && (
           <div className="flex h-full items-center justify-center">
-            <p className="text-sm text-slate-500 text-center leading-7">
-              Press <span className="text-white font-medium">Start Demo</span> to see<br />WhatsApp automation live.
-            </p>
+            <p className="text-sm text-slate-500 text-center leading-7">{emptyMsg}</p>
           </div>
         )}
         <AnimatePresence initial={false}>
           {messages.map((m, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}
-              className={`flex ${m.side === "customer" ? "justify-end" : "justify-start"}`}>
-              <div className={`max-w-[82%] rounded-2xl px-3 py-2 text-[12px] leading-5 shadow-sm whitespace-pre-line
-                ${m.side === "bot"
-                  ? "rounded-tl-sm bg-[#1f2b23] text-slate-200 border border-[#25D366]/20"
-                  : "rounded-tr-sm bg-[#056162]/80 text-slate-100"}`}>
+              className={`flex ${m.side !== botSide ? "justify-end" : "justify-start"}`}>
+              <div className={`max-w-[82%] rounded-2xl px-3 py-2 text-[12px] leading-5 whitespace-pre-line ${m.side === botSide ? botBubble : customerBubble}`}>
                 {m.text}
-                <div className={`mt-1 flex items-center gap-1 text-[10px] ${m.side === "bot" ? "text-slate-500 justify-start" : "text-slate-300 justify-end"}`}>
-                  {m.side === "customer" && <CheckCheck className="h-3 w-3 text-[#53BDEB]" />}
-                </div>
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
         {typing && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-1.5 items-center px-3 py-2 rounded-2xl rounded-tl-sm bg-[#1f2b23] w-fit border border-[#25D366]/20">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={`flex gap-1.5 items-center px-3 py-2 rounded-2xl rounded-tl-sm w-fit ${typingBubble}`}>
             {[0, 1, 2].map((i) => (
-              <motion.span key={i} className="h-1.5 w-1.5 rounded-full bg-[#25D366]/60"
+              <motion.span key={i} className={`h-1.5 w-1.5 rounded-full ${typingDot}`}
                 animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
                 transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }} />
             ))}
           </motion.div>
         )}
       </div>
-
-      {/* Input bar mock */}
-      <div className="border-t border-white/[0.06] flex items-center gap-2 bg-[#1a2a20]/60 px-3 py-2.5">
-        <div className="flex-1 rounded-full bg-white/[0.07] border border-white/[0.06] px-3 py-1.5 text-[12px] text-slate-500 select-none">
-          {running ? "Automation handling this…" : "Type a message"}
+      <div className="border-t border-white/[0.06] flex items-center gap-2 bg-white/[0.02] px-3 py-2.5">
+        <div className="flex-1 rounded-full bg-white/[0.06] border border-white/[0.06] px-3 py-1.5 text-[12px] text-slate-500 select-none">
+          {running ? runningPlaceholder : inputPlaceholder}
         </div>
-        <button disabled={running}
-          onClick={done ? reset : start}
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366] text-white shadow transition hover:bg-[#1eb356] disabled:opacity-50">
+        <button disabled={running} onClick={done ? reset : () => startChat(botSide)}
+          className={`flex h-8 w-8 items-center justify-center rounded-full ${btnColor} text-white shadow transition ${btnHover} disabled:opacity-50`}>
           <Send className="h-3.5 w-3.5" />
         </button>
       </div>
+      <div className="px-4 pb-3 pt-1 text-[11px] text-slate-500">{done ? doneFooter : idleFooter}</div>
+    </div>
+  );
+}
 
-      <div className="px-4 pb-3 pt-1.5 text-[11px] text-slate-500">
-        {done ? "✓ Order tracked · Agent escalation triggered · CRM logged" : "Automated 24/7 — no human needed for routine queries"}
+/* ─── CRM Tab ────────────────────────────────────────────────────── */
+function CRMTab() {
+  const [events, setEvents] = useState<typeof CRM_EVENTS>([]);
+  const [activeStage, setActiveStage] = useState(-1);
+  const [running, setRunning] = useState(false);
+  const [done, setDone] = useState(false);
+  const feedRef = useRef<HTMLDivElement>(null);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  useEffect(() => { if (feedRef.current) feedRef.current.scrollTop = feedRef.current.scrollHeight; }, [events]);
+
+  const start = () => {
+    timers.current.forEach(clearTimeout); timers.current = [];
+    setEvents([]); setActiveStage(-1); setRunning(true); setDone(false);
+    CRM_EVENTS.forEach((ev) => {
+      timers.current.push(setTimeout(() => { setEvents((p) => [...p, ev]); setActiveStage(ev.stageIdx); }, ev.delay));
+    });
+    timers.current.push(setTimeout(() => { setRunning(false); setDone(true); }, CRM_EVENTS[CRM_EVENTS.length - 1].delay + 1600));
+  };
+
+  const reset = () => {
+    timers.current.forEach(clearTimeout); timers.current = [];
+    setEvents([]); setActiveStage(-1); setRunning(false); setDone(false);
+  };
+
+  return (
+    <div className="flex flex-col">
+      <div className="flex items-center gap-1 overflow-x-auto border-b border-white/[0.06] bg-white/[0.02] px-3 py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {CRM_STAGES.map((stage, i) => (
+          <div key={stage} className="flex items-center gap-1 shrink-0">
+            <div className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition-all duration-500 ${i <= activeStage ? "bg-brand-blue-700 text-white" : "bg-white/[0.06] text-slate-500"}`}>{stage}</div>
+            {i < CRM_STAGES.length - 1 && <ArrowRight className={`h-3 w-3 shrink-0 transition-colors duration-500 ${i < activeStage ? "text-brand-blue-400" : "text-slate-700"}`} />}
+          </div>
+        ))}
+      </div>
+      <div ref={feedRef} className="h-52 overflow-y-auto px-4 py-3 space-y-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {events.length === 0 && !running && !done && (
+          <div className="flex h-full items-center justify-center">
+            <p className="text-sm text-slate-500 text-center leading-7">Press <span className="text-white font-medium">Run Demo</span><br />to watch a lead close automatically.</p>
+          </div>
+        )}
+        <AnimatePresence initial={false}>
+          {events.map((ev, i) => (
+            <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.25 }}
+              className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-white/[0.03] px-3 py-2.5">
+              <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-blue-800/60 border border-brand-blue-700/30">
+                <div className="h-1.5 w-1.5 rounded-full bg-brand-blue-400" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[12px] font-semibold text-slate-200 leading-tight">{ev.event}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5 leading-tight">{ev.detail}</p>
+              </div>
+              <span className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full border ${ev.stageIdx === 4 ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400" : "border-brand-blue-500/20 bg-brand-blue-500/10 text-brand-blue-300"}`}>
+                {CRM_STAGES[ev.stageIdx]}
+              </span>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+      <div className="border-t border-white/[0.06] px-4 py-3 bg-white/[0.02] flex items-center justify-between gap-3">
+        <p className="text-[11px] text-slate-500 leading-5">{done ? "Deal closed - Invoice triggered - Onboarding started" : "Automated pipeline from capture to close"}</p>
+        <button onClick={done ? reset : start} disabled={running}
+          className="flex items-center gap-2 rounded-xl bg-brand-blue-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-blue-600 active:scale-95 disabled:opacity-50">
+          {done ? "Replay" : running ? "Running..." : "Run Demo"}
+        </button>
       </div>
     </div>
   );
 }
 
-/* ─── Lead Bot tab ───────────────────────────────────────────────── */
-function LeadBotTab() {
-  const [messages, setMessages] = useState<typeof LEAD_SCRIPT>([]);
+/* ─── Invoice Tab ────────────────────────────────────────────────── */
+function InvoiceTab() {
+  const [steps, setSteps] = useState<typeof INVOICE_STEPS>([]);
   const [running, setRunning] = useState(false);
   const [done, setDone] = useState(false);
-  const [typing, setTyping] = useState(false);
-  const chatRef = useRef<HTMLDivElement>(null);
+  const feedRef = useRef<HTMLDivElement>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
-
-  useEffect(() => {
-    if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
-  }, [messages, typing]);
+  useEffect(() => { if (feedRef.current) feedRef.current.scrollTop = feedRef.current.scrollHeight; }, [steps]);
 
   const start = () => {
     timers.current.forEach(clearTimeout); timers.current = [];
-    setMessages([]); setRunning(true); setDone(false); setTyping(false);
-
-    LEAD_SCRIPT.forEach((msg, i) => {
-      if (msg.side === "bot") {
-        timers.current.push(setTimeout(() => setTyping(true), msg.delay - 700));
-      }
-      timers.current.push(setTimeout(() => {
-        setTyping(false);
-        setMessages((p) => [...p, msg]);
-      }, msg.delay));
-    });
-
-    timers.current.push(setTimeout(() => { setRunning(false); setDone(true); }, LEAD_SCRIPT[LEAD_SCRIPT.length - 1].delay + 1800));
+    setSteps([]); setRunning(true); setDone(false);
+    INVOICE_STEPS.forEach((s) => timers.current.push(setTimeout(() => setSteps((p) => [...p, s]), s.delay)));
+    timers.current.push(setTimeout(() => { setRunning(false); setDone(true); }, INVOICE_STEPS[INVOICE_STEPS.length - 1].delay + 1600));
   };
 
   const reset = () => {
     timers.current.forEach(clearTimeout); timers.current = [];
-    setMessages([]); setRunning(false); setDone(false); setTyping(false);
+    setSteps([]); setRunning(false); setDone(false);
   };
 
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <div className="flex items-center gap-3 border-b border-white/[0.06] bg-brand-blue-900/30 px-4 py-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-blue-700/40 text-lg">🤖</div>
-        <div className="flex-1">
-          <p className="text-sm font-semibold text-white">Harzo Lead Bot</p>
-          <p className="text-[11px] text-brand-blue-300">Website AI assistant · Qualifies leads 24/7</p>
+      <div className="flex items-center gap-3 border-b border-white/[0.06] bg-emerald-950/30 px-4 py-3">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-800/40 text-lg border border-emerald-700/20">🧾</div>
+        <div>
+          <p className="text-sm font-semibold text-white">BuildCraft Services</p>
+          <p className="text-[11px] text-emerald-400">Invoice & Payment Automation</p>
         </div>
-        <Users className="h-4 w-4 text-brand-blue-400" />
       </div>
-
-      {/* Chat */}
-      <div ref={chatRef} className="h-56 overflow-y-auto bg-navy-950/60 px-3 py-3 space-y-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {messages.length === 0 && !running && !done && (
+      <div ref={feedRef} className="h-52 overflow-y-auto px-4 py-3 space-y-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {steps.length === 0 && !running && !done && (
           <div className="flex h-full items-center justify-center">
-            <p className="text-sm text-slate-500 text-center leading-7">
-              Press <span className="text-white font-medium">Start Demo</span> to see<br />automated lead capture in action.
-            </p>
+            <p className="text-sm text-slate-500 text-center leading-7">Press <span className="text-white font-medium">Run Demo</span><br />to watch invoice automation fire.</p>
           </div>
         )}
         <AnimatePresence initial={false}>
-          {messages.map((m, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}
-              className={`flex ${m.side === "visitor" ? "justify-end" : "justify-start"}`}>
-              <div className={`max-w-[82%] rounded-2xl px-3 py-2 text-[12px] leading-5 whitespace-pre-line
-                ${m.side === "bot"
-                  ? "rounded-tl-sm bg-brand-blue-900/60 text-slate-200 border border-brand-blue-700/30"
-                  : "rounded-tr-sm bg-navy-700/80 text-slate-100 border border-white/[0.08]"}`}>
-                {m.text}
+          {steps.map((s, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}
+              className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-white/[0.03] px-3 py-2.5">
+              <span className="text-base shrink-0 mt-0.5">{INVOICE_EMOJIS[s.icon] ?? s.icon}</span>
+              <div className="flex-1 min-w-0">
+                <p className="text-[12px] font-semibold text-slate-200 leading-tight">{s.label}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5 leading-tight">{s.detail}</p>
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
-        {typing && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-1.5 items-center px-3 py-2 rounded-2xl rounded-tl-sm bg-brand-blue-900/60 w-fit border border-brand-blue-700/30">
-            {[0, 1, 2].map((i) => (
-              <motion.span key={i} className="h-1.5 w-1.5 rounded-full bg-brand-blue-400/60"
-                animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
-                transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }} />
-            ))}
-          </motion.div>
-        )}
       </div>
-
-      {/* Input bar mock */}
-      <div className="border-t border-white/[0.06] flex items-center gap-2 bg-white/[0.02] px-3 py-2.5">
-        <div className="flex-1 rounded-full bg-white/[0.06] border border-white/[0.06] px-3 py-1.5 text-[12px] text-slate-500 select-none">
-          {running ? "Collecting your details…" : "Your message…"}
-        </div>
-        <button disabled={running}
-          onClick={done ? reset : start}
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue-700 text-white shadow transition hover:bg-brand-blue-600 disabled:opacity-50">
-          <Send className="h-3.5 w-3.5" />
+      <div className="border-t border-white/[0.06] px-4 py-3 bg-white/[0.02] flex items-center justify-between gap-3">
+        <p className="text-[11px] text-slate-500 leading-5">{done ? "Paid in 6 hrs - Books updated - Zero manual work" : "From job complete to paid - fully automated"}</p>
+        <button onClick={done ? reset : start} disabled={running}
+          className="flex items-center gap-2 rounded-xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600 active:scale-95 disabled:opacity-50">
+          {done ? "Replay" : running ? "Running..." : "Run Demo"}
         </button>
-      </div>
-
-      <div className="px-4 pb-3 pt-1.5 text-[11px] text-slate-500">
-        {done ? "✓ Lead qualified · Proposal triggered · Added to CRM" : "Qualifies leads & sends proposals while you sleep"}
       </div>
     </div>
   );
 }
 
 /* ─── Tabs config ────────────────────────────────────────────────── */
-const TABS: { id: TabId; label: string; icon: React.ReactNode; description: string }[] = [
-  { id: "voice",    label: "AI Voice",  icon: <Mic className="h-3.5 w-3.5" />,            description: "Voice booking agent" },
-  { id: "whatsapp", label: "WhatsApp",  icon: <MessageCircle className="h-3.5 w-3.5" />,  description: "Chat automation"     },
-  { id: "leadbot",  label: "Lead Bot",  icon: <Bot className="h-3.5 w-3.5" />,            description: "Lead qualification"  },
+const TABS: { id: TabId; label: string; icon: React.ReactNode }[] = [
+  { id: "voice",       label: "AI Voice",  icon: <Mic className="h-3.5 w-3.5" />           },
+  { id: "whatsapp",    label: "WhatsApp",  icon: <MessageCircle className="h-3.5 w-3.5" /> },
+  { id: "leadbot",     label: "Lead Bot",  icon: <Bot className="h-3.5 w-3.5" />           },
+  { id: "appointment", label: "Booking",   icon: <Calendar className="h-3.5 w-3.5" />      },
+  { id: "crm",         label: "CRM",       icon: <Users className="h-3.5 w-3.5" />         },
+  { id: "invoice",     label: "Invoice",   icon: <Receipt className="h-3.5 w-3.5" />       },
+  { id: "support",     label: "Support",   icon: <Headphones className="h-3.5 w-3.5" />    },
 ];
 
 /* ─── Main widget ────────────────────────────────────────────────── */
@@ -427,37 +525,94 @@ export function AIAutomationWidget() {
         </span>
       </div>
 
-      {/* ── Tabs — 2-row wrap: 4 on top, 3 on bottom ────────── */}
-      <div className="flex flex-wrap border-b border-white/[0.06] bg-white/[0.02]">
-        {TABS.map((tab, i) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            style={{ width: i < 4 ? "25%" : "calc(100% / 3)" }}
+      {/* ── Tabs — grid: 4 on row 1, 3 on row 2 ────────────── */}
+      <div className="grid grid-cols-4 border-b border-white/[0.06] bg-white/[0.02]">
+        {TABS.slice(0, 4).map((tab) => (
+          <button key={tab.id} onClick={() => setActiveTab(tab.id)}
             className={`flex flex-col items-center gap-1 px-1 py-2.5 text-[11px] font-semibold transition-all
               ${activeTab === tab.id
                 ? "border-b-2 border-brand-blue-400 text-brand-blue-300 bg-brand-blue-900/20"
-                : "border-b-2 border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/[0.03]"}
-              ${i >= 4 ? "border-t border-white/[0.04]" : ""}`}
-          >
+                : "border-b-2 border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/[0.03]"}`}>
             <span className={activeTab === tab.id ? "text-brand-blue-400" : "text-slate-500"}>{tab.icon}</span>
             {tab.label}
           </button>
         ))}
+        <div className="col-span-4 grid grid-cols-3 border-t border-white/[0.04]">
+          {TABS.slice(4).map((tab) => (
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+              className={`flex flex-col items-center gap-1 px-1 py-2.5 text-[11px] font-semibold transition-all
+                ${activeTab === tab.id
+                  ? "border-b-2 border-brand-blue-400 text-brand-blue-300 bg-brand-blue-900/20"
+                  : "border-b-2 border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/[0.03]"}`}>
+              <span className={activeTab === tab.id ? "text-brand-blue-400" : "text-slate-500"}>{tab.icon}</span>
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* ── Tab panels ───────────────────────────────────────── */}
       <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -4 }}
-          transition={{ duration: 0.2 }}
-        >
-          {activeTab === "voice"    && <VoiceTab />}
-          {activeTab === "whatsapp" && <WhatsAppTab />}
-          {activeTab === "leadbot"  && <LeadBotTab />}
+        <motion.div key={activeTab} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2 }}>
+          {activeTab === "voice" && <VoiceTab />}
+          {activeTab === "whatsapp" && (
+            <ChatTab script={WA_SCRIPT}
+              headerBg="bg-[#075E54]/20" headerEmoji="🏪" headerTitle="StyleHaus Official" headerSub="Online · WhatsApp Business"
+              headerIcon={<MessageCircle className="h-4 w-4 text-[#25D366]" />}
+              botBubble="rounded-tl-sm bg-[#1f2b23] text-slate-200 border border-[#25D366]/20"
+              customerBubble="rounded-tr-sm bg-[#056162]/80 text-slate-100"
+              typingBubble="bg-[#1f2b23] border border-[#25D366]/20"
+              typingDot="bg-[#25D366]/60"
+              inputPlaceholder="Type a message" runningPlaceholder="Automation handling this..."
+              btnColor="bg-[#25D366]" btnHover="hover:bg-[#1eb356]"
+              emptyMsg={<>Press <span className="text-white font-medium">Send</span> to see WhatsApp automation live.</>}
+              doneFooter="Order tracked · Escalation triggered · CRM logged"
+              idleFooter="Automated 24/7 — no human needed for routine queries" />
+          )}
+          {activeTab === "leadbot" && (
+            <ChatTab script={LEAD_SCRIPT} botSide="bot"
+              headerBg="bg-brand-blue-900/20" headerEmoji="🤖" headerTitle="Harzo Lead Bot" headerSub="Website AI · Qualifies leads 24/7"
+              headerIcon={<Bot className="h-4 w-4 text-brand-blue-400" />}
+              botBubble="rounded-tl-sm bg-brand-blue-900/60 text-slate-200 border border-brand-blue-700/30"
+              customerBubble="rounded-tr-sm bg-navy-700/80 text-slate-100 border border-white/[0.08]"
+              typingBubble="bg-brand-blue-900/60 border border-brand-blue-700/30"
+              typingDot="bg-brand-blue-400/60"
+              inputPlaceholder="Your message..." runningPlaceholder="Collecting your details..."
+              btnColor="bg-brand-blue-700" btnHover="hover:bg-brand-blue-600"
+              emptyMsg={<>Press <span className="text-white font-medium">Send</span> to see automated lead capture.</>}
+              doneFooter="Lead qualified · Proposal triggered · CRM entry created"
+              idleFooter="Qualifies leads & sends proposals while you sleep" />
+          )}
+          {activeTab === "appointment" && (
+            <ChatTab script={APPT_SCRIPT}
+              headerBg="bg-violet-900/20" headerEmoji="✂️" headerTitle="LuxeBarbers" headerSub="Booking assistant · Instant confirmation"
+              headerIcon={<Calendar className="h-4 w-4 text-violet-400" />}
+              botBubble="rounded-tl-sm bg-violet-900/60 text-slate-200 border border-violet-700/30"
+              customerBubble="rounded-tr-sm bg-navy-700/80 text-slate-100 border border-white/[0.08]"
+              typingBubble="bg-violet-900/60 border border-violet-700/30"
+              typingDot="bg-violet-400/60"
+              inputPlaceholder="Type a message..." runningPlaceholder="Checking availability..."
+              btnColor="bg-violet-700" btnHover="hover:bg-violet-600"
+              emptyMsg={<>Press <span className="text-white font-medium">Send</span> to book automatically.</>}
+              doneFooter="Booked · SMS reminder sent · Calendar updated · Staff notified"
+              idleFooter="Handles bookings, reschedules & reminders automatically" />
+          )}
+          {activeTab === "crm" && <CRMTab />}
+          {activeTab === "invoice" && <InvoiceTab />}
+          {activeTab === "support" && (
+            <ChatTab script={SUPPORT_SCRIPT}
+              headerBg="bg-amber-900/20" headerEmoji="🎧" headerTitle="Harzo Support Bot" headerSub="AI triage · Tickets · Human escalation"
+              headerIcon={<Headphones className="h-4 w-4 text-amber-400" />}
+              botBubble="rounded-tl-sm bg-amber-900/40 text-slate-200 border border-amber-700/20"
+              customerBubble="rounded-tr-sm bg-navy-700/80 text-slate-100 border border-white/[0.08]"
+              typingBubble="bg-amber-900/40 border border-amber-700/20"
+              typingDot="bg-amber-400/60"
+              inputPlaceholder="Describe your issue..." runningPlaceholder="AI reviewing your issue..."
+              btnColor="bg-amber-700" btnHover="hover:bg-amber-600"
+              emptyMsg={<>Press <span className="text-white font-medium">Send</span> to see AI support triage.</>}
+              doneFooter="Ticket #HZ-4821 raised · Agent assigned · Client notified"
+              idleFooter="FAQ answers, ticket creation & human hand-off — automated" />
+          )}
         </motion.div>
       </AnimatePresence>
     </div>

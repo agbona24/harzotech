@@ -9,7 +9,7 @@ export function Section({
   className?: string;
   variant?: "light" | "dark";
 }) {
-  const base = "py-16 sm:py-20";
+  const base = "py-12 sm:py-20";
   const variants = {
     light: "bg-white",
     dark: "bg-navy-950 text-white",
