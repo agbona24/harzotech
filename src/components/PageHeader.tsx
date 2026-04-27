@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
 
@@ -9,16 +10,29 @@ export function PageHeader({
   secondaryCta,
   eyebrow = "Harzotech Nig Ltd",
   illustration,
+  bgImage,
 }: {
-  title: string;
+  title: ReactNode;
   description: string;
   primaryCta?: { href: string; label: string };
   secondaryCta?: { href: string; label: string };
   eyebrow?: string;
   illustration?: ReactNode;
+  bgImage?: string;
 }) {
   return (
     <div className="relative overflow-hidden bg-[#0c1e3b] text-white">
+      {/* Optional faded background photo */}
+      {bgImage && (
+        <Image
+          src={bgImage}
+          alt=""
+          fill
+          priority
+          aria-hidden
+          className="object-cover object-center opacity-[0.18]"
+        />
+      )}
       {/* Brand-blue radial glow — upper left */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_-10%_-10%,rgba(21,101,192,0.45),transparent_60%)]" />
       {/* Brand-red radial glow — lower right */}

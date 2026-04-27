@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { site } from "@/data/site";
 import { OrganizationSchema } from "@/components/OrganizationSchema";
+import { FloatingWidgets } from "@/components/FloatingWidgets";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -65,6 +66,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <FloatingWidgets />
       </body>
     </html>
   );

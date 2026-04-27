@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
+import { Logo } from "@/components/Logo";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -65,17 +65,7 @@ export function Navbar() {
     >
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link href="/" aria-label="Harzotech home">
-            <Image
-              src="/logo.gif"
-              alt="Harzotech"
-              width={180}
-              height={72}
-              priority
-              unoptimized
-              className="h-[61px] w-auto object-contain mix-blend-multiply"
-            />
-          </Link>
+          <Logo />
 
           <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
             {navItems.map((item) => {
@@ -131,17 +121,7 @@ export function Navbar() {
               <div className="flex flex-col gap-2 py-4">
                 {/* Mobile brand header */}
                 <div className="mb-2 flex items-center justify-between border-b border-slate-100 pb-4">
-                  <Link href="/" aria-label="Harzotech home">
-                    <Image
-                      src="/logo.gif"
-                      alt="Harzotech"
-                      width={180}
-                      height={72}
-                      priority
-                      unoptimized
-                      className="h-[61px] w-auto object-contain mix-blend-multiply"
-                    />
-                  </Link>
+                  <Logo />
                   <div className="flex items-center gap-1.5">
                     <div className="h-1 w-5 rounded-full bg-brand-blue-700" />
                     <div className="h-1 w-2 rounded-full bg-brand-red-700" />
