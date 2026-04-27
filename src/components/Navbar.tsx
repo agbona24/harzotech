@@ -42,7 +42,7 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur">
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
           <Logo />
@@ -54,18 +54,23 @@ export function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-sm font-medium transition-colors ${
-                    active ? "text-slate-950" : "text-slate-600 hover:text-slate-950"
+                  className={`relative text-sm font-medium transition-colors ${
+                    active
+                      ? "text-brand-blue-700"
+                      : "text-slate-600 hover:text-brand-blue-700"
                   }`}
                 >
                   {item.label}
+                  {active && (
+                    <span className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-brand-blue-700" />
+                  )}
                 </Link>
               );
             })}
           </nav>
 
           <div className="hidden md:flex">
-            <ButtonLink href="/contact?intent=start-project" size="sm">
+            <ButtonLink href="/contact?intent=start-project" variant="cta" size="sm">
               Start a Project
             </ButtonLink>
           </div>
@@ -94,7 +99,7 @@ export function Navbar() {
                     href={item.href}
                     className={`rounded-xl px-4 py-3 text-sm font-medium transition ${
                       active
-                        ? "bg-slate-950 text-white"
+                        ? "bg-brand-blue-700 text-white"
                         : "text-slate-700 hover:bg-slate-50"
                     }`}
                   >
@@ -104,7 +109,7 @@ export function Navbar() {
               })}
 
               <div className="pt-2">
-                <ButtonLink href="/contact?intent=start-project" className="w-full">
+                <ButtonLink href="/contact?intent=start-project" variant="cta" className="w-full">
                   Start a Project
                 </ButtonLink>
               </div>

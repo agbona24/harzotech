@@ -12,7 +12,7 @@ export function Section({
   const base = "py-16 sm:py-20";
   const variants = {
     light: "bg-white",
-    dark: "bg-slate-950 text-white",
+    dark: "bg-navy-950 text-white",
   } as const;
 
   return <section className={`${base} ${variants[variant]} ${className}`}>{children}</section>;

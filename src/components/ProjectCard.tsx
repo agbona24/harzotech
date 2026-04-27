@@ -5,13 +5,13 @@ import type { Project } from "@/data/projects";
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      {/* Gradient top strip */}
-      <div className="h-1 w-full bg-gradient-to-r from-cyan-500 to-blue-500" />
+      {/* Brand gradient top strip */}
+      <div className="h-1 w-full bg-gradient-to-r from-brand-blue-700 to-brand-red-700" />
 
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <span className="inline-flex items-center rounded-full bg-cyan-50 px-2.5 py-0.5 text-[11px] font-semibold text-cyan-700 ring-1 ring-cyan-100">
+            <span className="inline-flex items-center rounded-full bg-brand-blue-50 px-2.5 py-0.5 text-[11px] font-semibold text-brand-blue-700 ring-1 ring-brand-blue-100">
               {project.industry}
             </span>
             <p className="mt-2 text-sm font-semibold text-slate-950">{project.name}</p>
@@ -28,7 +28,7 @@ export function ProjectCard({ project }: { project: Project }) {
         <div className="mt-5 border-t border-slate-100 pt-4">
           <Link
             href={`/projects#${project.slug}`}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-950 transition hover:text-cyan-700 group-hover:gap-2.5"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-950 transition hover:text-brand-blue-700 group-hover:gap-2.5"
           >
             View Project{" "}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

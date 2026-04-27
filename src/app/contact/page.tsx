@@ -34,12 +34,14 @@ function getIntentCopy(intent?: string) {
   };
 }
 
-export default function ContactPage({
+export default async function ContactPage({
   searchParams,
 }: {
-  searchParams?: { intent?: string };
+  searchParams?: Promise<{ intent?: string }>;
 }) {
-  const { title, description } = getIntentCopy(searchParams?.intent);
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const intent = resolvedSearchParams?.intent;
+  const { title, description } = getIntentCopy(intent);
 
   return (
     <div>
@@ -92,7 +94,7 @@ export default function ContactPage({
 
               <ContactForm
                 toEmail={site.contact.email}
-                intent={searchParams?.intent}
+                intent={intent}
               />
             </div>
           </div>

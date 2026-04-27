@@ -7,39 +7,39 @@ const visuals: Record<
   { accent: string; iconBg: string; iconText: string }
 > = {
   "website-development": {
-    accent: "bg-blue-500",
-    iconBg: "bg-blue-50",
-    iconText: "text-blue-600",
+    accent: "bg-brand-blue-700",
+    iconBg: "bg-brand-blue-50",
+    iconText: "text-brand-blue-700",
   },
   "software-development": {
-    accent: "bg-violet-500",
+    accent: "bg-violet-600",
     iconBg: "bg-violet-50",
-    iconText: "text-violet-600",
+    iconText: "text-violet-700",
   },
   "ai-automation": {
-    accent: "bg-cyan-500",
-    iconBg: "bg-cyan-50",
-    iconText: "text-cyan-600",
+    accent: "bg-brand-red-700",
+    iconBg: "bg-brand-red-50",
+    iconText: "text-brand-red-700",
   },
   "it-support": {
-    accent: "bg-emerald-500",
+    accent: "bg-emerald-600",
     iconBg: "bg-emerald-50",
-    iconText: "text-emerald-600",
+    iconText: "text-emerald-700",
   },
   "seo-digital-marketing": {
-    accent: "bg-amber-500",
+    accent: "bg-amber-600",
     iconBg: "bg-amber-50",
-    iconText: "text-amber-600",
+    iconText: "text-amber-700",
   },
   "business-applications": {
-    accent: "bg-rose-500",
-    iconBg: "bg-rose-50",
-    iconText: "text-rose-600",
+    accent: "bg-navy-800",
+    iconBg: "bg-brand-blue-50",
+    iconText: "text-navy-800",
   },
   branding: {
-    accent: "bg-slate-500",
+    accent: "bg-slate-700",
     iconBg: "bg-slate-100",
-    iconText: "text-slate-600",
+    iconText: "text-slate-700",
   },
 };
 
@@ -66,7 +66,7 @@ export function ServiceCard({ service }: { service: Service }) {
           <div className="mt-5 border-t border-slate-100 pt-4">
             <Link
               href={service.href}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-950 transition hover:text-cyan-700 group-hover:gap-2.5"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-950 transition hover:text-brand-blue-700 group-hover:gap-2.5"
             >
               Explore{" "}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

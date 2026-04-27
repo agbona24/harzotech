@@ -9,17 +9,17 @@ type CommonProps = {
 };
 
 const base =
-  "inline-flex items-center justify-center rounded-full font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center rounded-full font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<NonNullable<CommonProps["variant"]>, string> = {
   primary:
-    "bg-slate-950 text-white hover:bg-slate-900 border border-slate-800",
+    "bg-navy-950 text-white hover:bg-navy-900 border border-navy-800",
   secondary:
     "bg-white text-slate-950 hover:bg-slate-50 border border-slate-200",
   ghost:
     "bg-transparent text-slate-900 hover:bg-slate-100 border border-transparent",
   cta:
-    "bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white border border-cyan-400/30 shadow-lg shadow-cyan-500/25",
+    "bg-brand-red-700 hover:bg-brand-red-800 text-white border border-brand-red-600 shadow-lg shadow-brand-red-700/25",
   "outline-white":
     "bg-white/10 text-white hover:bg-white/15 border border-white/20 backdrop-blur-sm",
 };

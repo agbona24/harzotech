@@ -14,7 +14,7 @@ export function SectionHeading({
   dark?: boolean;
 }) {
   const alignment = align === "center" ? "text-center items-center" : "text-left items-start";
-  const eyebrowColor = dark ? "text-cyan-400" : "text-cyan-600";
+  const eyebrowColor = dark ? "text-brand-blue-300" : "text-brand-blue-700";
   const titleColor = dark ? "text-white" : "text-slate-950";
   const descColor = dark ? "text-slate-300" : "text-slate-600";
 
@@ -22,7 +22,7 @@ export function SectionHeading({
     <div className={`flex flex-col gap-3 ${alignment}`}>
       {eyebrow ? (
         <div className={`flex items-center gap-2.5 ${align === "center" ? "justify-center" : ""}`}>
-          <div className="h-3.5 w-0.5 rounded-full bg-cyan-500" />
+          <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-700" />
           <p className={`text-xs font-semibold tracking-[0.18em] uppercase ${eyebrowColor}`}>
             {eyebrow}
           </p>

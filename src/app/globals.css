@@ -5,4 +5,34 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand Blue — from "HARZ" in logo (#1565C0) */
+  --color-brand-blue-50:  #e3f2fd;
+  --color-brand-blue-100: #bbdefb;
+  --color-brand-blue-200: #90caf9;
+  --color-brand-blue-300: #64b5f6;
+  --color-brand-blue-400: #42a5f5;
+  --color-brand-blue-500: #2196f3;
+  --color-brand-blue-600: #1e88e5;
+  --color-brand-blue-700: #1565c0;
+  --color-brand-blue-800: #0d47a1;
+  --color-brand-blue-900: #0a3372;
+
+  /* Brand Red — from "TECH" in logo (#C62828) */
+  --color-brand-red-50:  #ffebee;
+  --color-brand-red-100: #ffcdd2;
+  --color-brand-red-200: #ef9a9a;
+  --color-brand-red-300: #e57373;
+  --color-brand-red-400: #ef5350;
+  --color-brand-red-500: #f44336;
+  --color-brand-red-600: #e53935;
+  --color-brand-red-700: #c62828;
+  --color-brand-red-800: #b71c1c;
+  --color-brand-red-900: #7f0000;
+
+  /* Deep Navy — dark section backgrounds */
+  --color-navy-950: #0c1e3b;
+  --color-navy-900: #0f2649;
+  --color-navy-800: #163060;
+  --color-navy-700: #1e4080;
 }
