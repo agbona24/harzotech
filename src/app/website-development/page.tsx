@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
+import { WebsiteDevHeroIllustration } from "@/components/WebsiteDevHeroIllustration";
 import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
-import { CheckCircle2 } from "lucide-react";
+import {
+  Globe, ShoppingCart, LayoutTemplate, Rocket, Building2,
+  HeartPulse, LineChart, CheckCircle2, Search, PenLine,
+  Code2, Zap, MousePointerClick, BarChart3, ShieldCheck, Smartphone,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Website Development",
@@ -12,77 +17,245 @@ export const metadata: Metadata = {
     "Premium website design & development by Harzotech Nig Ltd — conversion-focused, SEO-ready, responsive websites built for credibility and growth.",
 };
 
+const WEBSITE_TYPES = [
+  {
+    icon: Building2,
+    title: "Corporate & Business Websites",
+    description: "Professional, credibility-first websites that establish authority and convert visitors into enquiries.",
+    isRed: false,
+  },
+  {
+    icon: ShoppingCart,
+    title: "E-Commerce Websites",
+    description: "Full-featured online stores with product management, checkout flows, payments, and order tracking.",
+    isRed: true,
+  },
+  {
+    icon: LayoutTemplate,
+    title: "Landing Pages",
+    description: "Conversion-optimised single pages built around one clear goal — lead capture, product launch, or campaign.",
+    isRed: false,
+  },
+  {
+    icon: Rocket,
+    title: "SaaS & Startup Websites",
+    description: "Product-focused websites with feature sections, pricing tables, onboarding flows, and sign-up CTAs.",
+    isRed: true,
+  },
+  {
+    icon: HeartPulse,
+    title: "Healthcare & Professional Services",
+    description: "Trust-building websites for clinics, hospitals, law firms, and consultancies with appointment booking.",
+    isRed: false,
+  },
+  {
+    icon: Globe,
+    title: "Real Estate & Property",
+    description: "Property listing websites with search filters, enquiry forms, agent profiles, and location maps.",
+    isRed: true,
+  },
+];
+
+const WHAT_WE_INCLUDE = [
+  { icon: Smartphone,       label: "Mobile-first responsive design" },
+  { icon: Search,           label: "Technical SEO & metadata" },
+  { icon: Zap,              label: "Performance optimisation" },
+  { icon: MousePointerClick,label: "Conversion-focused layout" },
+  { icon: ShieldCheck,      label: "Security & HTTPS setup" },
+  { icon: BarChart3,        label: "Analytics & tracking integration" },
+  { icon: PenLine,          label: "CMS / content management" },
+  { icon: LineChart,        label: "Clear call-to-action structure" },
+  { icon: CheckCircle2,     label: "Cross-browser compatibility" },
+  { icon: Globe,            label: "Custom domain & hosting setup" },
+  { icon: Code2,            label: "Clean, maintainable codebase" },
+  { icon: Rocket,           label: "Fast delivery — weeks, not months" },
+];
+
+const PROCESS = [
+  {
+    number: "01",
+    title: "Discovery Call",
+    description: "We learn your goals, audience, competitors, and what success looks like before proposing anything.",
+  },
+  {
+    number: "02",
+    title: "Structure & Wireframe",
+    description: "We map your site architecture, page hierarchy, and content structure before any visual design begins.",
+  },
+  {
+    number: "03",
+    title: "Design & Build",
+    description: "Visual design, responsive development, and content integration — with regular progress checkpoints.",
+  },
+  {
+    number: "04",
+    title: "QA, Launch & Handover",
+    description: "Full testing across devices, deployment, CMS training, and ongoing support after you go live.",
+  },
+];
+
+const STATS = [
+  { value: "50+",  label: "Websites Delivered" },
+  { value: "100%", label: "Mobile-First Builds" },
+  { value: "< 3s", label: "Target Load Time" },
+  { value: "5★",   label: "Client Satisfaction" },
+];
+
 export default function WebsiteDevelopmentPage() {
   return (
     <div>
       <PageHeader
-        title="Websites Built With Strategy, Not Just Design"
-        description="A website should build trust, explain your offer clearly, guide users to take action, and support your business goals. Harzotech builds websites with structure, SEO, performance, responsiveness, conversion, and brand credibility in mind."
+        eyebrow="Website Development"
+        title={<>Websites Built With <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Strategy,</span> Not Just <span className="text-brand-blue-300">Design</span></>}
+        description="A website should build trust, explain your offer clearly, guide users to take action, and support your business goals. We build with structure, SEO, performance, and conversion in mind — not just aesthetics."
         primaryCta={{ href: "/contact?intent=start-project", label: "Start a Project" }}
         secondaryCta={{ href: "/projects", label: "View Our Work" }}
+        illustration={<WebsiteDevHeroIllustration />}
+        bgImage="/hero.png"
       />
 
+      {/* Stats strip */}
+      <div className="border-b border-slate-100 bg-white">
+        <Container>
+          <div className="grid grid-cols-2 divide-x divide-slate-100 md:grid-cols-4">
+            {STATS.map((s) => (
+              <div key={s.label} className="flex flex-col items-center gap-1 py-7 px-4 text-center">
+                <span className="text-3xl font-black tracking-tight text-brand-blue-700">{s.value}</span>
+                <span className="text-xs font-semibold uppercase tracking-widest text-slate-500">{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </div>
+
+      {/* Website Types */}
       <Section>
         <Container>
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-            <div>
-              <SectionHeading
-                eyebrow="What We Build"
-                title="Premium web experiences designed to convert"
-                description="Clear structure, strong hierarchy, and performance-first engineering — built for credibility and measurable outcomes."
-              />
-              <div className="mt-6 grid gap-2">
-                {[
-                  "Business websites",
-                  "Corporate websites",
-                  "Landing pages",
-                  "E-commerce websites",
-                  "Real estate websites",
-                  "Healthcare websites",
-                  "SaaS websites",
-                  "Portfolio websites",
-                  "SEO-ready websites",
-                ].map((x) => (
-                  <div key={x} className="flex items-start gap-2 text-sm text-slate-700">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-cyan-700" />
-                    <span>{x}</span>
+          <div className="flex flex-col gap-12">
+            <SectionHeading
+              eyebrow="What We Build"
+              title="Every type of website, built to perform"
+              description="Whether you need a corporate presence, an online store, or a conversion-focused landing page — we build it with strategy and precision."
+              align="center"
+            />
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {WEBSITE_TYPES.map((type) => {
+                const Icon = type.icon;
+                return (
+                  <div
+                    key={type.title}
+                    className={`group relative flex flex-col gap-4 overflow-hidden rounded-2xl border p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
+                      type.isRed
+                        ? "border-brand-red-100 bg-brand-red-50/40 hover:border-brand-red-200 hover:shadow-brand-red-100"
+                        : "border-brand-blue-100 bg-brand-blue-50/40 hover:border-brand-blue-200 hover:shadow-brand-blue-100"
+                    }`}
+                  >
+                    <div
+                      className={`inline-flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 ${
+                        type.isRed
+                          ? "bg-brand-red-100 text-brand-red-700"
+                          : "bg-brand-blue-100 text-brand-blue-700"
+                      }`}
+                    >
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-base font-bold text-slate-950">{type.title}</p>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{type.description}</p>
+                    </div>
                   </div>
-                ))}
-              </div>
-              <div className="mt-7">
-                <ButtonLink href="/contact?intent=consultation" variant="secondary">
-                  Book a Consultation
-                </ButtonLink>
-              </div>
+                );
+              })}
             </div>
+          </div>
+        </Container>
+      </Section>
 
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-              <p className="text-sm font-semibold text-slate-950">What strategy means in practice</p>
-              <div className="mt-5 grid gap-4">
-                {[
-                  {
-                    title: "Credibility and clarity",
-                    desc: "Positioning and messaging that communicates value fast and builds trust.",
-                  },
-                  {
-                    title: "Conversion structure",
-                    desc: "Pages and CTAs designed to guide users toward your desired action.",
-                  },
-                  {
-                    title: "SEO foundations",
-                    desc: "Technical SEO, clean headings, and metadata for long-term visibility.",
-                  },
-                  {
-                    title: "Performance and responsiveness",
-                    desc: "Fast, mobile-first builds that feel premium across devices.",
-                  },
-                ].map((i) => (
-                  <div key={i.title} className="rounded-2xl border border-slate-200 bg-white p-5">
-                    <p className="text-sm font-semibold text-slate-950">{i.title}</p>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">{i.desc}</p>
+      {/* What's Included */}
+      <Section className="bg-slate-50">
+        <Container>
+          <div className="flex flex-col gap-12">
+            <SectionHeading
+              eyebrow="What's Included"
+              title="Everything a high-performing website needs"
+              description="No add-on surprises. Every project comes with the full stack of what makes a website actually work."
+              align="center"
+            />
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {WHAT_WE_INCLUDE.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+                  >
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-blue-50">
+                      <Icon className="h-4.5 w-4.5 text-brand-blue-700" />
+                    </div>
+                    <span className="text-sm font-semibold text-slate-800">{item.label}</span>
                   </div>
-                ))}
-              </div>
+                );
+              })}
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Process */}
+      <Section>
+        <Container>
+          <div className="flex flex-col gap-14">
+            <SectionHeading
+              eyebrow="Our Process"
+              title="How we build your website"
+              description="A repeatable, strategic process that reduces surprises and delivers results faster."
+              align="center"
+            />
+            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+              {PROCESS.map((step, i) => (
+                <div key={step.number} className="relative flex flex-col gap-4">
+                  {i < PROCESS.length - 1 && (
+                    <div className="absolute left-full top-7 hidden w-10 border-t border-dashed border-slate-300 lg:block" />
+                  )}
+                  <div className="flex items-center gap-3">
+                    <span className="text-5xl font-black leading-none text-slate-100 select-none">{step.number}</span>
+                    <div className="h-1 w-1 rounded-full bg-brand-blue-700" />
+                  </div>
+                  <div>
+                    <p className="text-base font-bold text-slate-950">{step.title}</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-500">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Dark CTA */}
+      <Section variant="dark">
+        <Container>
+          <div className="flex flex-col items-center gap-6 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-red-700/40 bg-brand-red-900/20 px-3 py-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-red-400" />
+              <span className="text-[10px] font-semibold tracking-[0.22em] uppercase text-brand-red-300">Ready to start?</span>
+            </div>
+            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Let&apos;s build a website that{" "}
+              <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">
+                works as hard as you do
+              </span>
+            </h2>
+            <p className="max-w-xl text-base leading-8 text-slate-300">
+              Tell us what you&apos;re trying to achieve. We&apos;ll respond with a clear plan, timeline, and what it takes to execute well.
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="/contact?intent=start-project" variant="cta">
+                Start a Project
+              </ButtonLink>
+              <ButtonLink href="/contact?intent=consultation" variant="outline-white">
+                Book a Consultation
+              </ButtonLink>
             </div>
           </div>
         </Container>
@@ -90,3 +263,4 @@ export default function WebsiteDevelopmentPage() {
     </div>
   );
 }
+
