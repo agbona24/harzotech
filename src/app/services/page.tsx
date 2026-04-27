@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ButtonLink } from "@/components/Button";
 import { services } from "@/data/services";
+import { PageSchema } from "@/components/PageSchema";
 import { Search, PenLine, Code2, Rocket, Target, Shield, Eye, TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -73,6 +74,12 @@ const PRINCIPLES = [
 export default function ServicesPage() {
   return (
     <div>
+      <PageSchema
+        service="Technology Services"
+        url="https://harzotech.com.ng/services"
+        description="End-to-end technology services in Nigeria: website design, custom software, AI automation, managed IT support, SEO, and branding."
+        breadcrumbs={[{ name: "Services", url: "https://harzotech.com.ng/services" }]}
+      />
       <PageHeader
         title={<>Technology Services{" "}<span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Designed for</span>{" "}Business{" "}<span className="text-brand-blue-300">Growth</span></>}
         description="Harzotech helps businesses build reliable digital systems — websites, software, automation, IT support, and visibility frameworks — that improve operations and drive growth."

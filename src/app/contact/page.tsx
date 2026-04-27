@@ -6,6 +6,7 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { site } from "@/data/site";
 import { ContactForm } from "@/components/ContactForm";
+import { PageSchema } from "@/components/PageSchema";
 
 export const metadata: Metadata = {
   title: "Contact Harzotech | Start a Project or Book a Consultation in Nigeria",
@@ -50,6 +51,12 @@ export default async function ContactPage({
 
   return (
     <div>
+      <PageSchema
+        service="Contact Harzotech"
+        url="https://harzotech.com.ng/contact"
+        description="Start a website, software, or AI project with Harzotech Nig Ltd in Lagos, Nigeria, or book a free strategy consultation."
+        breadcrumbs={[{ name: "Contact", url: "https://harzotech.com.ng/contact" }]}
+      />
       <PageHeader
         title={title}
         description={description}

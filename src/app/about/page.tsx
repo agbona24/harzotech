@@ -4,6 +4,7 @@ import { AboutHeroIllustration } from "@/components/AboutHeroIllustration";
 import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
+import { PageSchema } from "@/components/PageSchema";
 import { site } from "@/data/site";
 import {
   Target,
@@ -95,6 +96,12 @@ const WHY_ITEMS = [
 export default function AboutPage() {
   return (
     <div>
+      <PageSchema
+        service="About Harzotech"
+        url="https://harzotech.com.ng/about"
+        description="Harzotech Nig Ltd is a technology solutions company in Lagos, Nigeria. We build websites, software, AI automation, and IT systems that help businesses grow."
+        breadcrumbs={[{ name: "About", url: "https://harzotech.com.ng/about" }]}
+      />
 
       {/* ── HERO ───────────────────────────────────────────────── */}
       <PageHeader

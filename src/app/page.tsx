@@ -81,9 +81,27 @@ const processSteps = [
   },
 ] as const;
 
+const aggregateRatingSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://harzotech.com.ng/#organization",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5",
+    bestRating: "5",
+    worstRating: "1",
+    ratingCount: String(testimonials.length),
+    reviewCount: String(testimonials.length),
+  },
+};
+
 export default function Home() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}
+      />
       {/* ── 1. Hero ────────────────────────────────────────────── */}
       <Section variant="dark" className="relative flex min-h-[100svh] flex-col overflow-hidden pt-20 pb-0 sm:pt-28">
         <HeroBackground />
