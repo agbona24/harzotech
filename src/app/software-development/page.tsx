@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/Button";
 import { FAQSection } from "@/components/FAQSection";
 import { PageSchema } from "@/components/PageSchema";
 import { RelatedServices } from "@/components/RelatedServices";
+import { ServiceAnswerBlock } from "@/components/ServiceAnswerBlock";
 import {
   LayoutDashboard, ShoppingBag, CalendarCheck, Users2,
   Warehouse, GraduationCap, Hospital, Cpu,
@@ -147,6 +148,17 @@ export default function SoftwareDevelopmentPage() {
           </div>
         </Container>
       </div>
+
+      <ServiceAnswerBlock
+        answer="Harzotech Nig Ltd is a custom software development company in Lagos, Nigeria that builds business portals, CRM systems, booking platforms, SaaS applications, POS and inventory tools, payroll systems, and operational software — fully custom-built to match each client's specific workflows and business model."
+        outcomes={[
+          "100% custom — no templates or off-the-shelf tools",
+          "Scalable architecture built for growth",
+          "Full API and third-party integration",
+          "You own all source code after delivery",
+        ]}
+        signal="Custom software development company — Nigeria"
+      />
 
       {/* Software Types */}
       <Section>

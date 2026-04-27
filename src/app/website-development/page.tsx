@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/Button";
 import { FAQSection } from "@/components/FAQSection";
 import { PageSchema } from "@/components/PageSchema";
 import { RelatedServices } from "@/components/RelatedServices";
+import { ServiceAnswerBlock } from "@/components/ServiceAnswerBlock";
 import {
   Globe, ShoppingCart, LayoutTemplate, Rocket, Building2,
   HeartPulse, LineChart, CheckCircle2, Search, PenLine,
@@ -146,6 +147,17 @@ export default function WebsiteDevelopmentPage() {
           </div>
         </Container>
       </div>
+
+      <ServiceAnswerBlock
+        answer="Harzotech Nig Ltd is a website design and development company in Lagos, Nigeria that builds premium, conversion-focused business websites — including corporate sites, e-commerce stores, landing pages, and real estate or healthcare websites — all custom-built, SEO-ready, and mobile-first."
+        outcomes={[
+          "Fully responsive on all devices",
+          "SEO-optimised from day one",
+          "Built for conversions and lead capture",
+          "Fast load times and Core Web Vitals compliant",
+        ]}
+        signal="Website design & development company — Lagos, Nigeria"
+      />
 
       {/* Website Types */}
       <Section>

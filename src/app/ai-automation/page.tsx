@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/Button";
 import { FAQSection } from "@/components/FAQSection";
 import { PageSchema } from "@/components/PageSchema";
 import { RelatedServices } from "@/components/RelatedServices";
+import { ServiceAnswerBlock } from "@/components/ServiceAnswerBlock";
 import { AIAutomationWidget } from "@/components/AIAutomationWidget";
 import {
   Mic2, MessageSquare, CalendarCheck, Users2,
@@ -129,6 +130,17 @@ export default function AIAutomationPage() {
           </div>
         </Container>
       </div>
+
+      <ServiceAnswerBlock
+        answer="Harzotech Nig Ltd builds AI automation and workflow systems for businesses in Nigeria — including AI voice agents, WhatsApp Business automation, appointment booking workflows, CRM and lead automation, and end-to-end business process automation using tools like n8n, OpenAI, Twilio, and WhatsApp Business API."
+        outcomes={[
+          "24/7 automated customer responses",
+          "WhatsApp automation for leads and bookings",
+          "AI voice agents for inbound calls",
+          "Reduces manual workload without extra staff",
+        ]}
+        signal="AI automation & WhatsApp workflow systems — Nigeria"
+      />
 
       {/* Automation Types */}
       <Section>

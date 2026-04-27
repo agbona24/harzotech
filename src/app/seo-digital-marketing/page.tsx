@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/Button";
 import { FAQSection } from "@/components/FAQSection";
 import { PageSchema } from "@/components/PageSchema";
 import { RelatedServices } from "@/components/RelatedServices";
+import { ServiceAnswerBlock } from "@/components/ServiceAnswerBlock";
 import {
   Search, MapPin, PenLine, Funnel, BarChart3, Megaphone,
   CheckCircle2, TrendingUp, Users2, DollarSign,
@@ -153,6 +154,17 @@ export default function SEODigitalMarketingPage() {
           </div>
         </Container>
       </div>
+
+      <ServiceAnswerBlock
+        answer="Harzotech Nig Ltd is an SEO and digital marketing agency in Lagos, Nigeria that helps businesses rank on Google, attract qualified organic traffic, and generate leads — through technical SEO, local SEO, on-page optimisation, content strategy, Google Business Profile management, and monthly performance reporting."
+        outcomes={[
+          "Higher Google rankings for target keywords",
+          "Local SEO dominance in Lagos and Nigeria",
+          "Qualified organic leads — not just traffic",
+          "Monthly reporting with clear metrics",
+        ]}
+        signal="SEO & digital marketing agency — Lagos, Nigeria"
+      />
 
       {/* Services Grid */}
       <Section>

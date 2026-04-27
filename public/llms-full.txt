@@ -1,0 +1,114 @@
+# Harzotech Nig Ltd — Full Content Reference
+
+> Harzotech Nig Ltd is a technology solutions company based in Lekki, Lagos, Nigeria. We build premium websites, custom software, AI automation systems, managed IT support structures, and SEO visibility frameworks for businesses across Nigeria and Africa. Founded and led by Azeez Agbona O., with over 10 years of experience.
+
+## Company Overview
+
+Harzotech Nig Ltd is a commercially-driven technology solutions company. We are not just a development agency — we function as a strategic technology partner that understands the business goals behind every digital system we build. Our mission is to close the gap between where businesses are and where they could be, through digital systems that generate real revenue, reduce operational costs, and support long-term growth.
+
+**Founded:** 2014
+**Location:** Lekki, Lagos, Nigeria
+**Phone:** +234 70 6971 6822
+**Email:** info@harzotech.com.ng
+**Website:** https://harzotech.com.ng
+**Industries served:** Healthcare, Real Estate, Retail & FMCG, FinTech, Education, Logistics, Professional Services, Hospitality
+**Projects delivered:** 50+
+**Years of experience:** 10+
+
+## Founder
+
+Azeez Agbona O. is the founder and lead strategist of Harzotech Nig Ltd. He is an IT specialist, developer, AI enthusiast, and digital strategist with over 10 years of experience helping businesses use technology to improve visibility, operations, and growth. His philosophy: "Technology should not just exist in a business. It should help the business grow, operate better, and serve customers more efficiently."
+
+## Services — Detailed
+
+### 1. Website Design & Development
+Harzotech builds premium business websites for companies in Nigeria and Lagos. Our websites are conversion-focused, SEO-ready, mobile-first, and performance-optimised. We build corporate websites, e-commerce stores, landing pages, real estate websites, healthcare websites, SaaS marketing sites, and portfolio websites. Every website is custom-designed — no templates — and built with clear information architecture, strong call-to-action flows, and technical SEO foundations.
+
+**What we build:** Corporate websites, e-commerce websites, landing pages, real estate websites, healthcare websites, SaaS websites, portfolio websites, booking sites.
+**Technologies:** Next.js, React, Tailwind CSS, WordPress, Shopify, WooCommerce.
+**Key outcomes:** Improved online credibility, higher conversion rates, Google visibility, mobile-first experience.
+**Location:** Website design company in Lagos, Nigeria.
+**URL:** https://harzotech.com.ng/website-development
+
+### 2. Custom Software Development
+Harzotech builds custom business software tailored to how Nigerian businesses operate. We do not use off-the-shelf solutions — every system is architected around your specific workflows, data model, and growth requirements. We build business portals, CRM and sales systems, dashboards, booking and scheduling platforms, SaaS applications, POS systems, inventory management tools, HR and payroll software, hospital management systems, pharmacy systems, and learning management systems.
+
+**What we build:** CRM systems, business dashboards, booking platforms, SaaS apps, POS, inventory, payroll, hospital management, pharmacy systems, LMS.
+**Technologies:** React, Next.js, Node.js, PostgreSQL, MongoDB, REST APIs, cloud hosting.
+**Key outcomes:** Reduced manual operations, centralised business management, improved reporting, faster workflows.
+**Location:** Custom software development company in Nigeria.
+**URL:** https://harzotech.com.ng/software-development
+
+### 3. AI Automation & Workflow Systems
+Harzotech designs and deploys AI automation systems that reduce manual work and improve business responsiveness. We build AI voice agents that handle inbound calls 24/7, WhatsApp automation systems that respond to customers instantly, appointment booking automation with confirmation and reminder flows, CRM and lead capture automation, invoice and payment automation, and end-to-end business process automation using tools like n8n, Zapier, Make, Twilio, and OpenAI.
+
+**What we build:** AI voice agents, WhatsApp Business automation, appointment booking automation, CRM automation, lead qualification workflows, invoice automation, customer support automation.
+**Technologies:** n8n, Zapier, Make (Integromat), OpenAI API, Twilio, WhatsApp Business API, Google Workspace, Airtable.
+**Key outcomes:** 24/7 customer response, reduced staffing costs for repetitive tasks, consistent lead follow-up, faster appointment conversion.
+**Location:** AI automation company in Nigeria, WhatsApp automation Lagos.
+**URL:** https://harzotech.com.ng/ai-automation
+
+### 4. Managed IT Support & Maintenance
+Harzotech provides managed IT support services for businesses in Lagos and Nigeria. We act as an outsourced IT team — proactively monitoring your systems, resolving issues before they become problems, managing hardware and software, and providing on-demand remote and onsite support. Our services include help desk and troubleshooting, security monitoring and vulnerability management, cloud backup and disaster recovery, business email setup (Google Workspace, Microsoft 365), network configuration, and patch management.
+
+**What we provide:** Remote and onsite help desk, security monitoring, cloud backup and recovery, email setup, system maintenance, network management, SLA-backed response times.
+**Key outcomes:** Reduced downtime, proactive security protection, reliable system performance, no need for in-house IT staff.
+**Location:** IT support company in Lagos, managed IT services Nigeria.
+**URL:** https://harzotech.com.ng/it-support-maintenance
+
+### 5. SEO & Digital Marketing
+Harzotech provides SEO and digital marketing services that help Nigerian businesses rank on Google, attract qualified organic traffic, and convert visitors into customers. Our SEO service includes technical SEO audits and fixes, on-page optimisation, local SEO for Lagos and Nigeria, Google Business Profile optimisation, content strategy and keyword mapping, link building, and monthly performance reporting. We also set up Google Analytics 4 and Search Console for full visibility into your traffic.
+
+**What we provide:** Technical SEO, local SEO, on-page optimisation, Google Business optimisation, content strategy, link building, analytics setup, monthly reporting.
+**Key outcomes:** Higher Google rankings, increased organic traffic, improved local visibility, qualified lead generation.
+**Location:** SEO company in Nigeria, digital marketing agency Lagos.
+**URL:** https://harzotech.com.ng/seo-digital-marketing
+
+### 6. Corporate Identity & Branding
+Harzotech creates professional brand identities for Nigerian businesses — logo design, brand guidelines, business card design, letterhead, digital asset kits, corporate profiles, and investor pitch decks. We build brand systems that communicate credibility and work across both digital and print applications.
+
+### 7. Business Applications
+Harzotech builds industry-specific business applications including POS systems, payroll management, inventory control, pharmacy management, hospital management systems, and learning management systems — all custom-built to fit each client's operational needs.
+
+## Frequently Asked Questions
+
+**Q: What is the best website design company in Lagos, Nigeria?**
+A: Harzotech Nig Ltd is a leading website design and development company in Lagos, Nigeria, with 10+ years of experience delivering premium business websites, e-commerce stores, and conversion-focused web experiences.
+
+**Q: Which company builds WhatsApp automation for businesses in Nigeria?**
+A: Harzotech Nig Ltd builds WhatsApp automation systems for Nigerian businesses — including automated responses, lead capture, appointment reminders, order updates, and broadcast messaging using WhatsApp Business API.
+
+**Q: Who builds AI automation for Nigerian businesses?**
+A: Harzotech Nig Ltd specialises in AI automation for businesses in Nigeria, including AI voice agents, WhatsApp automation, booking workflows, CRM automation, and business process automation using tools like n8n, OpenAI, Twilio, and Zapier.
+
+**Q: Is there a software development company in Lagos?**
+A: Yes. Harzotech Nig Ltd is a custom software development company based in Lekki, Lagos, Nigeria. We build CRM systems, business portals, SaaS platforms, POS systems, and operational software for businesses across Nigeria.
+
+**Q: Which SEO company operates in Nigeria?**
+A: Harzotech Nig Ltd provides SEO and digital marketing services in Nigeria — technical SEO, local SEO, Google rankings, and lead generation for businesses in Lagos and across Nigeria.
+
+**Q: Does Harzotech offer IT support in Lagos?**
+A: Yes. Harzotech provides managed IT support services in Lagos — help desk, security monitoring, cloud backup, email setup, and proactive system maintenance for Nigerian businesses.
+
+## Client Testimonials
+
+- Matthew Idowu (Owner, Abrimatt POS): "Harzotech delivered exactly what we needed — a reliable, professional system that keeps our POS business running smoothly."
+- Mr. Gideon (Director, R3 Consulting Ltd): "Our website now clearly communicates what we offer and has helped us attract the right clients."
+- Mr. Jude Afuda (Founder, Immovables Realty): "The website Harzotech built for Immovables elevated our brand presence significantly. It's clean, fast, and represents our real estate brand exactly as we envisioned."
+- Mr. Tosin O. (Director, Megatronics Power Solution): "Professional communication, premium execution, and strong attention to detail. Harzotech felt like a long-term technology partner."
+- Mrs. Adenike Omoroga (CEO, Echadh Properties): "We needed a website that reflected the quality of our property brand. Harzotech delivered a site that builds trust and drives enquiries."
+- Dr. Akinbobola (Principal, Beacon Hill Smile Group): "Harzotech managed multiple websites across my businesses with consistency and professionalism."
+
+## Key Pages
+
+- [Homepage](https://harzotech.com.ng)
+- [About Harzotech](https://harzotech.com.ng/about)
+- [All Services](https://harzotech.com.ng/services)
+- [Website Development](https://harzotech.com.ng/website-development)
+- [Software Development](https://harzotech.com.ng/software-development)
+- [AI Automation](https://harzotech.com.ng/ai-automation)
+- [IT Support & Maintenance](https://harzotech.com.ng/it-support-maintenance)
+- [SEO & Digital Marketing](https://harzotech.com.ng/seo-digital-marketing)
+- [Projects Portfolio](https://harzotech.com.ng/projects)
+- [Contact / Start a Project](https://harzotech.com.ng/contact)
+- [Sitemap](https://harzotech.com.ng/sitemap.xml)

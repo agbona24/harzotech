@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/Button";
 import { FAQSection } from "@/components/FAQSection";
 import { PageSchema } from "@/components/PageSchema";
 import { RelatedServices } from "@/components/RelatedServices";
+import { ServiceAnswerBlock } from "@/components/ServiceAnswerBlock";
 import {
   Headset, ShieldCheck, Cloud, Mail, Server, Wifi,
   ClockAlert, RefreshCw, Lock, BarChart3, Database, MonitorCheck,
@@ -148,6 +149,17 @@ export default function ITSupportMaintenancePage() {
           </div>
         </Container>
       </div>
+
+      <ServiceAnswerBlock
+        answer="Harzotech Nig Ltd provides managed IT support and maintenance services for businesses in Lagos, Nigeria — including remote and onsite help desk, security monitoring, cloud backup and recovery, business email setup, system maintenance, and proactive IT management with defined SLA response times."
+        outcomes={[
+          "Fast remote & onsite response",
+          "Proactive monitoring before issues escalate",
+          "Cloud backup with tested recovery",
+          "No need for full-time in-house IT staff",
+        ]}
+        signal="Managed IT support & maintenance — Lagos, Nigeria"
+      />
 
       {/* Services Grid */}
       <Section>
