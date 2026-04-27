@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
+import { AIAutomationHeroIllustration } from "@/components/AIAutomationHeroIllustration";
 import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -16,10 +17,12 @@ export default function AIAutomationPage() {
   return (
     <div>
       <PageHeader
-        title="AI and Automation for Smarter Business Operations"
+        title={<>AI and{" "}<span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Automation</span>{" "}for Smarter{" "}<span className="text-brand-blue-300">Business Operations</span></>}
         description="Reduce manual work, improve customer communication, manage leads, confirm appointments, automate responses, and streamline daily operations using AI and workflow automation."
         primaryCta={{ href: "/contact?intent=consultation", label: "Book a Consultation" }}
         secondaryCta={{ href: "/contact?intent=start-project", label: "Start a Project" }}
+        illustration={<AIAutomationHeroIllustration />}
+        bgImage="/hero.png"
       />
 
       <Section>

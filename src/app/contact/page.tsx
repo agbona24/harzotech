@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
+import { ContactHeroIllustration } from "@/components/ContactHeroIllustration";
 import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -15,20 +16,23 @@ export const metadata: Metadata = {
 function getIntentCopy(intent?: string) {
   if (intent === "consultation") {
     return {
-      title: "Book a Consultation",
+      title: <>Book a <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Consultation</span></>,
+
       description:
         "Tell us what you’re trying to achieve. We’ll respond with a clear next step, recommended approach, and what it would take to execute well.",
     };
   }
   if (intent === "start-project") {
     return {
-      title: "Start a Project",
+      title: <>Start a <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Project</span></>,
+
       description:
         "Share your goals and requirements. We’ll respond with a structured plan, scope direction, and execution path aligned with your business outcomes.",
     };
   }
   return {
-    title: "Contact Harzotech",
+    title: <>Contact <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Harzotech</span></>,
+
     description:
       "Start a project or book a consultation. Harzotech helps businesses build premium websites, custom software, AI automation systems, reliable IT support structures, and SEO visibility frameworks.",
   };
@@ -49,6 +53,7 @@ export default async function ContactPage({
         title={title}
         description={description}
         primaryCta={{ href: "mailto:info@harzotech.com.ng", label: "Email Us" }}
+        illustration={<ContactHeroIllustration />}
         bgImage="/hero.png"
       />
 

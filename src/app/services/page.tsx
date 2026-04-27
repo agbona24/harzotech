@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
+import { ServicesHeroIllustration } from "@/components/ServicesHeroIllustration";
 import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -16,10 +17,11 @@ export default function ServicesPage() {
   return (
     <div>
       <PageHeader
-        title="Technology Services Designed for Business Growth"
+        title={<>Technology Services{" "}<span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Designed for</span>{" "}Business{" "}<span className="text-brand-blue-300">Growth</span></>}
         description="Harzotech helps businesses build reliable digital systems — websites, software, automation, IT support, and visibility frameworks — that improve operations and drive growth."
         primaryCta={{ href: "/contact?intent=start-project", label: "Start a Project" }}
         secondaryCta={{ href: "/projects", label: "View Our Work" }}
+        illustration={<ServicesHeroIllustration />}
         bgImage="/hero.png"
       />
 
