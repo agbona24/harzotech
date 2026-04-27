@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <div>
       {/* ── 1. Hero ────────────────────────────────────────────── */}
-      <Section variant="dark" className="relative flex min-h-screen flex-col overflow-hidden pt-20 pb-0 sm:pt-28">
+      <Section variant="dark" className="relative flex min-h-[100svh] flex-col overflow-hidden pt-20 pb-0 sm:pt-28">
         <HeroBackground />
 
         <Container>

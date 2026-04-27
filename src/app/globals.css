@@ -45,3 +45,18 @@
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
 }
+
+/* ── Mobile base enhancements ─────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  overflow-x: hidden;
+}

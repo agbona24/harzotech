@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
 import { Logo } from "@/components/Logo";
@@ -39,6 +40,12 @@ export function Navbar() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [open]);
 
   const activeHref = useMemo(() => {
@@ -100,44 +107,53 @@ export function Navbar() {
         </div>
       </Container>
 
-      {open ? (
-        <div className="border-t border-slate-200 bg-white md:hidden">
-          <Container>
-            <div className="flex flex-col gap-2 py-4">
-              {/* Mobile brand header */}
-              <div className="mb-2 flex items-center justify-between border-b border-slate-100 pb-4">
-                <Logo />
-                <div className="flex items-center gap-1.5">
-                  <div className="h-1 w-5 rounded-full bg-brand-blue-700" />
-                  <div className="h-1 w-2 rounded-full bg-brand-red-700" />
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="border-t border-slate-200 bg-white md:hidden"
+          >
+            <Container>
+              <div className="flex flex-col gap-2 py-4">
+                {/* Mobile brand header */}
+                <div className="mb-2 flex items-center justify-between border-b border-slate-100 pb-4">
+                  <Logo />
+                  <div className="flex items-center gap-1.5">
+                    <div className="h-1 w-5 rounded-full bg-brand-blue-700" />
+                    <div className="h-1 w-2 rounded-full bg-brand-red-700" />
+                  </div>
+                </div>
+                {navItems.map((item) => {
+                  const active = activeHref === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${
+                        active
+                          ? "bg-brand-blue-700 text-white"
+                          : "text-slate-700 hover:bg-slate-50"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+
+                <div className="pt-2">
+                  <ButtonLink href="/contact?intent=start-project" variant="cta" className="w-full">
+                    Start a Project
+                  </ButtonLink>
                 </div>
               </div>
-              {navItems.map((item) => {
-                const active = activeHref === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`rounded-xl px-4 py-3 text-sm font-medium transition ${
-                      active
-                        ? "bg-brand-blue-700 text-white"
-                        : "text-slate-700 hover:bg-slate-50"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-
-              <div className="pt-2">
-                <ButtonLink href="/contact?intent=start-project" variant="cta" className="w-full">
-                  Start a Project
-                </ButtonLink>
-              </div>
-            </div>
-          </Container>
-        </div>
-      ) : null}
+            </Container>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

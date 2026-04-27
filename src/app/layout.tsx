@@ -58,9 +58,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-white text-slate-950">
+      <body className="min-h-full flex flex-col bg-white text-slate-950 overflow-x-hidden">
         <OrganizationSchema />
         <Navbar />
         <main className="flex-1">{children}</main>

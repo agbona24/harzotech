@@ -75,7 +75,7 @@ export function WhyHarzotech() {
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
 
         {/* ── Header ─────────────────────────────────────────── */}
-        <div className="mb-16 text-center">
+        <div className="mb-10 sm:mb-16 text-center">
           {/* Badge */}
           <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-brand-blue-500/30 bg-brand-blue-900/30 px-4 py-1.5 backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5 text-brand-blue-300" />
@@ -84,7 +84,7 @@ export function WhyHarzotech() {
             </span>
           </div>
           {/* Heading */}
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.15]">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.15]">
             We Don&apos;t Just Build.{" "}
             <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">We Understand.</span>
           </h2>
@@ -95,7 +95,7 @@ export function WhyHarzotech() {
         </div>
 
         {/* ── Cards ──────────────────────────────────────────── */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
           {ITEMS.map((item, i) => {
             const Icon = item.Icon;
             return (
@@ -105,11 +105,11 @@ export function WhyHarzotech() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                className="rounded-2xl border border-white/[0.10] bg-white/[0.06] p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-white/[0.18] hover:bg-white/[0.10]"
+                className="rounded-2xl border border-white/[0.10] bg-white/[0.06] p-4 sm:p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-white/[0.18] hover:bg-white/[0.10]"
               >
                 {/* Icon box — alternates brand-blue / brand-red */}
                 <div
-                  className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl ring-1 ${
+                  className={`mb-3 sm:mb-5 inline-flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl ring-1 ${
                     i % 2 === 0
                       ? "bg-brand-blue-700/30 shadow-[0_0_24px_rgba(21,101,192,0.45)] ring-brand-blue-500/30"
                       : "bg-brand-red-700/30 shadow-[0_0_24px_rgba(198,40,40,0.4)] ring-brand-red-500/30"

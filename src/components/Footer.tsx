@@ -88,10 +88,10 @@ export function Footer() {
               </p>
             </div>
             <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact?intent=start-project" variant="cta">
+              <ButtonLink href="/contact?intent=start-project" variant="cta" className="w-full sm:w-auto">
                 Start a Project →
               </ButtonLink>
-              <ButtonLink href="/services" variant="outline-white">
+              <ButtonLink href="/services" variant="outline-white" className="w-full sm:w-auto">
                 Explore Services
               </ButtonLink>
             </div>
