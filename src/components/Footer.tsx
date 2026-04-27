@@ -46,6 +46,7 @@ const quickLinks = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
+  { href: "/blog",     label: "Blog" },
   { href: "/ai-automation", label: "AI Automation" },
   { href: "/contact", label: "Contact" },
 ] as const;
