@@ -5,6 +5,7 @@ import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
+import { AIAutomationWidget } from "@/components/AIAutomationWidget";
 import {
   Mic2, MessageSquare, CalendarCheck, Users2,
   CreditCard, HeadphonesIcon, Zap, RefreshCw,
@@ -139,6 +140,50 @@ export default function AIAutomationPage() {
           </div>
         </Container>
       </Section>
+
+      {/* Live Demo */}
+      <div className="relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_#0d1f3c_0%,_#030712_60%)] py-20 sm:py-28">
+        {/* background glows */}
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-[480px] w-[700px] -translate-x-1/2 rounded-full bg-brand-blue-700/20 blur-[120px]" />
+        <div className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 rounded-full bg-brand-red-700/10 blur-[100px]" />
+
+        <Container>
+          <div className="flex flex-col items-center gap-10">
+            {/* eyebrow pill */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue-500/30 bg-brand-blue-500/10 px-4 py-1.5">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-blue-400" />
+              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-blue-300">Live Interactive Demo</span>
+            </div>
+
+            {/* heading */}
+            <div className="flex flex-col items-center gap-4 text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                See the automation{" "}
+                <span className="bg-gradient-to-r from-brand-blue-300 via-sky-300 to-brand-red-400 bg-clip-text text-transparent">
+                  working right now
+                </span>
+              </h2>
+              <p className="max-w-xl text-base leading-8 text-slate-400">
+                Pick any tab below and watch each scenario play out in real-time — voice booking, WhatsApp, lead capture, CRM, invoicing, and support. This is exactly what we build for your business.
+              </p>
+            </div>
+
+            {/* widget with glow ring */}
+            <div className="relative w-full max-w-2xl">
+              <div className="pointer-events-none absolute inset-0 rounded-3xl bg-brand-blue-600/10 blur-2xl" />
+              <AIAutomationWidget />
+            </div>
+
+            {/* bottom nudge */}
+            <p className="text-sm text-slate-500">
+              Ready to deploy this for your business?{" "}
+              <a href="/contact?intent=consultation" className="font-semibold text-brand-blue-400 underline-offset-4 hover:underline">
+                Book a free automation audit →
+              </a>
+            </p>
+          </div>
+        </Container>
+      </div>
 
       {/* Outcomes */}
       <Section className="bg-slate-50">
