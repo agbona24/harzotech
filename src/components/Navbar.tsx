@@ -20,10 +20,17 @@ const navItems = [
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -42,7 +49,13 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 border-b backdrop-blur transition-all duration-300 ${
+        scrolled
+          ? "border-slate-100 bg-white/95 shadow-[0_1px_12px_rgba(0,0,0,0.07)]"
+          : "border-slate-200/80 bg-white/90"
+      }`}
+    >
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
           <Logo />
@@ -91,6 +104,14 @@ export function Navbar() {
         <div className="border-t border-slate-200 bg-white md:hidden">
           <Container>
             <div className="flex flex-col gap-2 py-4">
+              {/* Mobile brand header */}
+              <div className="mb-2 flex items-center justify-between border-b border-slate-100 pb-4">
+                <Logo />
+                <div className="flex items-center gap-1.5">
+                  <div className="h-1 w-5 rounded-full bg-brand-blue-700" />
+                  <div className="h-1 w-2 rounded-full bg-brand-red-700" />
+                </div>
+              </div>
               {navItems.map((item) => {
                 const active = activeHref === item.href;
                 return (

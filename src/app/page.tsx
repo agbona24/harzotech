@@ -1,4 +1,9 @@
+import { HeroBackground } from "@/components/HeroBackground";
+import { ClientsMarquee } from "@/components/ClientsMarquee";
+import { WhyHarzotech } from "@/components/WhyHarzotech";
 import { Container } from "@/components/Container";
+import Image from "next/image";
+import Link from "next/link";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
@@ -7,20 +12,29 @@ import { projects } from "@/data/projects";
 import { industries } from "@/data/industries";
 import { testimonials } from "@/data/testimonials";
 import { site } from "@/data/site";
+import { ScrollCarousel } from "@/components/ScrollCarousel";
+import { AIAutomationWidget } from "@/components/AIAutomationWidget";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ProjectCard } from "@/components/ProjectCard";
-import { FadeIn, Float } from "@/components/Motion";
+import { FadeIn } from "@/components/Motion";
+import { HeroServicesPanel } from "@/components/HeroServicesPanel";
 import {
+  Activity,
   ArrowRight,
-  BarChart3,
-  Bolt,
+  Briefcase,
+  Building,
+  Building2,
   CheckCircle2,
   Code2,
-  Globe,
-  Layers,
-  Search,
-  ShieldCheck,
-  Sparkles,
+  Coffee,
+  ExternalLink,
+  Factory,
+  GraduationCap,
+  HeartHandshake,
+  Landmark,
+  Rocket,
+  ShoppingBag,
+  Truck,
   Zap,
 } from "lucide-react";
 
@@ -29,58 +43,15 @@ export const metadata = {
   description: site.description,
 };
 
-const trustItems = [
-  "10+ Years of Technology Experience",
-  "Websites, Software & Business Systems Delivered",
-  "AI, Automation, SEO & Digital Growth Expertise",
-  "Trusted Across Multiple Industries",
+const marqueeStats = [
+  "50+ Projects Delivered",
+  "10+ Years of Experience",
+  "8+ Industries Served",
+  "24/7 Automation Systems",
+  "100% Custom-Built Solutions",
+  "Nigeria's Trusted Tech Partner",
 ] as const;
 
-const heroServices = [
-  {
-    title: "Website Development",
-    description: "Premium, fast websites that convert.",
-    icon: Globe,
-    tone: "bg-brand-blue-500/10 text-brand-blue-200 border-brand-blue-500/20",
-  },
-  {
-    title: "Software Development",
-    description: "Custom systems for real operations.",
-    icon: Code2,
-    tone: "bg-white/5 text-slate-200 border-white/10",
-  },
-  {
-    title: "AI & Automation",
-    description: "Workflows that run 24/7.",
-    icon: Sparkles,
-    tone: "bg-emerald-500/10 text-emerald-200 border-emerald-500/20",
-  },
-  {
-    title: "SEO & Digital Growth",
-    description: "Visibility, leads, and compounding results.",
-    icon: Search,
-    tone: "bg-brand-red-500/10 text-brand-red-200 border-brand-red-500/20",
-  },
-  {
-    title: "IT Support & Maintenance",
-    description: "Reliable support when it matters.",
-    icon: ShieldCheck,
-    tone: "bg-white/5 text-slate-200 border-white/10",
-  },
-] as const;
-
-const whyChoose = [
-  { title: "Strategy before execution", icon: Sparkles },
-  { title: "Business-focused technology", icon: BarChart3 },
-  { title: "Strong understanding of sales and customer behavior", icon: Bolt },
-  { title: "Custom software and web development experience", icon: Layers },
-  { title: "AI and automation expertise", icon: Zap },
-  { title: "SEO and digital visibility awareness", icon: BarChart3 },
-  { title: "Responsive and user-friendly design", icon: CheckCircle2 },
-  { title: "Reliable technical support", icon: ShieldCheck },
-  { title: "Experience across multiple industries", icon: CheckCircle2 },
-  { title: "Scalable solutions built for long-term value", icon: CheckCircle2 },
-] as const;
 
 const processSteps = [
   {
@@ -109,14 +80,8 @@ export default function Home() {
   return (
     <div>
       {/* ── 1. Hero ────────────────────────────────────────────── */}
-      <Section variant="dark" className="relative overflow-hidden py-24 sm:py-28">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_50%_-5%,rgba(21,101,192,0.18),transparent),radial-gradient(ellipse_50%_45%_at_85%_105%,rgba(198,40,40,0.1),transparent)]" />
-          <div className="absolute inset-0 opacity-[0.20] [background-image:url('/hero-network.svg')] [background-size:1200px_700px] [background-position:center] [background-repeat:no-repeat] mix-blend-overlay" />
-          <div className="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:30px_30px]" />
-          <div className="absolute -top-40 left-1/3 h-[28rem] w-[28rem] rounded-full bg-brand-blue-700/[0.08] blur-3xl" />
-          <div className="absolute -bottom-28 right-1/4 h-80 w-80 rounded-full bg-brand-red-700/[0.07] blur-3xl" />
-        </div>
+      <Section variant="dark" className="relative flex min-h-screen flex-col overflow-hidden pt-24 pb-0 sm:pt-28">
+        <HeroBackground />
 
         <Container>
           <div className="relative grid gap-16 lg:grid-cols-2 lg:items-center">
@@ -125,17 +90,18 @@ export default function Home() {
               <FadeIn>
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-slate-300 backdrop-blur-sm">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.85)]" />
-                  Serving businesses across Nigeria &amp; beyond
+                  Building the Future of Digital Excellence
                 </div>
               </FadeIn>
 
               <FadeIn delay={0.08}>
-                <h1 className="mt-6 text-5xl font-bold tracking-tight text-white sm:text-6xl leading-[1.1]">
-                  Technology Built to{" "}
-                  <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">
-                    Grow, Automate,
-                  </span>{" "}
-                  and Scale
+                <h1 className="mt-6 font-bold tracking-tight text-white leading-[1.08]">
+                  <span className="block text-5xl sm:text-6xl">
+                    Transforming Ideas into{" "}
+                    <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">
+                      Digital Reality.
+                    </span>
+                  </span>
                 </h1>
               </FadeIn>
 
@@ -159,59 +125,29 @@ export default function Home() {
               </FadeIn>
             </div>
 
-            {/* Right: Services snapshot */}
-            <div className="relative lg:pl-4">
-              <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-gradient-to-br from-brand-blue-700/10 via-transparent to-brand-red-700/10 blur-2xl" />
-              <FadeIn delay={0.14} y={18}>
-                <Float>
-                  <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-navy-900 to-navy-950 p-6 shadow-2xl ring-1 ring-white/[0.06]">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-semibold text-white">Everything we build for you</p>
-                        <p className="mt-1 text-xs text-slate-400">
-                          Websites • Software • AI • SEO • IT Support
-                        </p>
-                      </div>
-                      <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[11px] font-medium text-slate-300">
-                        Full service
-                      </span>
-                    </div>
-
-                    <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                      {heroServices.map((s) => (
-                        <div
-                          key={s.title}
-                          className="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-4 transition hover:bg-white/[0.06]"
-                        >
-                          <div className="flex items-start gap-3">
-                            <div className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${s.tone}`}>
-                              <s.icon className="h-5 w-5" />
-                            </div>
-                            <div className="min-w-0">
-                              <p className="text-sm font-semibold text-white">{s.title}</p>
-                              <p className="mt-1 text-xs leading-5 text-slate-400">{s.description}</p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-5 flex items-center justify-between rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-3">
-                      <p className="text-xs font-medium text-slate-300">
-                        Strategy → Design → Build → Launch → Support
-                      </p>
-                      <ArrowRight className="h-4 w-4 text-slate-400" />
-                    </div>
-                  </div>
-                </Float>
-              </FadeIn>
-            </div>
+            {/* Right: Services panel */}
+            <HeroServicesPanel />
           </div>
         </Container>
+
+        {/* Trust marquee — pinned to bottom of viewport */}
+        <div className="relative mt-auto overflow-hidden border-t border-white/10">
+          <div
+            className="flex w-max"
+            style={{ animation: "marquee 32s linear infinite" }}
+          >
+            {[...marqueeStats, ...marqueeStats].map((t, i) => (
+              <div key={i} className="flex shrink-0 items-center gap-3 px-10 py-4">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue-400" />
+                <span className="whitespace-nowrap text-sm font-semibold text-slate-300">{t}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </Section>
 
       {/* ── 2. Authority — Stats ───────────────────────────────── */}
-      <Section className="relative overflow-hidden border-y border-slate-100">
+      <Section className="relative overflow-hidden border-y border-slate-200 bg-gradient-to-br from-slate-50 via-white to-brand-blue-50">
         <div className="pointer-events-none absolute inset-0 opacity-[0.025] [background-image:linear-gradient(rgba(0,0,0,1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,1)_1px,transparent_1px)] [background-size:64px_64px]" />
         <Container>
           <div className="relative mx-auto max-w-4xl text-center">
@@ -243,68 +179,75 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="relative mx-auto mt-10 max-w-4xl">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {trustItems.map((t) => (
-                <div
-                  key={t}
-                  className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-                >
-                  <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand-blue-50 text-brand-blue-700">
-                    <CheckCircle2 className="h-4 w-4" />
-                  </div>
-                  <p className="text-sm font-semibold leading-6 text-slate-900">{t}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </Container>
       </Section>
 
+      {/* ── 2b. Happy Clients — logo marquee ────────────────── */}
+      <ClientsMarquee />
+
       {/* ── 3. About Preview ──────────────────────────────────── */}
-      <Section className="relative overflow-hidden bg-slate-50">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.03] [background-image:radial-gradient(rgba(0,0,0,0.8)_1px,transparent_1px)] [background-size:24px_24px]" />
+      <Section className="relative overflow-hidden bg-gradient-to-br from-brand-blue-800 via-navy-900 to-navy-950">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:28px_28px]" />
         <Container>
-          <div className="relative grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="relative grid gap-14 lg:grid-cols-2 lg:items-center">
+            {/* Text column — left */}
             <div>
               <div className="flex items-center gap-2.5">
-                <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-700" />
-                <p className="text-xs font-semibold tracking-[0.18em] uppercase text-brand-blue-700">About</p>
+                <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-300" />
+                <p className="text-xs font-semibold tracking-[0.18em] uppercase text-brand-blue-300">About</p>
+                <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-300" />
               </div>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 Built on Experience, Strategy, and Innovation
               </h2>
-              <p className="mt-5 text-base leading-8 text-slate-600">
+              <p className="mt-5 text-base leading-8 text-slate-300">
                 Harzotech Nig Ltd is a privately owned technology solutions company helping
                 businesses simplify operations, strengthen their digital presence, and scale
                 through reliable digital systems.
               </p>
-              <blockquote className="mt-7 rounded-2xl border-l-4 border-brand-blue-700 bg-white py-4 pl-5 pr-4 shadow-sm">
-                <p className="text-sm leading-7 italic text-slate-700">
+              {/* Mobile-only single image */}
+              <div className="mt-7 overflow-hidden rounded-2xl border border-white/10 shadow-xl lg:hidden">
+                <Image
+                  src="/about1.png"
+                  alt="Harzotech team at work"
+                  width={640}
+                  height={360}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <blockquote className="mt-7 rounded-2xl border-l-4 border-brand-blue-400 bg-white/[0.06] py-4 pl-5 pr-4 backdrop-blur-sm">
+                <p className="text-sm leading-7 italic text-slate-200">
                   &ldquo;Technology should not just exist in a business. It should help the business
                   grow, operate better, and serve customers more efficiently.&rdquo;
                 </p>
-                <footer className="mt-2 text-xs font-semibold text-slate-500">— Azeez Agbona O., Founder</footer>
+                <footer className="mt-2 text-xs font-semibold text-slate-400">— Azeez Agbona O., Founder</footer>
               </blockquote>
               <div className="mt-7">
                 <ButtonLink href="/about" variant="secondary">Learn More About Harzotech</ButtonLink>
               </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <p className="text-sm font-semibold text-slate-950">Core capabilities</p>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                {services.slice(0, 6).map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <div key={s.id} className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-3 py-3">
-                      <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-blue-50 text-brand-blue-700">
-                        <Icon className="h-4 w-4" />
-                      </div>
-                      <p className="text-xs font-medium leading-5 text-slate-700">{s.title}</p>
-                    </div>
-                  );
-                })}
+            {/* Images column — right */}
+            <div className="relative hidden lg:block">
+              <div className="relative">
+                <div className="overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
+                  <Image
+                    src="/about1.png"
+                    alt="Harzotech team at work"
+                    width={640}
+                    height={480}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-6 -left-6 w-48 overflow-hidden rounded-2xl border border-white/20 shadow-xl">
+                  <Image
+                    src="/about2.png"
+                    alt="Harzotech workspace"
+                    width={320}
+                    height={240}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -312,36 +255,125 @@ export default function Home() {
       </Section>
 
       {/* ── 4. Services ───────────────────────────────────────── */}
-      <Section>
+      <Section className="relative overflow-hidden bg-white">
+        {/* Radial blue wash from top */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_0%,rgba(21,101,192,0.05),transparent)]" />
+        {/* Dot grid */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.02] [background-image:radial-gradient(rgba(0,0,0,0.9)_1px,transparent_1px)] [background-size:24px_24px]" />
         <Container>
-          <div className="flex flex-col gap-10">
-            <SectionHeading
-              eyebrow="Services"
-              title="Technology Services Designed for Business Growth"
-              description="Build credibility, reduce manual work, improve operations, and increase visibility with technology that supports long-term growth."
-            />
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {services.map((s) => <ServiceCard key={s.id} service={s} />)}
+          <div className="relative flex flex-col gap-12">
+            {/* Header row with "View All" CTA */}
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <SectionHeading
+                eyebrow="Services"
+                title="Technology Services Designed for Business Growth"
+                description="Build credibility, reduce manual work, improve operations, and increase visibility with technology that supports long-term growth."
+              />
+              <div className="shrink-0">
+                <ButtonLink href="/services" variant="secondary">View All Services</ButtonLink>
+              </div>
             </div>
+            {/* Horizontal scroll row */}
+            <ScrollCarousel
+              fadeLeft="bg-[linear-gradient(to_right,white,transparent)]"
+              fadeRight="bg-[linear-gradient(to_left,white,transparent)]"
+              btnVariant="light"
+              cardWidth={288}
+            >
+              {services.map((s) => (
+                <div key={s.id} className="w-72 shrink-0 snap-start">
+                  <ServiceCard service={s} />
+                </div>
+              ))}
+            </ScrollCarousel>
           </div>
         </Container>
       </Section>
 
       {/* ── 5. Projects ───────────────────────────────────────── */}
-      <Section className="bg-slate-50">
+      <Section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-brand-blue-800">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:28px_28px]" />
         <Container>
-          <div className="flex flex-col gap-10">
-            <SectionHeading
-              eyebrow="Projects"
-              title="Selected Work Built With Strategy and Precision"
-              description="From corporate websites to software platforms and business systems, Harzotech has delivered solutions across different industries."
-            />
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {projects.slice(0, 9).map((p) => <ProjectCard key={p.slug} project={p} />)}
+          <div className="relative flex flex-col gap-8">
+
+            {/* Header */}
+            <div className="flex items-end justify-between gap-6">
+              <SectionHeading
+                eyebrow="Projects"
+                title="Selected Work"
+                dark
+              />
+              <div className="shrink-0 pb-1">
+                <ButtonLink href="/projects" variant="secondary">View All 50+ Projects</ButtonLink>
+              </div>
             </div>
-            <div>
-              <ButtonLink href="/projects" variant="secondary">View All Projects</ButtonLink>
-            </div>
+
+            {/* Scroll row */}
+            <ScrollCarousel
+              fadeLeft="bg-[linear-gradient(to_right,#0c1e3b,transparent)]"
+              fadeRight="bg-[linear-gradient(to_left,#163060,transparent)]"
+              btnVariant="dark"
+              cardWidth={288}
+            >
+              {projects.slice(0, 10).map((p) => (
+                <div key={p.slug} className="w-64 shrink-0 snap-start sm:w-72">
+                  {p.url ? (
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] transition duration-300 hover:-translate-y-1 hover:border-white/[0.16] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)]"
+                    >
+                      <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-navy-800 to-navy-950">
+                        {p.image && (
+                          <Image
+                            src={p.image}
+                            alt={p.name}
+                            fill
+                            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                            sizes="(max-width: 640px) 256px, 288px"
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/10 to-transparent" />
+                        <span className="absolute top-3 left-3 rounded-full border border-white/10 bg-black/40 px-2.5 py-0.5 text-[10px] font-semibold tracking-wide text-white/70 backdrop-blur-sm">
+                          {p.industry}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between gap-2 px-4 py-3.5">
+                        <p className="truncate text-sm font-semibold text-white">{p.name}</p>
+                        <ExternalLink className="h-3.5 w-3.5 shrink-0 text-slate-500 transition group-hover:text-brand-blue-300" />
+                      </div>
+                    </a>
+                  ) : (
+                    <Link
+                      href={`/projects#${p.slug}`}
+                      className="group block overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] transition duration-300 hover:-translate-y-1 hover:border-white/[0.16] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)]"
+                    >
+                      <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-navy-800 to-navy-950">
+                        {p.image && (
+                          <Image
+                            src={p.image}
+                            alt={p.name}
+                            fill
+                            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                            sizes="(max-width: 640px) 256px, 288px"
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/10 to-transparent" />
+                        <span className="absolute top-3 left-3 rounded-full border border-white/10 bg-black/40 px-2.5 py-0.5 text-[10px] font-semibold tracking-wide text-white/70 backdrop-blur-sm">
+                          {p.industry}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between gap-2 px-4 py-3.5">
+                        <p className="truncate text-sm font-semibold text-white">{p.name}</p>
+                        <ArrowRight className="h-3.5 w-3.5 shrink-0 text-slate-500 transition group-hover:translate-x-0.5 group-hover:text-brand-blue-300" />
+                      </div>
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </ScrollCarousel>
+
           </div>
         </Container>
       </Section>
@@ -380,35 +412,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm">
-              <div className="mb-6 flex items-center justify-between">
-                <p className="text-sm font-semibold text-white">Automation Pipeline</p>
-                <span className="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-                  Running
-                </span>
-              </div>
-              <div className="space-y-1.5">
-                {[
-                  { step: "Trigger",   detail: "Form / WhatsApp / Booking received",   cls: "border-brand-blue-500/30 bg-brand-blue-500/10 text-brand-blue-300" },
-                  { step: "Process",   detail: "AI triage → classify → route",          cls: "border-violet-500/30 bg-violet-500/10 text-violet-300"             },
-                  { step: "Respond",   detail: "Auto-reply → CRM update → team alert",  cls: "border-brand-red-500/30 bg-brand-red-500/10 text-brand-red-300"   },
-                  { step: "Follow-up", detail: "Reminder → invoice → review request",   cls: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"          },
-                ].map((item, i, arr) => (
-                  <div key={item.step}>
-                    <div className={`rounded-xl border p-4 ${item.cls}`}>
-                      <p className="text-[11px] font-bold tracking-widest uppercase opacity-80">{item.step}</p>
-                      <p className="mt-1 text-xs text-slate-300">{item.detail}</p>
-                    </div>
-                    {i < arr.length - 1 && (
-                      <div className="flex justify-center py-1">
-                        <ArrowRight className="h-4 w-4 rotate-90 text-white/20" />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <AIAutomationWidget />
           </div>
         </Container>
       </Section>
@@ -506,31 +510,7 @@ export default function Home() {
       </Section>
 
       {/* ── 9. Why Choose ─────────────────────────────────────── */}
-      <Section>
-        <Container>
-          <SectionHeading
-            eyebrow="Why Harzotech"
-            title="Why Businesses Choose Harzotech"
-            description="A strategic approach, premium execution, and practical systems built to support growth."
-          />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {whyChoose.map((w, idx) => {
-              const Icon = w.icon;
-              return (
-                <div key={w.title} className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-                  <span className="pointer-events-none absolute right-4 top-2 select-none text-6xl font-black leading-none text-slate-100 tabular-nums">
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
-                  <div className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-blue-50 text-brand-blue-700">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <p className="relative mt-4 text-sm font-semibold leading-6 text-slate-950">{w.title}</p>
-                </div>
-              );
-            })}
-          </div>
-        </Container>
-      </Section>
+      <WhyHarzotech />
 
       {/* ── 10. Process — navy dark ───────────────────────────── */}
       <Section variant="dark" className="relative overflow-hidden">
@@ -568,16 +548,40 @@ export default function Home() {
       {/* ── 11. Industries ────────────────────────────────────── */}
       <Section className="bg-slate-50">
         <Container>
-          <SectionHeading
-            eyebrow="Industries"
-            title="Industries We Serve"
-            description="Experience across multiple sectors — with solutions tailored to operational realities and customer behavior."
-          />
-          <div className="mt-10 flex flex-wrap gap-3">
-            {industries.map((i) => (
-              <div key={i} className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 shadow-sm transition hover:border-brand-blue-200 hover:shadow-md">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-blue-700" />
-                <p className="text-sm font-medium text-slate-700">{i}</p>
+          <div className="flex flex-col items-center text-center">
+            <SectionHeading
+              eyebrow="Industries"
+              title="12 Industries We've Built For"
+              description="Experience across multiple sectors — with solutions tailored to each industry's operational realities and customer behaviour."
+            />
+          </div>
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {[
+              { name: "Healthcare",              Icon: Activity      },
+              { name: "Real Estate",             Icon: Building2     },
+              { name: "Hospitality",             Icon: Coffee        },
+              { name: "Education",               Icon: GraduationCap },
+              { name: "E-commerce",              Icon: ShoppingBag   },
+              { name: "Logistics",               Icon: Truck         },
+              { name: "Consulting",              Icon: Briefcase     },
+              { name: "Manufacturing",           Icon: Factory       },
+              { name: "Financial Services",      Icon: Landmark      },
+              { name: "NGOs",                    Icon: HeartHandshake},
+              { name: "Corporate Organizations", Icon: Building      },
+              { name: "Startups & SMEs",         Icon: Rocket        },
+            ].map(({ name, Icon }, i) => (
+              <div
+                key={name}
+                className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-brand-blue-200 hover:shadow-md"
+              >
+                <div className={`shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-xl ${
+                  i % 2 === 0
+                    ? "bg-brand-blue-50 text-brand-blue-700"
+                    : "bg-brand-red-50 text-brand-red-700"
+                }`}>
+                  <Icon className="h-4 w-4" />
+                </div>
+                <p className="text-sm font-semibold text-slate-800">{name}</p>
               </div>
             ))}
           </div>
@@ -605,19 +609,19 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div
-                className="flex aspect-[4/3] w-full items-center justify-center rounded-2xl bg-gradient-to-br from-brand-blue-50 via-slate-50 to-brand-red-50"
-                aria-label="Founder image placeholder"
-                role="img"
-              >
-                <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-brand-blue-200 bg-gradient-to-br from-brand-blue-100 to-brand-blue-50">
-                  <p className="text-3xl font-black text-brand-blue-700">A</p>
+            <div className="flex justify-center">
+              <div className="relative w-64 overflow-hidden rounded-3xl border border-slate-200 shadow-md">
+                <Image
+                  src="/ceo.png"
+                  alt={`${site.founder.name} — Founder & CEO, Harzotech`}
+                  width={320}
+                  height={400}
+                  className="w-full object-cover object-top"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/80 to-transparent px-4 py-4">
+                  <p className="text-sm font-bold text-white">{site.founder.name}</p>
+                  <p className="mt-0.5 text-xs text-slate-400">{site.founder.title}</p>
                 </div>
-              </div>
-              <div className="mt-5">
-                <p className="text-sm font-semibold text-slate-950">{site.founder.name}</p>
-                <p className="mt-1 text-sm text-slate-600">{site.founder.title}</p>
               </div>
             </div>
           </div>
@@ -636,47 +640,35 @@ export default function Home() {
               description="Professional feedback from clients — real results, real relationships."
               dark
             />
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
-              {testimonials.map((t, idx) => (
-                <div key={`${t.company}-${idx}`} className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm">
-                  <div className="pointer-events-none absolute right-5 top-3 select-none text-7xl font-black leading-none text-white/[0.04]">&ldquo;</div>
-                  <p className="relative text-sm leading-7 text-slate-300">&ldquo;{t.quote}&rdquo;</p>
-                  <div className="mt-6 flex items-center gap-3 border-t border-white/[0.07] pt-5">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-brand-blue-500/30 bg-gradient-to-br from-brand-blue-700/30 to-navy-800/30 text-xs font-bold text-brand-blue-300">
-                      {t.name[0]}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{t.name}</p>
-                      <p className="text-xs text-slate-400">{t.role} · {t.company}</p>
+            <div className="relative mt-12 -mx-4 sm:-mx-6 lg:-mx-8">
+              <div className="flex gap-5 overflow-x-auto scroll-smooth px-4 pb-3 sm:px-6 lg:px-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory">
+                {testimonials.map((t, idx) => (
+                  <div key={`${t.company}-${idx}`} className="relative flex w-80 shrink-0 snap-start flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm">
+                    <div className="pointer-events-none absolute right-5 top-3 select-none text-7xl font-black leading-none text-white/[0.04]">&ldquo;</div>
+                    {t.logo && (
+                      <div className="mb-5 flex h-12 items-center">
+                        <Image
+                          src={t.logo}
+                          alt={t.company}
+                          width={180}
+                          height={48}
+                          className="max-h-12 w-auto object-contain"
+                        />
+                      </div>
+                    )}
+                    <p className="relative flex-1 text-sm leading-7 text-slate-300">&ldquo;{t.quote}&rdquo;</p>
+                    <div className="mt-6 flex items-center gap-3 border-t border-white/[0.07] pt-5">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-brand-blue-500/30 bg-gradient-to-br from-brand-blue-700/30 to-navy-800/30 text-xs font-bold text-brand-blue-300">
+                        {t.name[0]}
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-white">{t.name}</p>
+                        <p className="text-xs text-slate-400">{t.role} · {t.company}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ── 14. Final CTA ─────────────────────────────────────── */}
-      <Section variant="dark" className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(21,101,192,0.2),transparent_55%),radial-gradient(ellipse_at_bottom,rgba(198,40,40,0.12),transparent_55%)]" />
-        <Container>
-          <div className="relative rounded-3xl border border-white/10 bg-white/5 p-10">
-            <div className="flex items-center gap-2.5">
-              <div className="h-3.5 w-0.5 rounded-full bg-brand-blue-400" />
-              <p className="text-xs font-semibold tracking-[0.18em] uppercase text-brand-blue-300">Get Started</p>
-            </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Ready to Build a Digital System That Works for Your Business?
-            </h2>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300">
-              Whether you need a premium website, custom software, AI automation, IT support,
-              SEO, or a complete digital growth system, Harzotech can help you build it with
-              strategy, clarity, and excellence.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="/contact?intent=start-project" variant="cta">Start a Project →</ButtonLink>
-              <ButtonLink href="/contact?intent=consultation" variant="outline-white">Book a Consultation</ButtonLink>
+                ))}
+              </div>
             </div>
           </div>
         </Container>

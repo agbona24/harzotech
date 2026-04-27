@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
+import { AboutHeroIllustration } from "@/components/AboutHeroIllustration";
 import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -17,10 +18,12 @@ export default function AboutPage() {
   return (
     <div>
       <PageHeader
+        eyebrow="About Harzotech"
         title="Built on Experience, Strategy, and Innovation"
         description="Harzotech Nig Ltd is a privately owned technology solutions company helping businesses simplify operations, strengthen their digital presence, and scale through reliable digital systems."
         primaryCta={{ href: "/contact?intent=consultation", label: "Book a Consultation" }}
         secondaryCta={{ href: "/projects", label: "View Our Work" }}
+        illustration={<AboutHeroIllustration />}
       />
 
       <Section>

@@ -36,3 +36,8 @@
   --color-navy-800: #163060;
   --color-navy-700: #1e4080;
 }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
