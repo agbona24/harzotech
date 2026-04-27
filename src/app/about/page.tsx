@@ -22,9 +22,10 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Harzotech | Nigeria's Technology & Business Growth Partner",
   description:
-    "Harzotech is not just a tech company — we are your strategic technology partner, intentionally understanding your business to scale it through digital systems that drive revenue, manage risk, and unlock growth.",
+    "Harzotech Nig Ltd is a technology solutions company in Lagos, Nigeria. We build websites, software, AI automation, and IT systems that help businesses grow, operate better, and scale faster.",
+  alternates: { canonical: "https://harzotech.com.ng/about" },
 };
 
 /* ── Data ──────────────────────────────────────────────────────── */

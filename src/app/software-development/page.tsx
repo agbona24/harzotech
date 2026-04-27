@@ -5,6 +5,9 @@ import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
+import { FAQSection } from "@/components/FAQSection";
+import { PageSchema } from "@/components/PageSchema";
+import { RelatedServices } from "@/components/RelatedServices";
 import {
   LayoutDashboard, ShoppingBag, CalendarCheck, Users2,
   Warehouse, GraduationCap, Hospital, Cpu,
@@ -12,10 +15,20 @@ import {
   BarChart3, Layers, Lock, RefreshCw,
 } from "lucide-react";
 
+const FAQS = [
+  { q: "What types of software does Harzotech build?", a: "We build business portals, dashboards, CRM and sales systems, booking and scheduling platforms, SaaS applications, POS systems, inventory management tools, HR and payroll software, hospital management systems, and learning management systems — all fully custom to your business model." },
+  { q: "How long does custom software development take in Nigeria?", a: "Timelines depend on complexity. A standard business portal or CRM typically takes 6–12 weeks. Larger platforms with complex workflows may take 3–6 months. We provide a detailed project plan and milestone schedule before development begins." },
+  { q: "Can you integrate my new software with existing tools I use?", a: "Yes. We integrate with payment gateways (Paystack, Flutterwave), accounting tools, WhatsApp, email systems, Google Workspace, ERPs, and most third-party APIs. Integration is a core part of our development process." },
+  { q: "Do you build software for specific industries in Nigeria?", a: "Yes. We have delivered software for healthcare (hospital and pharmacy systems), real estate, retail and FMCG, education, logistics, fintech, and professional services. We understand the unique compliance and workflow requirements per industry." },
+  { q: "Will I own the source code after the project?", a: "Yes. All source code, databases, and intellectual property developed for you belongs entirely to your business upon full project completion. We do not retain any ownership of client software." },
+  { q: "Do you offer ongoing maintenance and support after launch?", a: "Yes. We provide post-launch support plans covering bug fixes, performance monitoring, feature updates, security patches, and technical assistance to ensure your software runs reliably as your business grows." },
+];
+
 export const metadata: Metadata = {
-  title: "Software Development",
+  title: "Custom Software Development Company in Nigeria — CRM, Portals & SaaS",
   description:
-    "Custom software development by Harzotech Nig Ltd — portals, dashboards, CRM systems, booking systems, SaaS platforms, inventory and POS systems built for real operations.",
+    "Harzotech builds custom business software in Nigeria — CRM systems, dashboards, booking platforms, SaaS apps, POS, and inventory tools designed to fit how your business actually works.",
+  alternates: { canonical: "https://harzotech.com.ng/software-development" },
 };
 
 const SOFTWARE_TYPES = [
@@ -105,6 +118,12 @@ const STATS = [
 export default function SoftwareDevelopmentPage() {
   return (
     <div>
+      <PageSchema
+        service="Custom Software Development"
+        url="https://harzotech.com.ng/software-development"
+        description="Custom business software in Nigeria — CRM systems, dashboards, booking platforms, SaaS apps, POS, and inventory tools built for how your business works."
+        breadcrumbs={[{ name: "Custom Software Development", url: "https://harzotech.com.ng/software-development" }]}
+      />
       <PageHeader
         eyebrow="Software Development"
         title={<>Custom Software That <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Solves Real</span> Business <span className="text-brand-blue-300">Problems</span></>}
@@ -216,6 +235,9 @@ export default function SoftwareDevelopmentPage() {
           </div>
         </Container>
       </Section>
+
+      <FAQSection faqs={FAQS} eyebrow="Software Development FAQ" />
+      <RelatedServices exclude={["software-development"]} />
 
       {/* Dark CTA */}
       <Section variant="dark">

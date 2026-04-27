@@ -5,15 +5,28 @@ import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
+import { FAQSection } from "@/components/FAQSection";
+import { PageSchema } from "@/components/PageSchema";
+import { RelatedServices } from "@/components/RelatedServices";
 import {
   Headset, ShieldCheck, Cloud, Mail, Server, Wifi,
   ClockAlert, RefreshCw, Lock, BarChart3, Database, MonitorCheck,
 } from "lucide-react";
 
+const FAQS = [
+  { q: "What IT support services does Harzotech offer in Lagos?", a: "We provide managed IT support including remote and onsite help desk, security monitoring, cloud backup and recovery, email setup and management, network configuration, system maintenance, hardware and software troubleshooting, and proactive patch management for businesses in Lagos and Nigeria." },
+  { q: "Do you provide remote IT support in Nigeria?", a: "Yes. We provide remote IT support via secure remote access tools for most issues — software faults, configuration problems, connectivity troubleshooting, and user support. On-site visits are scheduled when physical intervention is required." },
+  { q: "How quickly do you respond to IT issues?", a: "Our managed IT support plans include defined SLA response times. Critical issues receive a response within 1–2 hours. Standard issues are addressed within 4–8 business hours. Emergency support options are available for business-critical systems." },
+  { q: "Can you set up business email for my company?", a: "Yes. We set up and manage professional business email using Google Workspace or Microsoft 365 — including domain-linked email addresses, spam filtering, shared calendars, team collaboration tools, and ongoing management." },
+  { q: "Do you handle cybersecurity for businesses in Nigeria?", a: "Yes. Our IT security services include vulnerability scanning, firewall configuration, endpoint protection, security monitoring, staff training on phishing awareness, and incident response planning to protect your systems and data." },
+  { q: "What is a managed IT support plan?", a: "A managed IT support plan is a monthly retainer where Harzotech acts as your outsourced IT team — proactively monitoring your systems, handling issues before they become problems, managing your software and hardware, and providing on-demand support so you can focus on running your business." },
+];
+
 export const metadata: Metadata = {
-  title: "IT Support & Maintenance",
+  title: "Managed IT Support & Maintenance Services in Lagos, Nigeria",
   description:
-    "Managed IT support and maintenance by Harzotech Nig Ltd — troubleshooting, security monitoring, cloud backup, email setup, system maintenance, and ongoing technical management.",
+    "Harzotech provides managed IT support in Lagos — help desk, security monitoring, cloud backup, email setup, and proactive system maintenance to keep your business running without interruption.",
+  alternates: { canonical: "https://harzotech.com.ng/it-support-maintenance" },
 };
 
 const SUPPORT_SERVICES = [
@@ -106,6 +119,12 @@ const STATS = [
 export default function ITSupportMaintenancePage() {
   return (
     <div>
+      <PageSchema
+        service="Managed IT Support & Maintenance"
+        url="https://harzotech.com.ng/it-support-maintenance"
+        description="Managed IT support in Lagos — help desk, security monitoring, cloud backup, email setup, and proactive maintenance for Nigerian businesses."
+        breadcrumbs={[{ name: "Managed IT Support & Maintenance", url: "https://harzotech.com.ng/it-support-maintenance" }]}
+      />
       <PageHeader
         eyebrow="IT Support & Maintenance"
         title={<>IT Support That <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Keeps You Running</span> — Not <span className="text-brand-blue-300">Catching Up</span></>}
@@ -240,6 +259,9 @@ export default function ITSupportMaintenancePage() {
           </div>
         </Container>
       </Section>
+
+      <FAQSection faqs={FAQS} eyebrow="IT Support FAQ" />
+      <RelatedServices exclude={["it-support"]} />
 
       {/* Dark CTA */}
       <Section variant="dark">

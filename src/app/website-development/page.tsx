@@ -5,16 +5,29 @@ import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
+import { FAQSection } from "@/components/FAQSection";
+import { PageSchema } from "@/components/PageSchema";
+import { RelatedServices } from "@/components/RelatedServices";
 import {
   Globe, ShoppingCart, LayoutTemplate, Rocket, Building2,
   HeartPulse, LineChart, CheckCircle2, Search, PenLine,
   Code2, Zap, MousePointerClick, BarChart3, ShieldCheck, Smartphone,
 } from "lucide-react";
 
+const FAQS = [
+  { q: "How much does a business website cost in Nigeria?", a: "Website costs in Nigeria vary by complexity. A professional business website typically starts from ₦300,000 – ₦800,000, while e-commerce stores and feature-rich platforms range higher. Harzotech provides a transparent quote based on your specific goals, features, and timeline after an initial consultation." },
+  { q: "How long does it take to build a website?", a: "A standard business website takes 2–4 weeks. E-commerce stores and larger multi-page websites typically take 4–8 weeks depending on content readiness and revision rounds. We provide a clear project timeline before we start." },
+  { q: "Will my website be mobile-friendly and SEO-ready?", a: "Yes — every website we build is fully responsive across all screen sizes and follows SEO best practices: semantic HTML, fast loading, Core Web Vitals compliance, structured data, and proper meta tags from day one." },
+  { q: "Do you build e-commerce websites in Nigeria?", a: "Yes. We build full-featured e-commerce websites with product management, cart, checkout, payment gateway integration (Paystack, Flutterwave), order tracking, and inventory management." },
+  { q: "Do you provide ongoing website maintenance after launch?", a: "Yes. We offer post-launch maintenance packages covering security updates, content changes, performance monitoring, uptime checks, and technical support so your website stays fast, secure, and up to date." },
+  { q: "Can you redesign my existing website?", a: "Absolutely. We handle website redesigns, rebuilds, and migrations. We audit your current site, identify what's working, and rebuild it with a better structure, performance, and conversion focus." },
+];
+
 export const metadata: Metadata = {
-  title: "Website Development",
+  title: "Website Design & Development Company in Lagos, Nigeria",
   description:
-    "Premium website design & development by Harzotech Nig Ltd — conversion-focused, SEO-ready, responsive websites built for credibility and growth.",
+    "Harzotech builds premium business websites, e-commerce stores, and landing pages in Lagos, Nigeria — conversion-focused, SEO-ready, and mobile-first. Get a site that earns its place in your business.",
+  alternates: { canonical: "https://harzotech.com.ng/website-development" },
 };
 
 const WEBSITE_TYPES = [
@@ -104,6 +117,12 @@ const STATS = [
 export default function WebsiteDevelopmentPage() {
   return (
     <div>
+      <PageSchema
+        service="Website Design & Development"
+        url="https://harzotech.com.ng/website-development"
+        description="Premium business websites, e-commerce stores, and landing pages in Lagos, Nigeria — conversion-focused, SEO-ready, and mobile-first."
+        breadcrumbs={[{ name: "Website Design & Development", url: "https://harzotech.com.ng/website-development" }]}
+      />
       <PageHeader
         eyebrow="Website Development"
         title={<>Websites Built With <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Strategy,</span> Not Just <span className="text-brand-blue-300">Design</span></>}
@@ -231,6 +250,9 @@ export default function WebsiteDevelopmentPage() {
           </div>
         </Container>
       </Section>
+
+      <FAQSection faqs={FAQS} eyebrow="Website Development FAQ" />
+      <RelatedServices exclude={["website-development"]} />
 
       {/* Dark CTA */}
       <Section variant="dark">

@@ -9,6 +9,13 @@ import { ButtonLink } from "@/components/Button";
 import { services } from "@/data/services";
 import { Search, PenLine, Code2, Rocket, Target, Shield, Eye, TrendingUp } from "lucide-react";
 
+export const metadata: Metadata = {
+  title: "Technology Services — Website, Software, AI & IT Solutions in Nigeria",
+  description:
+    "Harzotech offers end-to-end technology services in Nigeria: website design, custom software, AI automation, managed IT support, SEO, and branding — all built to grow your business.",
+  alternates: { canonical: "https://harzotech.com.ng/services" },
+};
+
 const PROCESS_STEPS = [
   {
     number: "01",
@@ -62,12 +69,6 @@ const PRINCIPLES = [
     description: "Success is measured by outcomes — leads generated, efficiency gained, revenue grown.",
   },
 ];
-
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Explore Harzotech services: premium websites, custom software, AI automation, managed IT support, SEO & digital marketing, business applications, and corporate branding.",
-};
 
 export default function ServicesPage() {
   return (

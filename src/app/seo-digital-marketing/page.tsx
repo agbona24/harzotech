@@ -5,16 +5,29 @@ import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
+import { FAQSection } from "@/components/FAQSection";
+import { PageSchema } from "@/components/PageSchema";
+import { RelatedServices } from "@/components/RelatedServices";
 import {
   Search, MapPin, PenLine, Funnel, BarChart3, Megaphone,
   CheckCircle2, TrendingUp, Users2, DollarSign,
   Globe, Code2, FileText, Link2, Star, RefreshCw,
 } from "lucide-react";
 
+const FAQS = [
+  { q: "How long does SEO take to show results in Nigeria?", a: "SEO is a compounding investment. Most businesses see measurable improvements in rankings and organic traffic within 3–6 months of consistent optimisation. Competitive keywords in high-volume markets may take 6–12 months. We track and report progress monthly so you can see the trajectory clearly." },
+  { q: "Do you offer local SEO services in Lagos?", a: "Yes. Local SEO is a core part of our offering — Google Business Profile optimisation, local citation building, map pack rankings, review strategy, and geo-targeted content that helps your business appear when customers in Lagos and Nigeria search for your services." },
+  { q: "What is technical SEO and why does it matter?", a: "Technical SEO is the foundation of organic rankings — site speed, Core Web Vitals, mobile-friendliness, crawlability, indexation, structured data, and HTTPS. Without it, even great content won't rank well. We audit and fix technical issues that prevent Google from properly reading and ranking your site." },
+  { q: "Can SEO help my business get more leads in Nigeria?", a: "Yes — SEO is one of the highest-ROI lead generation channels because it attracts people actively searching for what you offer. We combine keyword strategy, content, and technical optimisation to drive qualified organic traffic that converts into enquiries and customers." },
+  { q: "What is included in your SEO service?", a: "Our SEO service includes: technical audit and fixes, keyword research and mapping, on-page optimisation (titles, meta, headers, content), local SEO setup, content strategy, link building, Google Analytics and Search Console setup, and monthly performance reporting." },
+  { q: "Do you guarantee first page Google rankings?", a: "No ethical SEO agency can guarantee specific rankings — Google's algorithm is outside anyone's control. What we guarantee is best-practice execution: the right strategy, consistent implementation, and transparent monthly reporting on rankings, traffic, and leads. Most clients see significant improvements within 3–6 months." },
+];
+
 export const metadata: Metadata = {
-  title: "SEO & Digital Marketing",
+  title: "SEO & Digital Marketing Agency in Lagos, Nigeria — Google Rankings & Leads",
   description:
-    "SEO and digital marketing by Harzotech Nig Ltd — technical SEO, local SEO, Google visibility, content strategy, analytics setup, and lead generation systems.",
+    "Harzotech's SEO and digital marketing services help Nigerian businesses rank on Google, attract qualified leads, and grow their online visibility — technical SEO, local SEO, and content strategy.",
+  alternates: { canonical: "https://harzotech.com.ng/seo-digital-marketing" },
 };
 
 const SEO_SERVICES = [
@@ -111,6 +124,12 @@ const STATS = [
 export default function SEODigitalMarketingPage() {
   return (
     <div>
+      <PageSchema
+        service="SEO & Digital Marketing"
+        url="https://harzotech.com.ng/seo-digital-marketing"
+        description="Technical SEO, local SEO, and digital marketing services that help Nigerian businesses rank on Google and attract qualified leads."
+        breadcrumbs={[{ name: "SEO & Digital Marketing", url: "https://harzotech.com.ng/seo-digital-marketing" }]}
+      />
       <PageHeader
         eyebrow="SEO & Digital Marketing"
         title={<>Visibility That Drives <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Qualified Leads</span> — Not Just <span className="text-brand-blue-300">Traffic</span></>}
@@ -252,6 +271,9 @@ export default function SEODigitalMarketingPage() {
           </div>
         </Container>
       </Section>
+
+      <FAQSection faqs={FAQS} eyebrow="SEO & Digital Marketing FAQ" />
+      <RelatedServices exclude={["seo-digital-marketing"]} />
 
       {/* Dark CTA */}
       <Section variant="dark">

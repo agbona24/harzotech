@@ -5,6 +5,9 @@ import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
+import { FAQSection } from "@/components/FAQSection";
+import { PageSchema } from "@/components/PageSchema";
+import { RelatedServices } from "@/components/RelatedServices";
 import { AIAutomationWidget } from "@/components/AIAutomationWidget";
 import {
   Mic2, MessageSquare, CalendarCheck, Users2,
@@ -12,10 +15,20 @@ import {
   Clock, TrendingUp, GitMerge, BarChart3,
 } from "lucide-react";
 
+const FAQS = [
+  { q: "What is AI automation for businesses in Nigeria?", a: "AI automation uses software and artificial intelligence to handle repetitive business tasks automatically — such as responding to customer enquiries on WhatsApp, booking appointments, qualifying leads, sending reminders, and processing invoices — without requiring manual staff intervention for every step." },
+  { q: "How does WhatsApp automation work for my business?", a: "WhatsApp automation connects your WhatsApp Business account to a workflow system. When a customer messages you, the system can automatically respond with the right information, collect their details, book appointments, send reminders, or escalate to a human agent — all based on rules you define." },
+  { q: "Can I automate my appointment bookings?", a: "Yes. We build appointment booking automation that lets customers self-schedule via your website, WhatsApp, or a booking link. The system syncs with your calendar, sends confirmation and reminder messages, and handles cancellations and rescheduling automatically." },
+  { q: "Will AI automation replace my staff?", a: "No — it frees your staff from repetitive tasks so they can focus on higher-value work. Automation handles the volume: responding at 2am, sending 500 reminders, qualifying 100 leads. Your team handles the relationships, decisions, and complex requests that need a human touch." },
+  { q: "What tools do you use to build automation systems?", a: "We build automation using a combination of n8n, Zapier, Make (Integromat), Twilio, OpenAI, WhatsApp Business API, Google Workspace, Airtable, and custom APIs — choosing the right stack based on your existing tools and workflow requirements." },
+  { q: "How much does business automation cost in Nigeria?", a: "Automation project costs depend on complexity. Simple WhatsApp response flows start from ₦150,000. Full multi-step automation systems with CRM integration, AI responses, and booking workflows typically range from ₦400,000 upwards. We provide a clear scope and quote after understanding your specific needs." },
+];
+
 export const metadata: Metadata = {
-  title: "AI & Automation",
+  title: "AI Automation & WhatsApp Workflow Systems for Nigerian Businesses",
   description:
-    "AI automation and workflow systems by Harzotech Nig Ltd — voice agents, WhatsApp automation, booking workflows, CRM automation, and business process automation.",
+    "Harzotech builds AI voice agents, WhatsApp automation, appointment booking workflows, CRM automation, and business process systems that reduce manual work and scale your operations.",
+  alternates: { canonical: "https://harzotech.com.ng/ai-automation" },
 };
 
 const AUTOMATION_TYPES = [
@@ -87,6 +100,12 @@ const STATS = [
 export default function AIAutomationPage() {
   return (
     <div>
+      <PageSchema
+        service="AI Automation & Workflow Systems"
+        url="https://harzotech.com.ng/ai-automation"
+        description="AI voice agents, WhatsApp automation, appointment booking workflows, CRM automation, and business process systems for Nigerian businesses."
+        breadcrumbs={[{ name: "AI Automation & Workflow Systems", url: "https://harzotech.com.ng/ai-automation" }]}
+      />
       <PageHeader
         eyebrow="AI & Automation"
         title={<>AI and <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Automation</span> for Smarter <span className="text-brand-blue-300">Business Operations</span></>}
@@ -267,6 +286,9 @@ export default function AIAutomationPage() {
           </div>
         </Container>
       </Section>
+
+      <FAQSection faqs={FAQS} eyebrow="AI Automation FAQ" />
+      <RelatedServices exclude={["ai-automation"]} />
 
       {/* Dark CTA */}
       <Section variant="dark">

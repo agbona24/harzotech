@@ -40,8 +40,12 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Home",
-  description: site.description,
+  title: {
+    absolute: "Harzotech Nig Ltd | Website Design, Software Development & AI Automation in Nigeria",
+  },
+  description:
+    "Harzotech builds premium websites, custom software, AI automation systems, IT support structures, and SEO visibility frameworks for businesses in Lagos and across Nigeria. 10+ years. 50+ projects delivered.",
+  alternates: { canonical: "https://harzotech.com.ng" },
 };
 
 const marqueeStats = [

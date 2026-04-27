@@ -9,6 +9,27 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  // ── Priority showcase projects ────────────────────────────────
+  {
+    slug: "zithelo-real-estate",
+    name: "Zithelo Real Estate",
+    industry: "Real Estate",
+    description:
+      "Pan-African urban development and real estate investment platform for diaspora investors. Features property listings, a 25-year structured lease model, ROI calculator, investor quiz, and integrated Sanity CMS — built for Lagos and Atlanta markets.",
+    image: "/project/zithelo.png",
+    tags: ["Next.js", "Sanity CMS", "Real Estate", "TypeScript"],
+    url: "https://zithelorealestate.com",
+  },
+  {
+    slug: "beaconhill-smile-group",
+    name: "Beaconhill Smile Group",
+    industry: "Healthcare",
+    description:
+      "Multi-specialty healthcare group website covering dental, eye care, dermatology, ENT, and behavioral health businesses. Includes clinic finder, appointment booking, foundation impact section, and ecosystem overview for 7+ healthcare brands across Lagos and the US.",
+    image: "/project/beaconhill.png",
+    tags: ["Next.js", "Healthcare", "TypeScript", "Multi-brand"],
+    url: "https://beaconhillsmilegroup.org",
+  },
   {
     slug: "r3-consulting",
     name: "R3 Consulting Ltd",
@@ -19,6 +40,48 @@ export const projects: Project[] = [
     tags: ["Next.js", "Laravel", "Dashboard"],
     url: "https://r3consultingltd.com",
   },
+  {
+    slug: "echadh-properties",
+    name: "Echadh Properties",
+    industry: "Real Estate",
+    description:
+      "Premium luxury real estate development company website for Lagos's Lekki peninsula. Features a full project portfolio (Gratia Heights, Rosewood Apartments, Cherry Rooftop), interactive payment calculator, investment case section, and brochure request system.",
+    image: "/project/echadh.png",
+    tags: ["Next.js", "Real Estate", "TypeScript"],
+    url: "https://www.echadhproperties.com",
+  },
+  // ── Next priority projects ─────────────────────────────────────
+  {
+    slug: "laciac",
+    name: "Lagos Chamber of Commerce (LACIAC)",
+    industry: "Professional Services",
+    description:
+      "Membership portal and arbitration platform for LACIAC, serving thousands of businesses across Lagos State.",
+    image: "/project/Laciac.png",
+    tags: ["WordPress", "Custom Development", "Member Portal"],
+    url: "https://laciac.org",
+  },
+  {
+    slug: "interop-digital-solutions",
+    name: "Interop Digital Solutions Ltd",
+    industry: "Technology / Enterprise",
+    description:
+      "Enterprise digital transformation platform providing software solutions, consulting, and integration services.",
+    image: "/project/interopdigital.png",
+    tags: ["Next.js", "TypeScript", "Enterprise"],
+    url: "https://interop-digital-solutions-ltd.vercel.app",
+  },
+  {
+    slug: "access-best-empowerment-hub",
+    name: "Access Best Empowerment Hub",
+    industry: "Education / Training",
+    description:
+      "Educational platform empowering communities with training programs, certifications, and skill development resources.",
+    image: "/project/accessbest.png",
+    tags: ["React", "Vite", "LMS"],
+    url: "https://accessbest.com.ng",
+  },
+  // ── Other projects ─────────────────────────────────────────────
   {
     slug: "cascadia-holdings",
     name: "Cascadia Holdings",
@@ -100,16 +163,6 @@ export const projects: Project[] = [
     url: "https://www.immovablesrealty.com",
   },
   {
-    slug: "access-best-empowerment-hub",
-    name: "Access Best Empowerment Hub",
-    industry: "Education / Training",
-    description:
-      "Educational platform empowering communities with training programs, certifications, and skill development resources.",
-    image: "/project/accessbest.png",
-    tags: ["React", "Vite", "LMS"],
-    url: "https://accessbest.com.ng",
-  },
-  {
     slug: "cliqpos",
     name: "Cliqpos — SaaS POS System",
     industry: "Retail / POS",
@@ -118,16 +171,6 @@ export const projects: Project[] = [
     image: "/project/cliqpos.png",
     tags: ["Laravel", "Blade", "Vite", "MySQL"],
     url: "https://cliqpos.co.uk",
-  },
-  {
-    slug: "interop-digital-solutions",
-    name: "Interop Digital Solutions Ltd",
-    industry: "Technology / Enterprise",
-    description:
-      "Enterprise digital transformation platform providing software solutions, consulting, and integration services.",
-    image: "/project/interopdigital.png",
-    tags: ["Next.js", "TypeScript", "Enterprise"],
-    url: "https://interop-digital-solutions-ltd.vercel.app",
   },
   {
     slug: "immovables-group",
@@ -228,16 +271,6 @@ export const projects: Project[] = [
     image: "/project/strategiceffects.png",
     tags: ["WordPress", "Corporate", "Consulting"],
     url: "https://strategiceffectsltd.com",
-  },
-  {
-    slug: "laciac",
-    name: "Lagos Chamber of Commerce (LACIAC)",
-    industry: "Professional Services",
-    description:
-      "Membership portal and arbitration platform for LACIAC, serving thousands of businesses across Lagos State.",
-    image: "/project/Laciac.png",
-    tags: ["WordPress", "Custom Development", "Member Portal"],
-    url: "https://laciac.org",
   },
   {
     slug: "harzotech-website",

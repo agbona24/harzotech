@@ -8,9 +8,10 @@ import { site } from "@/data/site";
 import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact Harzotech | Start a Project or Book a Consultation in Nigeria",
   description:
-    "Start a project or book a consultation with Harzotech Nig Ltd — premium websites, software development, AI automation, IT support, and SEO growth systems.",
+    "Ready to build? Contact Harzotech Nig Ltd in Lagos, Nigeria — start a website, software, or AI project, or book a free strategy consultation. We respond within 24 hours.",
+  alternates: { canonical: "https://harzotech.com.ng/contact" },
 };
 
 function getIntentCopy(intent?: string) {
