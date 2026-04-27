@@ -16,7 +16,7 @@ export const projects: Project[] = [
     industry: "Real Estate",
     description:
       "Pan-African urban development and real estate investment platform for diaspora investors. Features property listings, a 25-year structured lease model, ROI calculator, investor quiz, and integrated Sanity CMS — built for Lagos and Atlanta markets.",
-    image: "/project/zithelo.png",
+    image: "/project/zitehelo_real_estate.png",
     tags: ["Next.js", "Sanity CMS", "Real Estate", "TypeScript"],
     url: "https://zithelorealestate.com",
   },
@@ -26,7 +26,7 @@ export const projects: Project[] = [
     industry: "Healthcare",
     description:
       "Multi-specialty healthcare group website covering dental, eye care, dermatology, ENT, and behavioral health businesses. Includes clinic finder, appointment booking, foundation impact section, and ecosystem overview for 7+ healthcare brands across Lagos and the US.",
-    image: "/project/beaconhill.png",
+    image: "/project/Beacon_hill_smile_group.png",
     tags: ["Next.js", "Healthcare", "TypeScript", "Multi-brand"],
     url: "https://beaconhillsmilegroup.org",
   },
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     industry: "Real Estate",
     description:
       "Premium luxury real estate development company website for Lagos's Lekki peninsula. Features a full project portfolio (Gratia Heights, Rosewood Apartments, Cherry Rooftop), interactive payment calculator, investment case section, and brochure request system.",
-    image: "/project/echadh.png",
+    image: "/project/echadh_properties_ltd.png",
     tags: ["Next.js", "Real Estate", "TypeScript"],
     url: "https://www.echadhproperties.com",
   },
