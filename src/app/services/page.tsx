@@ -20,6 +20,7 @@ export default function ServicesPage() {
         description="Harzotech helps businesses build reliable digital systems — websites, software, automation, IT support, and visibility frameworks — that improve operations and drive growth."
         primaryCta={{ href: "/contact?intent=start-project", label: "Start a Project" }}
         secondaryCta={{ href: "/projects", label: "View Our Work" }}
+        bgImage="/hero.png"
       />
 
       <Section>

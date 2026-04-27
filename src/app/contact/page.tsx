@@ -49,6 +49,7 @@ export default async function ContactPage({
         title={title}
         description={description}
         primaryCta={{ href: "mailto:info@harzotech.com.ng", label: "Email Us" }}
+        bgImage="/hero.png"
       />
 
       <Section>

@@ -19,6 +19,7 @@ export default function ProjectsPage() {
         title="Selected Work Built With Strategy and Precision"
         description="From corporate websites to software platforms and business systems, Harzotech has delivered solutions across different industries."
         primaryCta={{ href: "/contact?intent=start-project", label: "Start a Project" }}
+        bgImage="/about2.png"
       />
 
       <Section>
