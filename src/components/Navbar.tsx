@@ -53,6 +53,7 @@ export function Navbar() {
     if (onServicePage) return { activeHref: "/services", isServicesActive: true };
     if (pathname.startsWith("/about"))    return { activeHref: "/about",    isServicesActive: false };
     if (pathname.startsWith("/projects")) return { activeHref: "/projects", isServicesActive: false };
+    if (pathname.startsWith("/products")) return { activeHref: "/products", isServicesActive: false };
     if (pathname.startsWith("/blog"))     return { activeHref: "/blog",     isServicesActive: false };
     if (pathname.startsWith("/contact"))  return { activeHref: "/contact",  isServicesActive: false };
     return { activeHref: undefined, isServicesActive: false };
@@ -166,6 +167,7 @@ export function Navbar() {
             </div>
 
             {desktopLink("/projects", "Projects")}
+            {desktopLink("/products", "Products")}
             {desktopLink("/blog", "Blog")}
             {desktopLink("/contact", "Contact")}
           </nav>
@@ -259,6 +261,7 @@ export function Navbar() {
                 </div>
 
                 <Link href="/projects" className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${activeHref === "/projects" ? "bg-brand-blue-700 text-white" : "text-slate-700 hover:bg-slate-50"}`}>Projects</Link>
+                <Link href="/products" className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${activeHref === "/products" ? "bg-brand-blue-700 text-white" : "text-slate-700 hover:bg-slate-50"}`}>Products</Link>
                 <Link href="/blog" className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${activeHref === "/blog" ? "bg-brand-blue-700 text-white" : "text-slate-700 hover:bg-slate-50"}`}>Blog</Link>
                 <Link href="/contact" className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${activeHref === "/contact" ? "bg-brand-blue-700 text-white" : "text-slate-700 hover:bg-slate-50"}`}>Contact</Link>
 

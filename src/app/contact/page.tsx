@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { site } from "@/data/site";
 import { ContactForm } from "@/components/ContactForm";
 import { PageSchema } from "@/components/PageSchema";
+import { CheckCircle2, Clock, Lock, Award, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Harzotech | Start a Project or Book a Consultation in Nigeria",
@@ -97,6 +98,26 @@ export default async function ContactPage({
                     ))}
                   </p>
                 </div>
+              </div>
+
+              <div className="mt-5 rounded-3xl border border-brand-blue-100 bg-brand-blue-50/50 p-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Why work with us</p>
+                <ul className="mt-4 space-y-3">
+                  {([
+                    { Icon: Clock,        text: "Reply within 24 hours" },
+                    { Icon: CheckCircle2, text: "Free initial consultation" },
+                    { Icon: Lock,         text: "No lock-in contracts" },
+                    { Icon: Award,        text: "50+ projects delivered" },
+                    { Icon: MapPin,       text: "Nigeria-based team, Lagos office" },
+                  ] as const).map(({ Icon, text }) => (
+                    <li key={text} className="flex items-center gap-2.5">
+                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-blue-100">
+                        <Icon className="h-3.5 w-3.5 text-brand-blue-700" />
+                      </div>
+                      <span className="text-sm text-slate-700">{text}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 

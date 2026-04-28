@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { site } from "@/data/site";
 import { OrganizationSchema } from "@/components/OrganizationSchema";
 import { FloatingWidgets } from "@/components/FloatingWidgets";
+import { ScrollPrompt } from "@/components/ScrollPrompt";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -87,6 +88,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <FloatingWidgets />
+        <ScrollPrompt />
       </body>
     </html>
   );

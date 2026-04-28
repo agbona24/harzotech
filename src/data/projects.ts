@@ -142,16 +142,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "E-commerce", "Product Catalog"],
     url: "https://www.sukopaint.com",
   },
-  {
-    slug: "restopro",
-    name: "Restopro — Restaurant Management",
-    industry: "Hospitality / SaaS",
-    description:
-      "SaaS restaurant management system with table reservation, order management, kitchen display, and payment integration.",
-    image: "/project/restopro.png",
-    tags: ["Laravel", "Blade", "Vite", "REST API"],
-    url: "https://restaurant.cliqpos.co.uk",
-  },
+
   {
     slug: "immovables-realty",
     name: "Immovables Realty",
@@ -162,16 +153,7 @@ export const projects: Project[] = [
     tags: ["React", "Vite", "Real Estate"],
     url: "https://www.immovablesrealty.com",
   },
-  {
-    slug: "cliqpos",
-    name: "Cliqpos — SaaS POS System",
-    industry: "Retail / POS",
-    description:
-      "Cloud-based Point-of-Sale system serving multiple businesses with real-time inventory, sales tracking, and multi-location support.",
-    image: "/project/cliqpos.png",
-    tags: ["Laravel", "Blade", "Vite", "MySQL"],
-    url: "https://cliqpos.co.uk",
-  },
+
   {
     slug: "immovables-group",
     name: "Immovables Group",
@@ -194,13 +176,23 @@ export const projects: Project[] = [
   },
   {
     slug: "alajo",
-    name: "Alajo — Savings Platform",
+    name: "Alajo — Digital Ajo Savings",
     industry: "FinTech",
     description:
-      "Digital savings and investment platform with secure transactions, automated savings, and financial analytics.",
+      "Modern digital savings app bringing the traditional Nigerian ajo/esusu cooperative model online. Users set savings goals, join group savings circles, track contributions in real time, and withdraw instantly. Built for everyday Nigerians starting from ₦500.",
     image: "/project/alajo.png",
-    tags: ["Next.js", "Laravel", "Payment Integration"],
+    tags: ["Next.js", "Laravel", "FinTech", "Payment Integration"],
     url: "https://alajo.ng",
+  },
+  {
+    slug: "suap-olowoex",
+    name: "Suap / OlowoEx — Crypto Exchange",
+    industry: "FinTech",
+    description:
+      "Fast peer-to-peer cryptocurrency exchange platform for the Nigerian market. Users sell USDT, Bitcoin, and Ethereum for instant Naira bank transfers. Features a multi-level affiliate/referral system, 24/7 WhatsApp support, and a clean order-flow built around local trust and speed.",
+    image: "/project/suap.png",
+    tags: ["Laravel", "Crypto", "FinTech", "Nigeria"],
+    url: "https://crypto.olowoex.com",
   },
   {
     slug: "the-pen-school",

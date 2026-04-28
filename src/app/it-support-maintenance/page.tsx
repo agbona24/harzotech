@@ -6,6 +6,7 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
 import { FAQSection } from "@/components/FAQSection";
+import { MidPageCTA } from "@/components/MidPageCTA";
 import { PageSchema } from "@/components/PageSchema";
 import { RelatedServices } from "@/components/RelatedServices";
 import { ServiceAnswerBlock } from "@/components/ServiceAnswerBlock";
@@ -240,6 +241,8 @@ export default function ITSupportMaintenancePage() {
           </div>
         </Container>
       </Section>
+
+      <MidPageCTA service="IT Support" ctaLabel="Get a Support Plan" ctaHref="/contact?intent=start-project" />
 
       {/* Process */}
       <Section className="bg-slate-50">
