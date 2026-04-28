@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function AIDemosPage() {
   return (
-    <main className="min-h-screen bg-[#030712]">
+    <main className="bg-[#030712]">
       <PageSchema
         service="AI Automation Live Demos"
         url="https://harzotech.com.ng/ai-automation/demos"
@@ -24,8 +24,8 @@ export default function AIDemosPage() {
         ]}
       />
 
-      {/* Hero */}
-      <div className="relative overflow-hidden border-b border-white/[0.06] bg-[radial-gradient(ellipse_at_center,_#0d1f3c_0%,_#030712_75%)] pt-28 pb-16 text-center">
+      {/* Hero — desktop only; mobile gets the full-screen app shell */}
+      <div className="hidden xl:block relative overflow-hidden border-b border-white/[0.06] bg-[radial-gradient(ellipse_at_center,_#0d1f3c_0%,_#030712_75%)] pt-28 pb-16 text-center">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-[900px] rounded-full bg-brand-blue-700/15 blur-[120px]" />
         </div>
@@ -51,9 +51,9 @@ export default function AIDemosPage() {
           <p className="mt-5 text-base leading-8 text-slate-400 max-w-xl mx-auto">
             Every widget below is a real demonstration of what gets deployed for your business. Press play, type a message — experience exactly what your customers will see.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm text-slate-500">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             {["Voice Agent", "WhatsApp", "Lead Bot", "Bookings", "CRM", "Invoicing", "Support"].map((item) => (
-              <span key={item} className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-xs font-medium">
+              <span key={item} className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-slate-400">
                 {item}
               </span>
             ))}

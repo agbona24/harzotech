@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
-  Volume2, MessageCircle, Bot, Calendar, Users, Receipt, Headphones,
+  MessageCircle, Bot, Calendar, Users, Receipt, Headphones,
   Phone, Send, ChevronRight, Zap, ArrowRight, RotateCcw,
 } from "lucide-react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
@@ -546,7 +547,7 @@ function InvoiceDemo() {
 type DemoMeta = {
   id: string;
   number: string;
-  icon: React.ReactNode;
+  icon: LucideIcon;
   title: string;
   tagline: string;
   description: string;
@@ -561,7 +562,7 @@ function buildDemos(): DemoMeta[] {
     {
       id: "voice",
       number: "01",
-      icon: <Phone className="h-5 w-5" />,
+      icon: Phone,
       title: "AI Voice Agent",
       tagline: "Answers every call. Books instantly. No staff needed.",
       description: "A conversational AI voice agent that handles inbound calls, qualifies callers, books appointments, and sends confirmation messages — all without a human receptionist. Never miss a call. Never lose a booking.",
@@ -581,7 +582,7 @@ function buildDemos(): DemoMeta[] {
     {
       id: "whatsapp",
       number: "02",
-      icon: <MessageCircle className="h-5 w-5" />,
+      icon: MessageCircle,
       title: "WhatsApp Automation",
       tagline: "Your team sleeps. Your WhatsApp doesn't.",
       description: "An AI-powered WhatsApp agent handles order tracking, FAQs, complaints, and escalations — automatically. Customers get instant, personalised responses. Complex issues are routed to a human with full context already logged.",
@@ -614,7 +615,7 @@ function buildDemos(): DemoMeta[] {
     {
       id: "leadbot",
       number: "03",
-      icon: <Bot className="h-5 w-5" />,
+      icon: Bot,
       title: "Lead Qualification Bot",
       tagline: "Qualify, score, and route every lead while you sleep.",
       description: "A smart website chatbot that engages every visitor, asks the right qualification questions, scores leads automatically, and triggers follow-up actions — proposal emails, CRM entries, sales notifications — in real time.",
@@ -647,7 +648,7 @@ function buildDemos(): DemoMeta[] {
     {
       id: "appointment",
       number: "04",
-      icon: <Calendar className="h-5 w-5" />,
+      icon: Calendar,
       title: "Appointment Booking",
       tagline: "Zero back-and-forth. Every slot filled automatically.",
       description: "Customers book, reschedule, and cancel appointments through WhatsApp or your website — without any staff involvement. The system checks real-time availability, sends confirmations, and fires reminders automatically.",
@@ -680,7 +681,7 @@ function buildDemos(): DemoMeta[] {
     {
       id: "crm",
       number: "05",
-      icon: <Users className="h-5 w-5" />,
+      icon: Users,
       title: "CRM & Pipeline Automation",
       tagline: "Every lead moves forward. Nothing falls through the cracks.",
       description: "From first web form submission to closed deal — every stage is automated. Welcome emails, lead scoring, proposal delivery, follow-up sequences, and deal-close triggers all fire without anyone lifting a finger.",
@@ -700,7 +701,7 @@ function buildDemos(): DemoMeta[] {
     {
       id: "invoice",
       number: "06",
-      icon: <Receipt className="h-5 w-5" />,
+      icon: Receipt,
       title: "Invoice & Payment Automation",
       tagline: "Job done → invoice sent → payment collected. Automatic.",
       description: "The moment a job is marked complete, the system generates and sends an invoice, follows up with a WhatsApp payment link, and updates your books when payment clears. No manual invoicing. No chasing.",
@@ -720,7 +721,7 @@ function buildDemos(): DemoMeta[] {
     {
       id: "support",
       number: "07",
-      icon: <Headphones className="h-5 w-5" />,
+      icon: Headphones,
       title: "Customer Support AI",
       tagline: "First-line support that never sleeps, never loses patience.",
       description: "An AI triage agent that answers FAQs, creates support tickets, and escalates complex issues to human agents — with full context already attached. Customers get instant help. Your team handles only what needs them.",
@@ -777,7 +778,7 @@ function DemoSection({ demo, isEven }: { demo: DemoMeta; isEven: boolean }) {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span className={`inline-flex items-center justify-center h-9 w-9 rounded-xl bg-gradient-to-br ${demo.accentClass} text-white`}>
-                  {demo.icon}
+                  <demo.icon className="h-5 w-5" />
                 </span>
                 <span className="text-xs font-bold tracking-[0.2em] uppercase text-slate-500">{demo.number} / 07</span>
               </div>
@@ -876,26 +877,166 @@ function SideNav({ activeId }: { activeId: string }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   MOBILE DEMO TABS
+   MOBILE NATIVE APP SHELL
 ═══════════════════════════════════════════════════════════════════ */
 
-function MobileDemoTabs({ activeId }: { activeId: string }) {
-  const scrollTo = (id: string) => {
-    document.getElementById(`demo-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+const SLIDE_VARIANTS = {
+  enter: (dir: number) => ({ x: `${dir * 100}%`, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit:  (dir: number) => ({ x: `${-dir * 100}%`, opacity: 0 }),
+};
+const SLIDE_TRANSITION = { duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] as const };
+
+function MobileAppShell({ demos }: { demos: DemoMeta[] }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const navigate = useCallback((idx: number) => {
+    if (idx === activeIdx) return;
+    setDirection(idx > activeIdx ? 1 : -1);
+    setActiveIdx(idx);
+  }, [activeIdx]);
+
+  const demo = demos[activeIdx];
+  const DemoIcon = demo.icon;
+
   return (
-    <div className="xl:hidden sticky top-16 z-30 border-b border-white/[0.06] bg-[#0d1f3c]/95 backdrop-blur px-4 py-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-      <div className="flex gap-1.5 w-max">
-        {NAV_ITEMS.map((item) => (
-          <button key={item.id} onClick={() => scrollTo(item.id)}
-            className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-[11px] font-bold transition-all ${
-              activeId === item.id
-                ? "bg-brand-blue-700 text-white"
-                : "bg-white/[0.05] text-slate-400 hover:text-slate-200"
-            }`}>
-            {item.num} {item.label}
-          </button>
-        ))}
+    <div
+      className="xl:hidden flex flex-col bg-[#030712]"
+      style={{ height: "calc(100dvh - 4rem)" }}
+    >
+      {/* ── App bar ─────────────────────────────────────── */}
+      <div className="shrink-0 flex items-center gap-3 px-4 py-2.5 border-b border-white/[0.06] bg-[#08152a]">
+        <AnimatePresence mode="wait">
+          <motion.div key={demo.id} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} transition={{ duration: 0.18 }}
+            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${demo.accentClass}`}>
+            <DemoIcon className="h-4 w-4 text-white" />
+          </motion.div>
+        </AnimatePresence>
+        <div className="flex-1 min-w-0">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-slate-600">{demo.number} / 07 · AI Automation</p>
+          <AnimatePresence mode="wait">
+            <motion.p key={demo.id} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.15 }}
+              className="text-sm font-black text-white leading-tight truncate">{demo.title}</motion.p>
+          </AnimatePresence>
+        </div>
+        {/* Impact pills */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          {demo.impact.map((s) => (
+            <div key={s.label} className="text-center">
+              <p className="text-[11px] font-black text-white leading-none">{s.value}</p>
+              <p className="text-[8px] text-slate-600 leading-none mt-0.5">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Progress bar ────────────────────────────────── */}
+      <div className="shrink-0 h-[2px] bg-white/[0.05]">
+        <motion.div
+          className={`h-full bg-gradient-to-r ${demo.accentClass}`}
+          animate={{ width: `${((activeIdx + 1) / demos.length) * 100}%` }}
+          transition={{ duration: 0.3 }}
+        />
+      </div>
+
+      {/* ── Scrollable content ──────────────────────────── */}
+      <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={activeIdx}
+            custom={direction}
+            variants={SLIDE_VARIANTS}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={SLIDE_TRANSITION}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.12}
+            onDragEnd={(_, info) => {
+              const { offset, velocity } = info;
+              if ((offset.x < -50 || velocity.x < -300) && activeIdx < demos.length - 1) navigate(activeIdx + 1);
+              else if ((offset.x > 50 || velocity.x > 300) && activeIdx > 0) navigate(activeIdx - 1);
+            }}
+            className="flex flex-col gap-4 p-4 pb-6"
+          >
+            {/* Tagline */}
+            <p className={`text-sm font-bold leading-6 bg-gradient-to-r ${demo.accentClass} bg-clip-text text-transparent`}>
+              {demo.tagline}
+            </p>
+
+            {/* Interactive demo */}
+            {demo.component}
+
+            {/* Industries — compact chips */}
+            <div>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-slate-600 mb-2">Used in</p>
+              <div className="flex flex-wrap gap-1.5">
+                {demo.industries.map((ind) => (
+                  <span key={ind.name}
+                    className="flex items-center gap-1 rounded-full border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-[10px] font-medium text-slate-400">
+                    {ind.emoji} {ind.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <Link
+              href={`/contact?intent=consultation&automation=${demo.id}`}
+              className={`flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r ${demo.accentClass} py-4 text-sm font-black text-white active:scale-[0.97] transition-transform`}
+            >
+              Build this for my business <ArrowRight className="h-4 w-4" />
+            </Link>
+
+            {/* Swipe hint (shown only on first visit) */}
+            {activeIdx === 0 && (
+              <p className="text-center text-[10px] text-slate-600">Swipe left/right or tap below to switch demos</p>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* ── Bottom tab bar ──────────────────────────────── */}
+      <div
+        className="shrink-0 border-t border-white/[0.06] bg-[#050d1a]/96 backdrop-blur-xl"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      >
+        <div className="grid grid-cols-7">
+          {demos.map((d, i) => {
+            const Icon = d.icon;
+            const isActive = i === activeIdx;
+            return (
+              <button
+                key={d.id}
+                onClick={() => navigate(i)}
+                className="flex flex-col items-center justify-center gap-[3px] py-2.5 px-0.5 transition-all active:scale-90"
+              >
+                <motion.span
+                  animate={isActive ? { scale: 1 } : { scale: 0.92 }}
+                  className={`flex h-8 w-8 items-center justify-center rounded-xl transition-all duration-200 ${
+                    isActive
+                      ? `bg-gradient-to-br ${d.accentClass} shadow-lg`
+                      : "bg-white/[0.04]"
+                  }`}
+                >
+                  <Icon className={`h-3.5 w-3.5 ${isActive ? "text-white" : "text-slate-600"}`} />
+                </motion.span>
+                <span className={`text-[8px] font-bold leading-none transition-colors ${isActive ? "text-slate-300" : "text-slate-700"}`}>
+                  {d.number}
+                </span>
+                {isActive && (
+                  <motion.span
+                    layoutId="tab-dot"
+                    className={`h-[3px] w-3 rounded-full bg-gradient-to-r ${d.accentClass}`}
+                    transition={{ duration: 0.2 }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -909,8 +1050,9 @@ export function AIDemoShowcase() {
   const DEMOS = buildDemos();
   const [activeId, setActiveId] = useState("voice");
 
-  /* Track which demo is in view */
+  /* Desktop only: track which section is in view */
   useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth < 1280) return;
     const observers: IntersectionObserver[] = [];
     NAV_ITEMS.forEach(({ id }) => {
       const el = document.getElementById(`demo-${id}`);
@@ -926,50 +1068,52 @@ export function AIDemoShowcase() {
   }, []);
 
   return (
-    <div className="relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_#0d1f3c_0%,_#030712_70%)]">
-      {/* Background glows */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-32 left-1/4 h-[600px] w-[800px] rounded-full bg-brand-blue-700/10 blur-[140px]" />
-        <div className="absolute bottom-0 right-0 h-[400px] w-[600px] rounded-full bg-brand-red-700/08 blur-[120px]" />
-      </div>
+    <>
+      {/* ── Mobile: native app experience ─────────────────── */}
+      <MobileAppShell demos={DEMOS} />
 
-      {/* Mobile tabs */}
-      <MobileDemoTabs activeId={activeId} />
-
-      {/* Main layout */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:flex xl:gap-12 xl:px-8">
-        <SideNav activeId={activeId} />
-
-        <div className="flex-1 min-w-0">
-          {DEMOS.map((demo, i) => (
-            <DemoSection key={demo.id} demo={demo} isEven={i % 2 === 0} />
-          ))}
+      {/* ── Desktop: stacked sections + sticky sidebar ────── */}
+      <div className="hidden xl:block relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_#0d1f3c_0%,_#030712_70%)]">
+        {/* Background glows */}
+        <div className="pointer-events-none fixed inset-0 overflow-hidden">
+          <div className="absolute -top-32 left-1/4 h-[600px] w-[800px] rounded-full bg-brand-blue-700/10 blur-[140px]" />
+          <div className="absolute bottom-0 right-0 h-[400px] w-[600px] rounded-full bg-brand-red-700/08 blur-[120px]" />
         </div>
-      </div>
 
-      {/* Bottom CTA */}
-      <div className="border-t border-white/[0.06] py-16">
-        <div className="mx-auto max-w-2xl px-4 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-brand-red-700/40 bg-brand-red-900/20 px-3 py-1 mb-5">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-red-400 animate-pulse" />
-            <span className="text-[10px] font-semibold tracking-[0.22em] uppercase text-brand-red-300">Start automating</span>
-          </div>
-          <h2 className="text-2xl font-black text-white sm:text-3xl">Every day without automation<br />is a day of lost revenue.</h2>
-          <p className="mt-4 text-sm leading-7 text-slate-400 max-w-lg mx-auto">
-            Pick any automation above and we will build it for your business — customised to your workflows, tools, and customers. Most go live within 2–4 weeks.
-          </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Link href="/contact?intent=consultation"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-blue-700 px-6 py-3 text-sm font-bold text-white shadow transition hover:bg-brand-blue-600">
-              Book Free Automation Audit <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href="/ai-automation"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.06]">
-              AI Automation Overview
-            </Link>
+        {/* Main layout */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:flex xl:gap-12 xl:px-8">
+          <SideNav activeId={activeId} />
+          <div className="flex-1 min-w-0">
+            {DEMOS.map((demo, i) => (
+              <DemoSection key={demo.id} demo={demo} isEven={i % 2 === 0} />
+            ))}
           </div>
         </div>
+
+        {/* Bottom CTA */}
+        <div className="border-t border-white/[0.06] py-16">
+          <div className="mx-auto max-w-2xl px-4 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-red-700/40 bg-brand-red-900/20 px-3 py-1 mb-5">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-red-400 animate-pulse" />
+              <span className="text-[10px] font-semibold tracking-[0.22em] uppercase text-brand-red-300">Start automating</span>
+            </div>
+            <h2 className="text-2xl font-black text-white sm:text-3xl">Every day without automation<br />is a day of lost revenue.</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-400 max-w-lg mx-auto">
+              Pick any automation above and we will build it for your business — customised to your workflows, tools, and customers. Most go live within 2–4 weeks.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <Link href="/contact?intent=consultation"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-blue-700 px-6 py-3 text-sm font-bold text-white shadow transition hover:bg-brand-blue-600">
+                Book Free Automation Audit <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/ai-automation"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.06]">
+                AI Automation Overview
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
