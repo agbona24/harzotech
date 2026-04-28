@@ -72,28 +72,28 @@ export function Footer() {
         className="bg-gradient-to-br from-navy-900 to-navy-950"
       >
         <Container>
-          <div className="flex flex-col items-start gap-8 py-16 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col items-start gap-5 py-8 sm:gap-8 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-xl">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-400">
                 Ready to get started?
               </p>
               <h2
                 id="footer-cta-heading"
-                className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                className="mt-2 text-xl font-bold tracking-tight text-white sm:mt-3 sm:text-4xl"
               >
                 Let&apos;s build technology that{" "}
                 <span className="text-brand-blue-300">works for your business.</span>
               </h2>
-              <p className="mt-4 text-base leading-8 text-slate-400">
+              <p className="mt-2 hidden text-base leading-8 text-slate-400 sm:mt-4 sm:block">
                 Website, software, AI automation, SEO, IT support — we do it all, and we
                 do it right. Tell us what you need; we&apos;ll tell you how to get there.
               </p>
             </div>
-            <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact?intent=start-project" variant="cta" className="w-full sm:w-auto">
+            <div className="flex w-full shrink-0 gap-2 sm:w-auto sm:flex-col sm:gap-3 sm:flex-row">
+              <ButtonLink href="/contact?intent=start-project" variant="cta" className="flex-1 sm:flex-none sm:w-auto">
                 Start a Project →
               </ButtonLink>
-              <ButtonLink href="/services" variant="outline-white" className="w-full sm:w-auto">
+              <ButtonLink href="/services" variant="outline-white" className="flex-1 sm:flex-none sm:w-auto">
                 Explore Services
               </ButtonLink>
             </div>
@@ -107,18 +107,20 @@ export function Footer() {
       <div className="h-1 w-full bg-red-600" />
 
       <Container>
-        <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 py-8 sm:gap-10 sm:py-14 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
-          <div className="space-y-5 lg:col-span-1">
-            <Logo invert />
-            <p className="text-sm leading-7 text-slate-400">
-              Technology solutions built to help businesses grow, automate, and scale
-              with premium websites, software, AI systems, and digital strategy.
-            </p>
-            <p className="text-[11px] font-medium uppercase tracking-widest text-slate-500">
-              A Nigerian Technology Company
-            </p>
-            <div className="flex items-center gap-3">
+          <div className="flex items-start justify-between gap-4 sm:block sm:space-y-5 lg:col-span-1">
+            <div className="space-y-2 sm:space-y-5">
+              <Logo invert />
+              <p className="hidden text-sm leading-7 text-slate-400 sm:block">
+                Technology solutions built to help businesses grow, automate, and scale
+                with premium websites, software, AI systems, and digital strategy.
+              </p>
+              <p className="hidden text-[11px] font-medium uppercase tracking-widest text-slate-500 sm:block">
+                A Nigerian Technology Company
+              </p>
+            </div>
+            <div className="flex items-center gap-2 sm:gap-3">
               {socialLinks.map((s) => (
                 <a
                   key={s.label}
@@ -132,8 +134,23 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Company links */}
-          <div>
+          {/* Company + Services — on mobile: merged 2-column grid; on desktop: separate columns */}
+          <div className="sm:hidden col-span-full">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
+              {[...quickLinks, ...serviceLinks].map((l) => (
+                <Link
+                  key={l.href + l.label}
+                  href={l.href}
+                  className="truncate text-xs text-slate-400 transition hover:text-white"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Company links — desktop only */}
+          <div className="hidden sm:block">
             <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white">
               Company
             </p>
@@ -151,8 +168,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Services links */}
-          <div>
+          {/* Services links — desktop only */}
+          <div className="hidden sm:block">
             <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white">
               Services
             </p>
@@ -172,42 +189,43 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white">
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-white sm:mb-5">
               Contact Us
             </p>
-            <div className="space-y-3 text-sm text-slate-400">
+            {/* Mobile: compact inline row */}
+            <div className="flex flex-col gap-2 sm:hidden">
+              <a href={`tel:${site.contact.phone}`}
+                className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-red-400 transition">
+                <span className="text-[10px] uppercase tracking-wider text-slate-500">📞</span>
+                {site.contact.phone}
+              </a>
+              <a href={`mailto:${site.contact.email}`}
+                className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-red-400 transition">
+                <span className="text-[10px] uppercase tracking-wider text-slate-500">✉️</span>
+                {site.contact.email}
+              </a>
+            </div>
+            {/* Desktop: full block */}
+            <div className="hidden space-y-3 text-sm text-slate-400 sm:block">
               <p>
-                <span className="block text-xs uppercase tracking-wider text-slate-500">
-                  Phone
-                </span>
-                <a
-                  href={`tel:${site.contact.phone}`}
-                  className="mt-0.5 block font-medium text-white hover:text-red-400 transition"
-                >
+                <span className="block text-xs uppercase tracking-wider text-slate-500">Phone</span>
+                <a href={`tel:${site.contact.phone}`}
+                  className="mt-0.5 block font-medium text-white hover:text-red-400 transition">
                   {site.contact.phone}
                 </a>
               </p>
               <p>
-                <span className="block text-xs uppercase tracking-wider text-slate-500">
-                  Email
-                </span>
-                <a
-                  href={`mailto:${site.contact.email}`}
-                  className="mt-0.5 block font-medium text-white hover:text-red-400 transition"
-                >
+                <span className="block text-xs uppercase tracking-wider text-slate-500">Email</span>
+                <a href={`mailto:${site.contact.email}`}
+                  className="mt-0.5 block font-medium text-white hover:text-red-400 transition">
                   {site.contact.email}
                 </a>
               </p>
               <p>
-                <span className="block text-xs uppercase tracking-wider text-slate-500">
-                  Office
-                </span>
+                <span className="block text-xs uppercase tracking-wider text-slate-500">Office</span>
                 <span className="mt-0.5 block leading-6">
                   {site.contact.addressLines.map((line) => (
-                    <span key={line}>
-                      {line}
-                      <br />
-                    </span>
+                    <span key={line}>{line}<br /></span>
                   ))}
                 </span>
               </p>
