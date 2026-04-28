@@ -113,7 +113,7 @@ export default function AIAutomationPage() {
         title={<>AI and <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Automation</span> for Smarter <span className="text-brand-blue-300">Business Operations</span></>}
         description="Your competitors are automating. Every manual follow-up, missed call, and delayed response is a lost opportunity. We build AI systems that work while you sleep — capturing leads, confirming bookings, and handling support 24/7."
         primaryCta={{ href: "/contact?intent=consultation", label: "Book a Consultation" }}
-        secondaryCta={{ href: "/contact?intent=start-project", label: "Start a Project" }}
+        secondaryCta={{ href: "/ai-automation/demo", label: "Try Live Demos" }}
         illustration={<AIAutomationHeroIllustration />}
         bgImage="/hero.png"
       />
@@ -128,6 +128,29 @@ export default function AIAutomationPage() {
                 <span className="text-xs font-semibold uppercase tracking-widest text-slate-500">{s.label}</span>
               </div>
             ))}
+          </div>
+        </Container>
+      </div>
+
+      {/* Demos teaser */}
+      <div className="border-b border-slate-100 bg-gradient-to-r from-slate-950 to-brand-blue-950">
+        <Container>
+          <div className="flex flex-col items-center justify-between gap-4 py-5 text-center sm:flex-row sm:text-left">
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-blue-700">
+                <span className="text-sm font-black text-white">7</span>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-white">Try the demos — live, in your browser</p>
+                <p className="text-xs text-slate-400">Voice agents, WhatsApp bots, CRM automation and more</p>
+              </div>
+            </div>
+            <a
+              href="/ai-automation/demo"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-brand-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-blue-500"
+            >
+              See All Live Demos →
+            </a>
           </div>
         </Container>
       </div>

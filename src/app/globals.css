@@ -62,3 +62,25 @@ html {
 body {
   overflow-x: hidden;
 }
+
+/* ── AI Demo Showcase shared utilities ──────────────────────── */
+@layer utilities {
+  .demo-panel {
+    @apply relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm;
+  }
+  .demo-panel-header {
+    @apply flex items-center justify-between border-b border-white/[0.06] bg-white/[0.02] px-4 py-3;
+  }
+  .demo-panel-footer {
+    @apply flex items-center justify-between border-t border-white/[0.06] bg-white/[0.02] px-4 py-3;
+  }
+  .demo-transcript {
+    @apply flex flex-col gap-3 overflow-y-auto px-4 py-4 scroll-smooth;
+  }
+  .demo-btn {
+    @apply inline-flex shrink-0 items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-bold text-white transition cursor-pointer;
+  }
+  .pill-badge {
+    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold;
+  }
+}
