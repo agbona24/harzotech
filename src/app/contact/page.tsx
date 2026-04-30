@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { site } from "@/data/site";
 import { ContactForm } from "@/components/ContactForm";
 import { PageSchema } from "@/components/PageSchema";
+import { ContactPageSchema } from "@/components/ContactPageSchema";
 import { CheckCircle2, Clock, Lock, Award, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -52,6 +53,7 @@ export default async function ContactPage({
 
   return (
     <div>
+      <ContactPageSchema />
       <PageSchema
         service="Contact Harzotech"
         url="https://harzotech.com.ng/contact"

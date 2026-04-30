@@ -10,6 +10,9 @@ import { MidPageCTA } from "@/components/MidPageCTA";
 import { PageSchema } from "@/components/PageSchema";
 import { RelatedServices } from "@/components/RelatedServices";
 import { ServiceAnswerBlock } from "@/components/ServiceAnswerBlock";
+import { FAQPageSchema } from "@/components/FAQPageSchema";
+import { SpeakableSchema } from "@/components/SpeakableSchema";
+import { BookingServiceSchema } from "@/components/BookingServiceSchema";
 import {
   Globe, ShoppingCart, LayoutTemplate, Rocket, Building2,
   HeartPulse, LineChart, CheckCircle2, Search, PenLine,
@@ -29,6 +32,41 @@ export const metadata: Metadata = {
   title: "Website Design & Development Company in Lagos, Nigeria",
   description:
     "Harzotech builds premium business websites, e-commerce stores, and landing pages in Lagos, Nigeria — conversion-focused, SEO-ready, and mobile-first. Get a site that earns its place in your business.",
+  keywords: [
+    "website design company Nigeria",
+    "web development company Lagos",
+    "website development Nigeria",
+    "ecommerce website development Nigeria",
+    "SEO-ready website Nigeria",
+    "corporate website design Lagos",
+    "landing page design Nigeria",
+    "mobile responsive website Nigeria",
+    "Harzotech web development",
+  ],
+  openGraph: {
+    title: "Website Design & Development Company in Lagos, Nigeria",
+    description:
+      "Harzotech builds premium business websites, e-commerce stores, and landing pages in Lagos, Nigeria — conversion-focused, SEO-ready, and mobile-first.",
+    url: "https://harzotech.com.ng/website-development",
+    siteName: "Harzotech Nig Ltd",
+    locale: "en_NG",
+    type: "website",
+    images: [
+      {
+        url: "/website-development/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Website Design & Development Services by Harzotech",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Website Design & Development Company in Lagos, Nigeria",
+    description:
+      "Conversion-focused, SEO-ready, mobile-first websites for Nigerian businesses.",
+    images: ["/website-development/opengraph-image"],
+  },
   alternates: { canonical: "https://harzotech.com.ng/website-development" },
 };
 
@@ -124,6 +162,21 @@ export default function WebsiteDevelopmentPage() {
         url="https://harzotech.com.ng/website-development"
         description="Premium business websites, e-commerce stores, and landing pages in Lagos, Nigeria — conversion-focused, SEO-ready, and mobile-first."
         breadcrumbs={[{ name: "Website Design & Development", url: "https://harzotech.com.ng/website-development" }]}
+      />
+      <FAQPageSchema
+        title="Website Development FAQs"
+        url="https://harzotech.com.ng/website-development"
+        faqs={FAQS}
+      />
+      <SpeakableSchema
+        text="Website Design and Development. We build premium business websites, e-commerce stores, and landing pages in Lagos, Nigeria — conversion-focused, SEO-ready, and mobile-first."
+        url="https://harzotech.com.ng/website-development"
+        cssSelector="h1, [data-speakable]"
+      />
+      <BookingServiceSchema
+        serviceName="Website Development Consultation"
+        url="https://harzotech.com.ng/website-development"
+        serviceUrl="https://harzotech.com.ng/contact?intent=start-project"
       />
       <PageHeader
         eyebrow="Website Development"

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Clock, Tag, Calendar, User } from "lucide-react";
 import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
+import { SpeakableSchema } from "@/components/SpeakableSchema";
 import { blogPosts } from "@/data/blog";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -116,23 +117,34 @@ export default async function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
       />
+      <SpeakableSchema
+        text={post.excerpt}
+        url={`https://harzotech.com.ng/blog/${slug}`}
+        cssSelector="h1, p[data-speakable]"
+      />
       {/* Article header */}
-      <div className="border-b border-slate-100 bg-slate-50 py-12 sm:py-16">
+      <div className="relative overflow-hidden bg-[#0c1e3b] py-14 sm:py-20">
+        {/* Gradient glows */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_-10%_-10%,rgba(21,101,192,0.45),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_110%_110%,rgba(198,40,40,0.3),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="pointer-events-none absolute bottom-0 inset-x-0 h-px bg-[linear-gradient(90deg,transparent_0%,rgba(21,101,192,0.5)_35%,rgba(198,40,40,0.4)_65%,transparent_100%)]" />
+
         <Container>
-          <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-blue-700 hover:text-brand-blue-600 mb-8">
+          <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-blue-300 hover:text-white mb-8 relative transition">
             <ArrowLeft className="h-4 w-4" /> Back to Blog
           </Link>
 
-          <div className="max-w-3xl">
-            <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${getCategoryClass(post.category)}`}>
+          <div className="relative max-w-3xl">
+            <span className="inline-flex items-center rounded-full border border-brand-blue-700/30 bg-brand-blue-700/10 px-2.5 py-0.5 text-[11px] font-semibold text-brand-blue-300">
               {post.category}
             </span>
-            <h1 className="mt-4 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            <h1 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
               {post.title}
             </h1>
-            <p className="mt-4 text-lg leading-8 text-slate-600">{post.excerpt}</p>
+            <p className="mt-4 text-lg leading-8 text-slate-300">{post.excerpt}</p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-slate-500">
+            <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-slate-400">
               <span className="inline-flex items-center gap-1.5">
                 <User className="h-4 w-4" />
                 {post.author.name} · {post.author.title}

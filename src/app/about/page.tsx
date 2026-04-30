@@ -6,6 +6,7 @@ import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
 import { PageSchema } from "@/components/PageSchema";
 import { site } from "@/data/site";
+import { AboutPageSchema } from "@/components/AboutPageSchema";
 import {
   Target,
   Eye,
@@ -95,8 +96,7 @@ const WHY_ITEMS = [
 
 export default function AboutPage() {
   return (
-    <div>
-      <PageSchema
+    <div>      <AboutPageSchema />      <PageSchema
         service="About Harzotech"
         url="https://harzotech.com.ng/about"
         description="Harzotech Nig Ltd is a technology solutions company in Lagos, Nigeria. We build websites, software, AI automation, and IT systems that help businesses grow."

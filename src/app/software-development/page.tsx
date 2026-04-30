@@ -10,6 +10,9 @@ import { MidPageCTA } from "@/components/MidPageCTA";
 import { PageSchema } from "@/components/PageSchema";
 import { RelatedServices } from "@/components/RelatedServices";
 import { ServiceAnswerBlock } from "@/components/ServiceAnswerBlock";
+import { FAQPageSchema } from "@/components/FAQPageSchema";
+import { SpeakableSchema } from "@/components/SpeakableSchema";
+import { BookingServiceSchema } from "@/components/BookingServiceSchema";
 import {
   LayoutDashboard, ShoppingBag, CalendarCheck, Users2,
   Warehouse, GraduationCap, Hospital, Cpu,
@@ -30,6 +33,41 @@ export const metadata: Metadata = {
   title: "Custom Software Development Company in Nigeria — CRM, Portals & SaaS",
   description:
     "Harzotech builds custom business software in Nigeria — CRM systems, dashboards, booking platforms, SaaS apps, POS, and inventory tools designed to fit how your business actually works.",
+  keywords: [
+    "custom software development company Nigeria",
+    "software development company Lagos",
+    "CRM development Nigeria",
+    "business portal development Nigeria",
+    "SaaS development Nigeria",
+    "booking system development Nigeria",
+    "POS and inventory software Nigeria",
+    "enterprise software development Lagos",
+    "Harzotech software development",
+  ],
+  openGraph: {
+    title: "Custom Software Development Company in Nigeria — CRM, Portals & SaaS",
+    description:
+      "Harzotech builds custom business software in Nigeria — CRM systems, dashboards, booking platforms, SaaS apps, POS, and inventory tools designed to fit how your business actually works.",
+    url: "https://harzotech.com.ng/software-development",
+    siteName: "Harzotech Nig Ltd",
+    locale: "en_NG",
+    type: "website",
+    images: [
+      {
+        url: "/software-development/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Custom Software Development Services by Harzotech",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Custom Software Development Company in Nigeria — CRM, Portals & SaaS",
+    description:
+      "Custom CRM, portals, SaaS, booking systems, and operational software for Nigerian businesses.",
+    images: ["/software-development/opengraph-image"],
+  },
   alternates: { canonical: "https://harzotech.com.ng/software-development" },
 };
 
@@ -125,6 +163,21 @@ export default function SoftwareDevelopmentPage() {
         url="https://harzotech.com.ng/software-development"
         description="Custom business software in Nigeria — CRM systems, dashboards, booking platforms, SaaS apps, POS, and inventory tools built for how your business works."
         breadcrumbs={[{ name: "Custom Software Development", url: "https://harzotech.com.ng/software-development" }]}
+      />
+      <FAQPageSchema
+        title="Custom Software Development FAQs"
+        url="https://harzotech.com.ng/software-development"
+        faqs={FAQS}
+      />
+      <SpeakableSchema
+        text="Custom Software Development. We build custom business software in Nigeria — CRM systems, dashboards, booking platforms, SaaS apps, POS, and inventory tools designed to fit how your business actually works."
+        url="https://harzotech.com.ng/software-development"
+        cssSelector="h1, [data-speakable]"
+      />
+      <BookingServiceSchema
+        serviceName="Software Development Consultation"
+        url="https://harzotech.com.ng/software-development"
+        serviceUrl="https://harzotech.com.ng/contact?intent=start-project"
       />
       <PageHeader
         eyebrow="Software Development"

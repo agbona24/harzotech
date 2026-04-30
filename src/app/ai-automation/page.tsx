@@ -11,6 +11,9 @@ import { PageSchema } from "@/components/PageSchema";
 import { RelatedServices } from "@/components/RelatedServices";
 import { ServiceAnswerBlock } from "@/components/ServiceAnswerBlock";
 import { AIAutomationWidget } from "@/components/AIAutomationWidget";
+import { FAQPageSchema } from "@/components/FAQPageSchema";
+import { SpeakableSchema } from "@/components/SpeakableSchema";
+import { BookingServiceSchema } from "@/components/BookingServiceSchema";
 import {
   Mic2, MessageSquare, CalendarCheck, Users2,
   CreditCard, HeadphonesIcon, Zap, RefreshCw,
@@ -30,6 +33,41 @@ export const metadata: Metadata = {
   title: "AI Automation & WhatsApp Workflow Systems for Nigerian Businesses",
   description:
     "Harzotech builds AI voice agents, WhatsApp automation, appointment booking workflows, CRM automation, and business process systems that reduce manual work and scale your operations.",
+  keywords: [
+    "AI automation for business Nigeria",
+    "AI automation company Nigeria",
+    "WhatsApp automation Nigeria",
+    "AI voice agent Nigeria",
+    "workflow automation Nigeria",
+    "business process automation Nigeria",
+    "CRM automation Lagos",
+    "appointment booking automation Nigeria",
+    "Harzotech AI automation",
+  ],
+  openGraph: {
+    title: "AI Automation & WhatsApp Workflow Systems for Nigerian Businesses",
+    description:
+      "Harzotech builds AI voice agents, WhatsApp automation, appointment booking workflows, CRM automation, and business process systems that reduce manual work and scale your operations.",
+    url: "https://harzotech.com.ng/ai-automation",
+    siteName: "Harzotech Nig Ltd",
+    locale: "en_NG",
+    type: "website",
+    images: [
+      {
+        url: "/ai-automation/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "AI Automation & Workflow Systems by Harzotech",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Automation & WhatsApp Workflow Systems for Nigerian Businesses",
+    description:
+      "AI voice agents, WhatsApp automation, booking workflows, and CRM automation built for Nigerian businesses.",
+    images: ["/ai-automation/opengraph-image"],
+  },
   alternates: { canonical: "https://harzotech.com.ng/ai-automation" },
 };
 
@@ -107,6 +145,21 @@ export default function AIAutomationPage() {
         url="https://harzotech.com.ng/ai-automation"
         description="AI voice agents, WhatsApp automation, appointment booking workflows, CRM automation, and business process systems for Nigerian businesses."
         breadcrumbs={[{ name: "AI Automation & Workflow Systems", url: "https://harzotech.com.ng/ai-automation" }]}
+      />
+      <FAQPageSchema
+        title="AI Automation FAQs"
+        url="https://harzotech.com.ng/ai-automation"
+        faqs={FAQS}
+      />
+      <SpeakableSchema
+        text="AI Automation and WhatsApp Workflow Systems. We build AI voice agents, WhatsApp automation, appointment booking workflows, CRM automation, and business process systems that reduce manual work and scale your operations."
+        url="https://harzotech.com.ng/ai-automation"
+        cssSelector="h1, [data-speakable]"
+      />
+      <BookingServiceSchema
+        serviceName="AI Automation Consultation"
+        url="https://harzotech.com.ng/ai-automation"
+        serviceUrl="https://harzotech.com.ng/contact?intent=consultation"
       />
       <PageHeader
         eyebrow="AI & Automation"

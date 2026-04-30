@@ -14,6 +14,41 @@ export const metadata: Metadata = {
   title: "Technology Services — Website, Software, AI & IT Solutions in Nigeria",
   description:
     "Harzotech offers end-to-end technology services in Nigeria: website design, custom software, AI automation, managed IT support, SEO, and branding — all built to grow your business.",
+  keywords: [
+    "technology services Nigeria",
+    "AI automation services Nigeria",
+    "website development services Lagos",
+    "custom software services Nigeria",
+    "IT support services Lagos",
+    "SEO services Nigeria",
+    "digital transformation services Nigeria",
+    "business technology solutions Nigeria",
+    "Harzotech services",
+  ],
+  openGraph: {
+    title: "Technology Services — Website, Software, AI & IT Solutions in Nigeria",
+    description:
+      "Harzotech offers end-to-end technology services in Nigeria: website design, custom software, AI automation, managed IT support, SEO, and branding.",
+    url: "https://harzotech.com.ng/services",
+    siteName: "Harzotech Nig Ltd",
+    locale: "en_NG",
+    type: "website",
+    images: [
+      {
+        url: "/services/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Technology Services by Harzotech",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Technology Services — Website, Software, AI & IT Solutions in Nigeria",
+    description:
+      "Website, software, AI automation, IT support, and SEO services built for business growth in Nigeria.",
+    images: ["/services/opengraph-image"],
+  },
   alternates: { canonical: "https://harzotech.com.ng/services" },
 };
 
