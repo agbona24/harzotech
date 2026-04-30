@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
+    keywords: post.tags,
     alternates: { canonical: `https://harzotech.com.ng/blog/${slug}` },
     openGraph: {
       title: post.title,
@@ -27,6 +28,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.publishedAt,
       authors: [post.author.name],
       tags: post.tags,
+      url: `https://harzotech.com.ng/blog/${slug}`,
+      siteName: "Harzotech Nig Ltd",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      creator: "@harzotech",
     },
   };
 }
@@ -59,8 +68,54 @@ export default async function BlogPostPage({ params }: Props) {
     .filter((p) => p.slug !== slug && (p.category === post.category || p.tags.some((t) => post.tags.includes(t))))
     .slice(0, 3);
 
+  const blogPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    author: {
+      "@type": "Person",
+      name: post.author.name,
+      jobTitle: post.author.title,
+      worksFor: {
+        "@type": "Organization",
+        name: "Harzotech Nig Ltd",
+        url: "https://harzotech.com.ng",
+      },
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Harzotech Nig Ltd",
+      url: "https://harzotech.com.ng",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://harzotech.com.ng/logo.gif",
+      },
+    },
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://harzotech.com.ng/blog/${slug}`,
+    },
+    url: `https://harzotech.com.ng/blog/${slug}`,
+    keywords: post.tags.join(", "),
+    articleSection: post.category,
+    inLanguage: "en-NG",
+    isPartOf: {
+      "@type": "Blog",
+      "@id": "https://harzotech.com.ng/blog",
+      name: "Harzotech Blog — Technology, Business & Digital Growth",
+      publisher: { "@id": "https://harzotech.com.ng/#organization" },
+    },
+  };
+
   return (
     <div className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+      />
       {/* Article header */}
       <div className="border-b border-slate-100 bg-slate-50 py-12 sm:py-16">
         <Container>

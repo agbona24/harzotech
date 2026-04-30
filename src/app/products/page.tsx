@@ -24,8 +24,45 @@ function getVerticalClass(v: string) {
 }
 
 export default function ProductsPage() {
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "SaaS Products by Harzotech Nig Ltd",
+    description: "Live subscription-based SaaS platforms built and operated by Harzotech Nig Ltd for businesses across Africa.",
+    url: "https://harzotech.com.ng/products",
+    itemListElement: saasProducts.map((product, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "SoftwareApplication",
+        name: product.name,
+        description: product.description,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        url: product.url,
+        offers: {
+          "@type": "Offer",
+          seller: {
+            "@type": "Organization",
+            name: "Harzotech Nig Ltd",
+            url: "https://harzotech.com.ng",
+          },
+        },
+        creator: {
+          "@type": "Organization",
+          name: "Harzotech Nig Ltd",
+          url: "https://harzotech.com.ng",
+        },
+      },
+    })),
+  };
+
   return (
     <div className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+      />
       {/* ── Header ─────────────────────────────────────────────── */}
       <div className="relative overflow-hidden bg-[#0c1e3b] py-16 sm:py-20 lg:py-24">
         {/* Glow accents */}

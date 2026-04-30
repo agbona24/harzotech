@@ -10,7 +10,6 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
 import { services } from "@/data/services";
 import { projects } from "@/data/projects";
-import { industries } from "@/data/industries";
 import { testimonials } from "@/data/testimonials";
 import { site } from "@/data/site";
 import { ScrollCarousel } from "@/components/ScrollCarousel";
@@ -18,9 +17,10 @@ import { AIAutomationWidget } from "@/components/AIAutomationWidget";
 import { ServiceCard } from "@/components/ServiceCard";
 import { WebsiteTypesWidget } from "@/components/WebsiteTypesWidget";
 import { SoftwareSystemsWidget } from "@/components/SoftwareSystemsWidget";
-import { ProjectCard } from "@/components/ProjectCard";
 import { FadeIn } from "@/components/Motion";
-import { HeroServicesPanel } from "@/components/HeroServicesPanel";
+import { AIHeroAdvisor } from "@/components/AIHeroAdvisor";
+import { WebsiteAuditWidget } from "@/components/WebsiteAuditWidget";
+import { AIProjectScoping } from "@/components/AIProjectScoping";
 import {
   Activity,
   ArrowRight,
@@ -160,9 +160,9 @@ export default function Home() {
               </FadeIn>
             </div>
 
-            {/* Right: Services panel — desktop only */}
-            <div className="hidden lg:block">
-              <HeroServicesPanel />
+            {/* Right: AI advisor */}
+            <div>
+              <AIHeroAdvisor />
             </div>
           </div>
         </Container>
@@ -655,7 +655,17 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* ── 13. Testimonials — navy dark ──────────────────────── */}
+      {/* ── 13. AI Audit ──────────────────────────────────────── */}
+      <Section className="relative overflow-hidden bg-slate-50">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_72%_40%_at_15%_18%,rgba(21,101,192,0.08),transparent),radial-gradient(ellipse_42%_28%_at_88%_82%,rgba(198,40,40,0.06),transparent)]" />
+        <Container>
+          <div className="relative">
+            <WebsiteAuditWidget />
+          </div>
+        </Container>
+      </Section>
+
+      {/* ── 14. Testimonials — navy dark ──────────────────────── */}
       <Section variant="dark" className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(21,101,192,0.1),transparent),radial-gradient(ellipse_50%_50%_at_80%_100%,rgba(198,40,40,0.07),transparent)]" />
         <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:28px_28px]" />
@@ -697,6 +707,17 @@ export default function Home() {
                 ))}
               </div>
             </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* ── 15. AI Scoping ────────────────────────────────────── */}
+      <Section variant="dark" className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-brand-blue-800">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_65%_52%_at_22%_18%,rgba(21,101,192,0.18),transparent),radial-gradient(ellipse_45%_35%_at_84%_84%,rgba(198,40,40,0.1),transparent)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:28px_28px]" />
+        <Container>
+          <div className="relative">
+            <AIProjectScoping toEmail={site.contact.email} />
           </div>
         </Container>
       </Section>
