@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHeader } from "@/components/PageHeader";
 import { AboutHeroIllustration } from "@/components/AboutHeroIllustration";
 import { Section } from "@/components/Section";
@@ -322,13 +323,13 @@ export default function AboutPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-navy-950 via-navy-800 to-brand-blue-900 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="mx-auto mb-3 flex h-20 w-20 items-center justify-center rounded-full bg-brand-blue-700/30 ring-2 ring-brand-blue-400/30 text-4xl font-black text-white">
-                    A
-                  </div>
-                  <p className="text-sm font-semibold text-white">{site.founder.name}</p>
-                  <p className="mt-1 text-xs text-slate-400">Founder &amp; Lead Strategist</p>
-                </div>
+                <Image
+                  src="/ceo.png"
+                  alt={`${site.founder.name} - Founder and Lead Strategist`}
+                  width={1200}
+                  height={900}
+                  className="h-full w-full object-cover"
+                />
               </div>
               <div className="mt-6 rounded-2xl border border-slate-100 bg-slate-50 p-5">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-red-600">Founder Quote</p>
