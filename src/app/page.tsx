@@ -18,9 +18,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { WebsiteTypesWidget } from "@/components/WebsiteTypesWidget";
 import { SoftwareSystemsWidget } from "@/components/SoftwareSystemsWidget";
 import { FadeIn } from "@/components/Motion";
-import { AIHeroAdvisor } from "@/components/AIHeroAdvisor";
-import { WebsiteAuditWidget } from "@/components/WebsiteAuditWidget";
-import { AIProjectScoping } from "@/components/AIProjectScoping";
+import { HeroServicesPanel } from "@/components/HeroServicesPanel";
 import {
   Activity,
   ArrowRight,
@@ -95,12 +93,50 @@ const aggregateRatingSchema = {
   },
 };
 
+const reviewsSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://harzotech.com.ng/#organization",
+  name: "Harzotech Nig Ltd",
+  review: testimonials.map((t) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: t.name },
+    reviewBody: t.quote,
+    reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+    publisher: { "@type": "Organization", name: "Harzotech Nig Ltd" },
+  })),
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "How Harzotech Delivers a Technology Project",
+  description:
+    "The 5-step process Harzotech Nig Ltd uses to deliver websites, custom software, and AI automation systems for businesses in Nigeria.",
+  totalTime: "P6W",
+  supply: [{ "@type": "HowToSupply", name: "Business requirements and goals" }],
+  step: processSteps.map((s, i) => ({
+    "@type": "HowToStep",
+    position: i + 1,
+    name: s.title,
+    text: s.description,
+  })),
+};
+
 export default function Home() {
   return (
     <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
       {/* ── 1. Hero ────────────────────────────────────────────── */}
       <Section variant="dark" className="relative flex min-h-[100svh] flex-col overflow-hidden pt-20 pb-0 sm:pt-28">
@@ -160,9 +196,9 @@ export default function Home() {
               </FadeIn>
             </div>
 
-            {/* Right: AI advisor */}
+            {/* Right: services panel */}
             <div>
-              <AIHeroAdvisor />
+              <HeroServicesPanel />
             </div>
           </div>
         </Container>
@@ -655,17 +691,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* ── 13. AI Audit ──────────────────────────────────────── */}
-      <Section className="relative overflow-hidden bg-slate-50">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_72%_40%_at_15%_18%,rgba(21,101,192,0.08),transparent),radial-gradient(ellipse_42%_28%_at_88%_82%,rgba(198,40,40,0.06),transparent)]" />
-        <Container>
-          <div className="relative">
-            <WebsiteAuditWidget />
-          </div>
-        </Container>
-      </Section>
-
-      {/* ── 14. Testimonials — navy dark ──────────────────────── */}
+      {/* ── 13. Testimonials — navy dark ──────────────────────── */}
       <Section variant="dark" className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(21,101,192,0.1),transparent),radial-gradient(ellipse_50%_50%_at_80%_100%,rgba(198,40,40,0.07),transparent)]" />
         <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:28px_28px]" />
@@ -707,17 +733,6 @@ export default function Home() {
                 ))}
               </div>
             </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ── 15. AI Scoping ────────────────────────────────────── */}
-      <Section variant="dark" className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-brand-blue-800">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_65%_52%_at_22%_18%,rgba(21,101,192,0.18),transparent),radial-gradient(ellipse_45%_35%_at_84%_84%,rgba(198,40,40,0.1),transparent)]" />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:28px_28px]" />
-        <Container>
-          <div className="relative">
-            <AIProjectScoping toEmail={site.contact.email} />
           </div>
         </Container>
       </Section>

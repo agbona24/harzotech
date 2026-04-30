@@ -7,33 +7,8 @@ export type AdvisorResult = {
   quickWins: string[];
 };
 
-export type AuditResult = {
-  summary: string;
-  recommendedService: string;
-  focusArea: string;
-  scores: {
-    clarity: number;
-    trust: number;
-    conversion: number;
-    mobile: number;
-  };
-  actions: string[];
-};
-
-export type ScopeResult = {
-  summary: string;
-  recommendedSolution: string;
-  projectApproach: string;
-  phases: string[];
-  nextStep: string;
-};
-
 const OPENAI_URL = "https://api.openai.com/v1/responses";
 const DEFAULT_MODEL = process.env.OPENAI_MODEL || "gpt-5.4-mini";
-
-function clampScore(value: number) {
-  return Math.max(58, Math.min(94, Math.round(value)));
-}
 
 function keywordIncludes(text: string, words: string[]) {
   return words.some((word) => text.includes(word));
@@ -102,78 +77,6 @@ export function fallbackAdvisor(prompt: string): AdvisorResult {
       "Reduce friction in the enquiry flow",
       "Strengthen trust with proof, case studies, and structure",
     ],
-  };
-}
-
-export function fallbackAudit(rawUrl: string, focusArea: string): AuditResult {
-  const url = rawUrl.trim().toLowerCase();
-  const lengthFactor = Math.min(url.length, 40);
-  const hasHttps = url.startsWith("https://");
-  const hasWww = url.includes("www.");
-  const hasShop = keywordIncludes(url, ["shop", "store", "buy"]);
-  const base = 64 + lengthFactor / 3;
-
-  const clarity = clampScore(base + (hasWww ? 2 : 0));
-  const trust = clampScore(base + (hasHttps ? 6 : -4));
-  const conversion = clampScore(base + (hasShop ? 4 : 0) - 3);
-  const mobile = clampScore(base + 1);
-
-  const actions = [
-    "Tighten the hero message so visitors understand the offer in the first screen.",
-    "Increase trust signals with stronger proof, testimonials, and clearer company positioning.",
-    "Improve primary calls to action so users always know the next step.",
-  ];
-
-  if (focusArea === "seo") {
-    actions[0] = "Rework page titles, service headings, and content hierarchy around search intent.";
-  }
-  if (focusArea === "conversion") {
-    actions[2] = "Reduce CTA friction by shortening forms and clarifying the main conversion path.";
-  }
-  if (focusArea === "mobile") {
-    actions[1] = "Simplify mobile layouts, reduce clutter, and make the most important actions thumb-friendly.";
-  }
-
-  return {
-    summary:
-      "The site likely has usable foundations, but the messaging, trust structure, and conversion path can be sharpened to perform more like a premium growth asset.",
-    recommendedService: focusArea === "seo" ? "SEO & Website Optimization" : "Website Strategy & Redesign",
-    focusArea,
-    scores: { clarity, trust, conversion, mobile },
-    actions,
-  };
-}
-
-export function fallbackScope(input: {
-  businessType: string;
-  serviceNeeded: string;
-  painPoint: string;
-  goal: string;
-  timeline: string;
-  budget: string;
-}): ScopeResult {
-  const service = input.serviceNeeded || "digital solution";
-  const pain = input.painPoint || "unclear positioning and manual work";
-  const goal = input.goal || "more enquiries and smoother operations";
-  const businessType = input.businessType || "business";
-
-  return {
-    summary: `Harzotech should help this ${businessType} solve ${pain} and move toward ${goal} with a focused ${service.toLowerCase()} project.`,
-    recommendedSolution: `${service} with a strong strategy, launch-ready execution, and follow-up optimization.`,
-    projectApproach:
-      input.timeline === "Urgent"
-        ? "Use a phased launch: ship the core journey first, then add secondary features after the first live release."
-        : "Start with discovery and structure, then move into a staged build with testing and post-launch support.",
-    phases: [
-      "Discovery and requirements alignment",
-      "UX structure, content direction, and conversion planning",
-      "Build, testing, and deployment",
-      "Post-launch optimization and support",
-    ],
-    nextStep:
-      input.budget === "Not sure yet"
-        ? "Book a discovery call to define scope and budget range."
-        : "Review the draft brief with Harzotech and confirm scope for kickoff.",
   };
 }
 
