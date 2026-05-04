@@ -49,6 +49,94 @@ const categoryColor: Record<string, string> = {
   "IT Support":           "bg-red-50 text-red-700 border-red-200",
   "Industry Insights":    "bg-slate-100 text-slate-700 border-slate-200",
 };
+
+function BlogTopicIllustration({ category }: { category: string }) {
+  if (category === "AI & Automation") {
+    return (
+      <svg viewBox="0 0 160 120" className="h-20 w-28 text-brand-blue-300" aria-hidden="true">
+        <rect x="26" y="26" width="72" height="56" rx="14" fill="currentColor" opacity="0.08" />
+        <rect x="38" y="38" width="48" height="32" rx="8" fill="currentColor" opacity="0.18" />
+        <circle cx="108" cy="48" r="14" fill="#f87171" opacity="0.24">
+          <animate attributeName="r" values="12;15;12" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="62" cy="54" r="5" fill="currentColor">
+          <animate attributeName="cy" values="54;50;54" dur="2.6s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="80" cy="54" r="5" fill="#f87171">
+          <animate attributeName="cy" values="54;58;54" dur="2.6s" repeatCount="indefinite" />
+        </circle>
+        <path d="M108 48 L132 34" stroke="#f87171" strokeWidth="3" strokeLinecap="round" opacity="0.7">
+          <animate attributeName="opacity" values="0.35;0.9;0.35" dur="2.2s" repeatCount="indefinite" />
+        </path>
+      </svg>
+    );
+  }
+
+  if (category === "Website Development") {
+    return (
+      <svg viewBox="0 0 160 120" className="h-20 w-28 text-brand-blue-300" aria-hidden="true">
+        <rect x="18" y="24" width="92" height="68" rx="12" fill="currentColor" opacity="0.08" />
+        <rect x="30" y="36" width="68" height="44" rx="8" fill="currentColor" opacity="0.16" />
+        <path d="M52 58 l-10 -10 M52 58 l-10 10" stroke="currentColor" strokeWidth="4" strokeLinecap="round" opacity="0.8" />
+        <path d="M76 48 l-8 20" stroke="#f87171" strokeWidth="4" strokeLinecap="round" opacity="0.8" />
+        <path d="M86 48 l10 10 M86 68 l10 -10" stroke="#f87171" strokeWidth="4" strokeLinecap="round" opacity="0.8" />
+      </svg>
+    );
+  }
+
+  if (category === "SEO & Digital Marketing") {
+    return (
+      <svg viewBox="0 0 160 120" className="h-20 w-28 text-emerald-300" aria-hidden="true">
+        <circle cx="62" cy="54" r="22" fill="currentColor" opacity="0.12" />
+        <circle cx="62" cy="54" r="14" fill="currentColor" opacity="0.2" />
+        <path d="M76 68 L96 88" stroke="currentColor" strokeWidth="6" strokeLinecap="round" opacity="0.55" />
+        <path d="M106 76 C112 66 124 58 138 54" stroke="#f87171" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.8">
+          <animate attributeName="d" dur="2.8s" repeatCount="indefinite"
+            values="M106 76 C112 66 124 58 138 54;M106 76 C116 62 126 54 138 50;M106 76 C112 66 124 58 138 54" />
+        </path>
+      </svg>
+    );
+  }
+
+  if (category === "Software Development") {
+    return (
+      <svg viewBox="0 0 160 120" className="h-20 w-28 text-orange-300" aria-hidden="true">
+        <rect x="24" y="28" width="72" height="54" rx="12" fill="currentColor" opacity="0.1" />
+        <rect x="38" y="42" width="18" height="10" rx="3" fill="currentColor" opacity="0.35" />
+        <rect x="62" y="42" width="22" height="10" rx="3" fill="#f87171" opacity="0.28" />
+        <rect x="38" y="58" width="46" height="8" rx="3" fill="currentColor" opacity="0.18" />
+        <path d="M106 78 a18 18 0 1 0 0.1 0" fill="none" stroke="#f87171" strokeWidth="8" strokeLinecap="round" opacity="0.45">
+          <animateTransform attributeName="transform" type="rotate" from="0 106 78" to="360 106 78" dur="6s" repeatCount="indefinite" />
+        </path>
+      </svg>
+    );
+  }
+
+  if (category === "IT Support") {
+    return (
+      <svg viewBox="0 0 160 120" className="h-20 w-28 text-red-300" aria-hidden="true">
+        <rect x="28" y="28" width="60" height="42" rx="10" fill="currentColor" opacity="0.12" />
+        <path d="M98 48 c0 -12 10 -22 22 -22 s22 10 22 22" stroke="currentColor" strokeWidth="7" fill="none" opacity="0.35" />
+        <rect x="104" y="48" width="32" height="28" rx="8" fill="#f87171" opacity="0.2" />
+        <path d="M112 62 l6 6 l12 -14" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" opacity="0.8">
+          <animate attributeName="opacity" values="0.2;1;0.2" dur="2.2s" repeatCount="indefinite" />
+        </path>
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 160 120" className="h-20 w-28 text-slate-300" aria-hidden="true">
+      <circle cx="52" cy="60" r="24" fill="currentColor" opacity="0.12" />
+      <circle cx="88" cy="48" r="18" fill="#60a5fa" opacity="0.2">
+        <animate attributeName="cy" values="48;42;48" dur="2.6s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="114" cy="72" r="12" fill="#f87171" opacity="0.22">
+        <animate attributeName="r" values="10;13;10" dur="2.6s" repeatCount="indefinite" />
+      </circle>
+    </svg>
+  );
+}
 function getCategoryClass(cat: string) {
   return categoryColor[cat] ?? "bg-slate-100 text-slate-600 border-slate-200";
 }
@@ -131,9 +219,14 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="pointer-events-none absolute bottom-0 inset-x-0 h-px bg-[linear-gradient(90deg,transparent_0%,rgba(21,101,192,0.5)_35%,rgba(198,40,40,0.4)_65%,transparent_100%)]" />
 
         <Container>
-          <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-blue-300 hover:text-white mb-8 relative transition">
-            <ArrowLeft className="h-4 w-4" /> Back to Blog
-          </Link>
+          <div className="mb-8 flex items-center justify-between gap-6">
+            <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-blue-300 hover:text-white relative transition">
+              <ArrowLeft className="h-4 w-4" /> Back to Blog
+            </Link>
+            <div className="hidden sm:block">
+              <BlogTopicIllustration category={post.category} />
+            </div>
+          </div>
 
           <div className="relative max-w-3xl">
             <span className="inline-flex items-center rounded-full border border-brand-blue-700/30 bg-brand-blue-700/10 px-2.5 py-0.5 text-[11px] font-semibold text-brand-blue-300">

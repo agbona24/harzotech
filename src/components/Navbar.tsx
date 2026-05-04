@@ -55,6 +55,7 @@ export function Navbar() {
     if (pathname.startsWith("/projects")) return { activeHref: "/projects", isServicesActive: false };
     if (pathname.startsWith("/products")) return { activeHref: "/products", isServicesActive: false };
     if (pathname.startsWith("/blog"))     return { activeHref: "/blog",     isServicesActive: false };
+    if (pathname.startsWith("/careers"))  return { activeHref: "/careers",  isServicesActive: false };
     if (pathname.startsWith("/contact"))  return { activeHref: "/contact",  isServicesActive: false };
     return { activeHref: undefined, isServicesActive: false };
   }, [pathname]);
@@ -169,6 +170,7 @@ export function Navbar() {
             {desktopLink("/projects", "Projects")}
             {desktopLink("/products", "Products")}
             {desktopLink("/blog", "Blog")}
+            {desktopLink("/careers", "Careers")}
             {desktopLink("/contact", "Contact")}
           </nav>
 
@@ -263,6 +265,7 @@ export function Navbar() {
                 <Link href="/projects" className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${activeHref === "/projects" ? "bg-brand-blue-700 text-white" : "text-slate-700 hover:bg-slate-50"}`}>Projects</Link>
                 <Link href="/products" className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${activeHref === "/products" ? "bg-brand-blue-700 text-white" : "text-slate-700 hover:bg-slate-50"}`}>Products</Link>
                 <Link href="/blog" className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${activeHref === "/blog" ? "bg-brand-blue-700 text-white" : "text-slate-700 hover:bg-slate-50"}`}>Blog</Link>
+                <Link href="/careers" className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${activeHref === "/careers" ? "bg-brand-blue-700 text-white" : "text-slate-700 hover:bg-slate-50"}`}>Careers</Link>
                 <Link href="/contact" className={`rounded-xl px-4 py-3.5 text-[15px] font-medium transition ${activeHref === "/contact" ? "bg-brand-blue-700 text-white" : "text-slate-700 hover:bg-slate-50"}`}>Contact</Link>
 
                 <div className="pt-2">
