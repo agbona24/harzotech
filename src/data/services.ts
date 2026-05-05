@@ -6,6 +6,7 @@ import {
   Headset,
   LineChart,
   Layers3,
+  DatabaseZap,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -17,7 +18,8 @@ export type Service = {
     | "it-support"
     | "seo-digital-marketing"
     | "business-applications"
-    | "branding";
+    | "branding"
+    | "data-migration";
   title: string;
   summary: string;
   icon: ComponentType<{ className?: string }>;
@@ -86,5 +88,14 @@ export const services: Service[] = [
       "Brand identity, business profiles, digital assets, corporate presentations, and professional brand systems that build trust.",
     icon: BriefcaseBusiness,
     tags: ["Logo & Identity", "Brand Guidelines", "Digital Assets", "Pitch Decks"],
+  },
+  {
+    id: "data-migration",
+    title: "Data Migration & Integration",
+    summary:
+      "Move business data from spreadsheets, legacy systems, or old software into modern platforms — safely, completely, and with zero data loss.",
+    icon: DatabaseZap,
+    href: "/data-migration",
+    tags: ["Zero Data Loss", "Legacy to Modern", "Spreadsheet Import", "Cloud Migration"],
   },
 ];

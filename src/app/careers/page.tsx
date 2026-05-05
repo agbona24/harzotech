@@ -46,7 +46,7 @@ export default function CareersPage() {
       />
 
       {/* Stats Section */}
-      <Section background="white">
+      <Section>
         <Container>
           <div className="grid gap-6 sm:grid-cols-3">
             <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-brand-blue-50 to-white p-6 transition-all hover:shadow-lg">
@@ -92,7 +92,7 @@ export default function CareersPage() {
       </Section>
 
       {/* Why Join Harzotech */}
-      <Section background="slate">
+      <Section className="bg-slate-50">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-brand-blue-200 bg-brand-blue-50 px-4 py-1.5 text-sm font-semibold text-brand-blue-700">
@@ -209,7 +209,7 @@ export default function CareersPage() {
       </Section>
 
       {/* Open Positions */}
-      <Section background="white">
+      <Section>
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-1.5 text-sm font-semibold text-green-700">
@@ -406,7 +406,7 @@ export default function CareersPage() {
       </Section>
 
       {/* Call to Action */}
-      <Section background="slate">
+      <Section className="bg-slate-50">
         <Container>
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-brand-blue-600 via-brand-blue-700 to-brand-blue-800 p-8 text-center shadow-2xl sm:p-12">
             {/* Decorative elements */}

@@ -25,9 +25,23 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Harzotech | Nigeria's Technology & Business Growth Partner",
+  title: "About Harzotech | Nigeria's Leading Web Agency, Software Firm & AI Automation Company",
   description:
-    "Harzotech Nig Ltd is a technology solutions company in Lagos, Nigeria. We build websites, software, AI automation, and IT systems that help businesses grow, operate better, and scale faster.",
+    "Harzotech Nig Ltd is a leading web agency, software development firm, and AI automation company in Lagos, Nigeria. We build websites, custom software, AI automation systems, and IT solutions that help businesses grow, operate better, and scale faster.",
+  keywords: [
+    "web agency Nigeria",
+    "web agency Lagos",
+    "software development firm Nigeria",
+    "AI automation firm Nigeria",
+    "digital agency Nigeria",
+    "technology company Lagos",
+    "about Harzotech",
+    "Harzotech Nigeria",
+    "web development company Lagos Nigeria",
+    "AI automation company Lagos",
+    "custom software firm Nigeria",
+    "tech partner Nigeria",
+  ],
   alternates: { canonical: "https://harzotech.com.ng/about" },
 };
 

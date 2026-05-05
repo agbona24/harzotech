@@ -3,18 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { Menu, X, ChevronDown, Globe, Code2, Bot, Search, Shield } from "lucide-react";
+import { Menu, X, ChevronDown, Globe, Code2, Bot, Search, Shield, DatabaseZap } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
 import { Logo } from "@/components/Logo";
 
 const SERVICE_ITEMS = [
-  { href: "/website-development",    label: "Website Development",     desc: "Conversion-focused, SEO-ready websites",      Icon: Globe   },
-  { href: "/software-development",   label: "Software Development",    desc: "Custom portals, CRM & SaaS platforms",       Icon: Code2   },
-  { href: "/ai-automation",          label: "AI & Automation",         desc: "Voice agents, WhatsApp & workflow bots",     Icon: Bot     },
-  { href: "/seo-digital-marketing",  label: "SEO & Digital Marketing", desc: "Rankings, leads & measurable growth",        Icon: Search  },
-  { href: "/it-support-maintenance", label: "IT Support & Maintenance",desc: "Managed support, backups & security",        Icon: Shield  },
+  { href: "/website-development",    label: "Website Development",     desc: "Conversion-focused, SEO-ready websites",      Icon: Globe       },
+  { href: "/software-development",   label: "Software Development",    desc: "Custom portals, CRM & SaaS platforms",       Icon: Code2       },
+  { href: "/ai-automation",          label: "AI & Automation",         desc: "Voice agents, WhatsApp & workflow bots",     Icon: Bot         },
+  { href: "/data-migration",         label: "Data Migration",          desc: "Spreadsheet, hosting & legacy migration",    Icon: DatabaseZap },
+  { href: "/seo-digital-marketing",  label: "SEO & Digital Marketing", desc: "Rankings, leads & measurable growth",        Icon: Search      },
+  { href: "/it-support-maintenance", label: "IT Support & Maintenance",desc: "Managed support, backups & security",        Icon: Shield      },
 ] as const;
 
 export function Navbar() {

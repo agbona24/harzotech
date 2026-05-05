@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   description:
     "Harzotech offers end-to-end technology services in Nigeria: website design, custom software, AI automation, managed IT support, SEO, and branding — all built to grow your business.",
   keywords: [
+    "web agency Nigeria services",
+    "software development firm Nigeria",
+    "AI automation firm Nigeria",
+    "digital agency services Nigeria",
     "technology services Nigeria",
     "AI automation services Nigeria",
     "website development services Lagos",
@@ -23,6 +27,7 @@ export const metadata: Metadata = {
     "SEO services Nigeria",
     "digital transformation services Nigeria",
     "business technology solutions Nigeria",
+    "web agency Lagos",
     "Harzotech services",
   ],
   openGraph: {

@@ -17,7 +17,7 @@ export function OrganizationSchema() {
         name: site.legalName,
         alternateName: "Harzotech",
         description:
-          "Harzotech Nig Ltd is a technology solutions company in Lagos, Nigeria, building websites, custom software, AI automation systems, IT support, and SEO services that help businesses grow.",
+          "Harzotech Nig Ltd is Nigeria's leading web agency, software development firm, and AI automation company in Lagos, Nigeria. As a full-service web agency and digital agency, Harzotech builds premium websites, custom software, AI automation systems, IT support, and SEO services that help businesses grow.",
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
@@ -49,12 +49,33 @@ export function OrganizationSchema() {
           { "@type": "City", name: "Abuja" },
         ],
         serviceType: [
+          "Web Agency",
+          "Digital Agency",
           "Website Design and Development",
+          "Software Development Firm",
           "Custom Software Development",
+          "AI Automation Firm",
           "AI Automation and Workflow Systems",
+          "Data Migration Services",
+          "Legacy System Migration",
+          "Cloud Migration",
           "Managed IT Support",
           "SEO and Digital Marketing",
           "Corporate Branding",
+        ],
+        additionalType: [
+          "https://schema.org/WebSite",
+          "https://schema.org/SoftwareApplication",
+        ],
+        knowsAbout: [
+          "Web Agency Nigeria",
+          "Software Development Nigeria",
+          "AI Automation Nigeria",
+          "Website Design Lagos",
+          "Digital Agency Lagos",
+          "WhatsApp Automation Nigeria",
+          "Custom Software Nigeria",
+          "Business Automation Nigeria",
         ],
         hasOfferCatalog: {
           "@id": serviceCatalogId,

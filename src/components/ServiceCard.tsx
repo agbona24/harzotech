@@ -48,6 +48,12 @@ const visuals: Record<
     iconText: "text-slate-700",
     hoverBorder: "hover:border-slate-300",
   },
+  "data-migration": {
+    accent: "bg-teal-600",
+    iconBg: "bg-teal-50",
+    iconText: "text-teal-700",
+    hoverBorder: "hover:border-teal-200",
+  },
 };
 
 export function ServiceCard({ service }: { service: Service }) {

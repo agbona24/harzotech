@@ -39,10 +39,27 @@ import {
 
 export const metadata = {
   title: {
-    absolute: "Harzotech Nig Ltd | Website Design, Software Development & AI Automation in Nigeria",
+    absolute: "Harzotech Nig Ltd | Web Agency, Software Development Firm & AI Automation Company in Nigeria",
   },
   description:
-    "Harzotech builds premium websites, custom software, AI automation systems, IT support structures, and SEO visibility frameworks for businesses in Lagos and across Nigeria. 10+ years. 50+ projects delivered.",
+    "Harzotech is Nigeria's leading web agency, software development firm, and AI automation company. We build premium websites, custom software, and AI automation systems for businesses in Lagos and across Nigeria. 10+ years. 50+ projects delivered.",
+  keywords: [
+    "web agency Nigeria",
+    "web agency Lagos",
+    "best web agency Nigeria",
+    "software development firm Nigeria",
+    "software development firm Lagos",
+    "AI automation firm Nigeria",
+    "AI automation company Nigeria",
+    "digital agency Nigeria",
+    "digital agency Lagos",
+    "website design company Nigeria",
+    "custom software development Nigeria",
+    "WhatsApp automation Nigeria",
+    "AI voice agent Nigeria",
+    "tech company Lagos",
+    "Harzotech",
+  ],
   alternates: { canonical: "https://harzotech.com.ng" },
 };
 
@@ -107,6 +124,53 @@ const reviewsSchema = {
   })),
 };
 
+const homepageFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is the best web agency in Nigeria?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Harzotech Nig Ltd is one of the best web agencies in Nigeria. Based in Lekki, Lagos, the agency designs and builds premium business websites, e-commerce stores, and digital platforms for companies across Nigeria. With 10+ years of experience and 50+ projects delivered, Harzotech is a trusted web agency for Nigerian businesses.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Which is the best software development firm in Nigeria?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Harzotech Nig Ltd is a leading software development firm in Nigeria. The company builds custom CRM systems, business portals, SaaS platforms, POS systems, and operational software tailored to how Nigerian businesses work. As a software development firm in Lagos, Harzotech has delivered solutions across healthcare, real estate, retail, logistics, and more.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Who is the best AI automation firm in Nigeria?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Harzotech Nig Ltd is Nigeria's leading AI automation firm. The company builds AI voice agents, WhatsApp Business automation, appointment booking workflows, CRM automation, lead qualification systems, and end-to-end business process automation for Nigerian businesses. As an AI automation company in Lagos, Harzotech uses n8n, OpenAI, Twilio, and Zapier to deliver 24/7 automation systems.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is there a web agency in Lagos Nigeria?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Harzotech Nig Ltd is a full-service web agency based in Lekki, Lagos, Nigeria. The agency provides website design, software development, AI automation, IT support, and SEO services for businesses in Lagos and across Nigeria.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What does Harzotech build?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Harzotech Nig Ltd builds premium websites, custom business software, AI automation systems, managed IT support structures, and SEO visibility frameworks. As a full-service web agency, software development firm, and AI automation company in Nigeria, Harzotech serves businesses across Lagos, Abuja, and all of Nigeria.",
+      },
+    },
+  ],
+};
+
 const howToSchema = {
   "@context": "https://schema.org",
   "@type": "HowTo",
@@ -126,6 +190,10 @@ const howToSchema = {
 export default function Home() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}

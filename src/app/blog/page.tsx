@@ -7,9 +7,21 @@ import { BlogHeroIllustration } from "@/components/BlogHeroIllustration";
 import { blogPosts } from "@/data/blog";
 
 export const metadata: Metadata = {
-  title: "Blog — Technology, Business & Digital Growth Insights",
+  title: "Blog — Web Agency, Software & AI Automation Insights for Nigerian Businesses",
   description:
-    "Insights on website development, custom software, AI automation, SEO, and IT support for Nigerian businesses — written by the Harzotech team.",
+    "Expert insights on website development, custom software, AI automation, SEO, and IT support for Nigerian businesses — written by Harzotech, Nigeria's leading web agency and software development firm.",
+  keywords: [
+    "web agency Nigeria blog",
+    "software development Nigeria",
+    "AI automation Nigeria",
+    "website development tips Nigeria",
+    "software firm Nigeria insights",
+    "digital growth Nigeria",
+    "technology blog Nigeria",
+    "Harzotech blog",
+    "AI automation firm Nigeria",
+    "business technology Nigeria",
+  ],
   alternates: { canonical: "https://harzotech.com.ng/blog" },
 };
 

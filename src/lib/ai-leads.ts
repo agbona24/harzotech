@@ -1,3 +1,11 @@
+export type ScopeResult = {
+  summary: string;
+  recommendedSolution: string;
+  projectApproach: string;
+  phases: string[];
+  nextStep: string;
+};
+
 export type AdvisorResult = {
   headline: string;
   service: string;
