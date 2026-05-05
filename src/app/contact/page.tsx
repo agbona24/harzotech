@@ -5,10 +5,10 @@ import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { site } from "@/data/site";
-import { ContactForm } from "@/components/ContactForm";
 import { PageSchema } from "@/components/PageSchema";
 import { ContactPageSchema } from "@/components/ContactPageSchema";
 import { CheckCircle2, Clock, Lock, Award, MapPin } from "lucide-react";
+import { ProjectWizard } from "@/components/ProjectWizard";
 
 export const metadata: Metadata = {
   title: "Contact Harzotech | Start a Project or Book a Consultation in Nigeria",
@@ -124,12 +124,7 @@ export default async function ContactPage({
             </div>
 
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <p className="text-sm font-semibold text-slate-950">Project brief</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                Share a short brief and we’ll respond with clear next steps.
-              </p>
-
-              <ContactForm
+              <ProjectWizard
                 toEmail={site.contact.email}
                 intent={intent}
               />
