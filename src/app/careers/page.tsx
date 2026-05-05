@@ -9,7 +9,6 @@ import {
   Briefcase,
   MapPin,
   Clock,
-  DollarSign,
   CheckCircle2,
   Target,
   TrendingUp,
@@ -260,10 +259,6 @@ export default function CareersPage() {
                         <Clock className="h-4 w-4 text-slate-400" />
                         {job.type}
                       </span>
-                      <span className="inline-flex items-center gap-2 rounded-xl border border-green-200 bg-gradient-to-r from-green-500 to-green-600 px-4 py-2 text-sm font-semibold text-white shadow-md">
-                        <DollarSign className="h-4 w-4" />
-                        {job.salary}
-                      </span>
                     </div>
                   </div>
                 </div>
@@ -375,15 +370,11 @@ export default function CareersPage() {
                             <span className="text-brand-blue-900">{job.location}</span>
                           </div>
                           <div className="flex items-center justify-between text-sm">
-                            <span className="font-medium text-brand-blue-700">Salary</span>
-                            <span className="font-bold text-brand-blue-900">{job.salary}</span>
-                          </div>
-                          <div className="flex items-center justify-between text-sm">
                             <span className="font-medium text-brand-blue-700">Type</span>
                             <span className="text-brand-blue-900">{job.type}</span>
                           </div>
                           <div className="mt-3 rounded-lg bg-green-100 px-3 py-2 text-center text-xs font-bold text-green-800">
-                            ✨ Performance bonuses available
+                            ✨ Competitive salary + performance bonuses
                           </div>
                         </div>
                       </div>
