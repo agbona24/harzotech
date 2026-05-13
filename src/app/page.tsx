@@ -245,10 +245,16 @@ export default function Home() {
                   <ButtonLink href="/contact?intent=start-project" variant="cta" className="w-full justify-center sm:w-auto">
                     Start a Project →
                   </ButtonLink>
-                  <ButtonLink href="/projects" variant="outline-white" className="w-full justify-center sm:w-auto">
-                    View Our Work
+                  <ButtonLink href="/free-audit" variant="outline-white" className="w-full justify-center sm:w-auto">
+                    Get Free Website Audit
                   </ButtonLink>
                 </div>
+                <p className="mt-3 text-[11px] text-slate-500">
+                  Not sure where to start?{" "}
+                  <Link href="/packages" className="font-semibold text-brand-blue-400 hover:text-brand-blue-300 hover:underline">
+                    See our packages & pricing →
+                  </Link>
+                </p>
               </FadeIn>
 
               {/* Mobile trust chips */}

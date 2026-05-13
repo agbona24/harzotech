@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Globe, Code2, Bot, DatabaseZap, LineChart, Headset,
   MessageCircle, Mail, ArrowLeft, ArrowRight, CheckCircle2,
-  HelpCircle, X,
+  HelpCircle, X, Loader2,
 } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 
@@ -102,6 +102,8 @@ export function ProjectWizard({ toEmail, intent }: { toEmail: string; intent?: s
   const [step, setStep] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
   const [form, setForm] = useState<WizardForm>(EMPTY);
+  const [submitting, setSubmitting] = useState(false);
+  const submitted = useRef(false);
 
   /* navigation */
   function next() { setDir(1);  setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1)); }
@@ -146,6 +148,33 @@ export function ProjectWizard({ toEmail, intent }: { toEmail: string; intent?: s
     const params = new URLSearchParams({ subject: "New Project Brief", body: briefText.replace(/\*/g, "") });
     return `mailto:${toEmail}?${params}`;
   }, [toEmail, briefText]);
+
+  async function saveLead() {
+    if (submitted.current) return;
+    submitted.current = true;
+    setSubmitting(true);
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          service: SERVICES.find((s) => s.id === form.service)?.label ?? form.service,
+          serviceType: form.serviceType,
+          goals: form.goals,
+          budget: form.budget,
+          timeline: form.timeline,
+          source: "wizard",
+        }),
+      });
+    } catch {
+      // non-blocking — lead goes through WhatsApp/email regardless
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   const canNext: boolean = (() => {
     if (step === 0) return !!form.service;
@@ -368,13 +397,15 @@ export function ProjectWizard({ toEmail, intent }: { toEmail: string; intent?: s
                       href={waHref}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={saveLead}
                       className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] py-3 px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1ebe5d]"
                     >
-                      <MessageCircle className="h-4 w-4" />
+                      {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <MessageCircle className="h-4 w-4" />}
                       Send via WhatsApp
                     </a>
                     <a
                       href={mailHref}
+                      onClick={saveLead}
                       className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-slate-200 bg-white py-3 px-5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
                     >
                       <Mail className="h-4 w-4" />

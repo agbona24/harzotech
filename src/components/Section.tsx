@@ -4,10 +4,12 @@ export function Section({
   children,
   className = "",
   variant = "light",
+  id,
 }: {
   children: ReactNode;
   className?: string;
   variant?: "light" | "dark";
+  id?: string;
 }) {
   const base = "py-12 sm:py-20";
   const variants = {
@@ -15,5 +17,5 @@ export function Section({
     dark: "bg-navy-950 text-white",
   } as const;
 
-  return <section className={`${base} ${variants[variant]} ${className}`}>{children}</section>;
+  return <section id={id} className={`${base} ${variants[variant]} ${className}`}>{children}</section>;
 }

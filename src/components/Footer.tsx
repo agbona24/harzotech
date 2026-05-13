@@ -45,6 +45,8 @@ const quickLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
+  { href: "/packages", label: "Packages & Pricing" },
+  { href: "/free-audit", label: "Free Website Audit" },
   { href: "/projects",  label: "Projects" },
   { href: "/products",  label: "Products" },
   { href: "/blog",      label: "Blog" },
