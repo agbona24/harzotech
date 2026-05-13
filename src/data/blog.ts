@@ -1001,4 +1001,250 @@ export const blogPosts: BlogPost[] = [
 <p>If you would like to discuss the right CRM approach for your business, <a href="/software-development">see our custom software development service</a> or <a href="/contact?intent=consultation">book a free consultation</a>. We have built CRM systems for businesses across healthcare, real estate, logistics, and professional services in Nigeria.</p>
 `,
   },
+
+  // ── 19 ────────────────────────────────────────────────────────────
+  {
+    slug: "restovax-number-one-restaurant-management-system-nigeria",
+    title: "Restovax: Nigeria's Number One Restaurant Management System",
+    excerpt:
+      "Running a restaurant in Nigeria without the right technology is like cooking without a recipe — chaotic and expensive. Restovax is the all-in-one restaurant management platform built specifically for Nigerian food businesses.",
+    category: "Industry Insights",
+    tags: ["Restovax", "Restaurant Management", "Nigeria", "POS", "Food Business"],
+    publishedAt: "2026-05-07",
+    readingTime: 7,
+    author: { name: "Azeez Agbona", title: "Founder & Lead Developer" },
+    body: `
+<p>Running a restaurant in Nigeria is one of the most operationally demanding businesses you can operate. You are managing perishable inventory, coordinating kitchen staff, taking table orders, handling takeout, processing payments, tracking daily sales, and trying to understand which menu items are actually profitable — all at the same time. Most Nigerian restaurant owners do this manually, with WhatsApp, and a prayer. There is a better way.</p>
+
+<p><a href="https://restovax.com" target="_blank" rel="noopener noreferrer"><strong>Restovax</strong></a> is Nigeria's leading restaurant management system — an all-in-one platform designed from the ground up for how Nigerian food businesses actually operate.</p>
+
+<h2>The Problem with Running a Restaurant Manually in Nigeria</h2>
+<p>Walk into most Nigerian restaurants and here is what you find behind the scenes: orders written on paper, kitchen communication done by shouting or running slips, daily sales counted manually at close, inventory tracked (or not tracked) in a notebook, and no reliable way to know which items are selling, which are being wasted, or which are driving the most profit.</p>
+<p>The result is predictable — food waste is high, staff errors are common, management has no real visibility, and the owner cannot step away from the business without things falling apart.</p>
+
+<h2>What Restovax Does</h2>
+
+<h3>Multi-Device POS System</h3>
+<p>Take orders on tablets at the table, on phones for takeout, and at a fixed terminal at the counter — all synced in real time. Orders flow instantly to the kitchen without paper slips or verbal relay. The system handles split bills, discounts, service charges, and multiple payment methods including Paystack, cash, and bank transfer.</p>
+
+<h3>Kitchen Display System (KDS)</h3>
+<p>Orders appear on a screen in the kitchen the moment they are placed. Kitchen staff see exactly what was ordered, for which table, in what sequence. No lost tickets, no "I didn't get that order", no confusion between the floor and the kitchen.</p>
+
+<h3>QR Code Ordering</h3>
+<p>Customers scan a QR code on the table, browse the menu on their own phone, and place orders directly — reducing wait times and removing the need for a waiter at every step. This is particularly powerful for high-volume operations and fast casual formats.</p>
+
+<h3>Table Management</h3>
+<p>A real-time floor map showing which tables are occupied, how long they have been seated, and what their current order status is. Manage reservations, walk-ins, and table assignments from one screen.</p>
+
+<h3>Inventory and Waste Tracking</h3>
+<p>Set stock levels for every ingredient. Restovax deducts automatically when orders are placed. Alerts fire when stock runs low. Track waste, monitor usage patterns, and identify which menu items are consuming the most costly ingredients relative to their revenue contribution.</p>
+
+<h3>Real-Time Analytics and Reporting</h3>
+<p>Daily sales reports, best-selling items, peak hour analysis, staff performance, table turnover rates, and revenue trends — available on your phone wherever you are. Run your restaurant by data, not by gut feel.</p>
+
+<h3>Multi-Branch Support</h3>
+<p>If you operate more than one location, Restovax gives you a single dashboard across all branches. Compare performance, manage menus centrally, and spot underperforming locations immediately.</p>
+
+<h2>Who Restovax Is For</h2>
+<p>Restovax serves the full range of Nigerian food businesses:</p>
+<ul>
+  <li>Full-service restaurants and fine dining</li>
+  <li>Quick service and fast casual restaurants</li>
+  <li>Hotel restaurants and room service operations</li>
+  <li>Bakeries, cafes, and coffee shops</li>
+  <li>Food courts and multi-outlet food businesses</li>
+  <li>Catering operations with event-based ordering</li>
+</ul>
+
+<h2>Why Restovax Is Nigeria's Number One Choice</h2>
+<p>Unlike imported restaurant software built for US or European markets, Restovax was designed with the Nigerian restaurant environment in mind — local payment methods, power fluctuation resilience, offline mode capability, Nigerian tax structures, and support that understands your operating environment.</p>
+<p>It is built, hosted, and supported by Harzotech — a Nigerian technology company with over ten years of experience building operational software for businesses across Lagos and Nigeria.</p>
+
+<p>To see Restovax in action or to get a demo for your restaurant, visit <a href="https://restovax.com" target="_blank" rel="noopener noreferrer">restovax.com</a> or <a href="/contact?intent=consultation">speak with our team here</a>.</p>
+`,
+  },
+
+  // ── 20 ────────────────────────────────────────────────────────────
+  {
+    slug: "stayquora-number-one-hotel-management-system-nigeria",
+    title: "StayQuora: Nigeria's Number One Hotel Management System",
+    excerpt:
+      "Nigerian hotels that still manage bookings on spreadsheets and WhatsApp are losing revenue every day. StayQuora is the complete hotel management platform built for Nigerian hospitality businesses.",
+    category: "Industry Insights",
+    tags: ["StayQuora", "Hotel Management", "Nigeria", "Hospitality", "Booking System"],
+    publishedAt: "2026-05-08",
+    readingTime: 7,
+    author: { name: "Azeez Agbona", title: "Founder & Lead Developer" },
+    body: `
+<p>A guest calls to book a room for next Friday. The receptionist checks a notebook, finds an opening, writes the name down. Another guest books online via a third-party platform — nobody updates the notebook. A third guest arrives at the door with a confirmation email. The room was double-booked. The guest is turned away. A negative review follows.</p>
+<p>This scenario plays out across Nigerian hotels every week. It is not a staff problem. It is a systems problem — and it is entirely preventable.</p>
+
+<p><a href="https://stayquora.com" target="_blank" rel="noopener noreferrer"><strong>StayQuora</strong></a> is Nigeria's leading hotel management system — a complete platform that handles every operational aspect of running a hotel, from booking to billing to housekeeping to guest communication.</p>
+
+<h2>The Real Cost of Manual Hotel Operations in Nigeria</h2>
+<p>Hotels running on spreadsheets, WhatsApp messages, and paper registers face predictable problems:</p>
+<ul>
+  <li><strong>Double bookings</strong> — multiple channels, no central sync</li>
+  <li><strong>Revenue leakage</strong> — charges missed, bills calculated incorrectly, disputes with no audit trail</li>
+  <li><strong>Staff coordination failures</strong> — housekeeping not notified of checkouts, maintenance requests lost</li>
+  <li><strong>No occupancy visibility</strong> — owners cannot see performance without physically being on site</li>
+  <li><strong>Slow check-in and check-out</strong> — manual paper processes create queues and poor first impressions</li>
+</ul>
+
+<h2>What StayQuora Does</h2>
+
+<h3>Central Reservation Management</h3>
+<p>All bookings — phone, walk-in, website, third-party platforms — feed into a single reservation calendar. No double bookings. Real-time room availability visible to every staff member. Automated confirmation messages sent to guests the moment a booking is made.</p>
+
+<h3>Front Desk Operations</h3>
+<p>Check-in and check-out handled digitally with full guest profile capture. Room assignments, key tracking, and guest preferences recorded at check-in. Bills generated automatically based on length of stay, room type, and any extras consumed — restaurant charges, laundry, extra services.</p>
+
+<h3>Room and Floor Management</h3>
+<p>A live floor map showing the status of every room: occupied, vacant, checked out (dirty), or cleaned and ready. Housekeeping staff see their assigned rooms, mark rooms as cleaned, and flag maintenance issues — all on their phones. Management sees the whole floor at a glance.</p>
+
+<h3>Billing and Payments</h3>
+<p>Itemised invoices generated automatically. Paystack and bank transfer integration for digital payments. Corporate account billing for business guests. Partial payments, deposits, and balance tracking. Every transaction logged with a full audit trail.</p>
+
+<h3>Guest Communication</h3>
+<p>Automated booking confirmations, check-in reminders, checkout summaries, and follow-up messages sent via WhatsApp and email. Guests feel well-served without any manual staff effort.</p>
+
+<h3>Reporting and Analytics</h3>
+<p>Daily revenue, occupancy rates, average room rate, RevPAR, length of stay, channel performance — all available in real time from your phone. Know exactly how your property is performing without waiting for a manual end-of-month report.</p>
+
+<h2>Who StayQuora Is For</h2>
+<ul>
+  <li>Boutique and mid-size hotels</li>
+  <li>Guesthouses and serviced apartments</li>
+  <li>Short-let apartment operators</li>
+  <li>Resorts and event centres with accommodation</li>
+  <li>Budget hotels and hostels</li>
+  <li>Multi-property hospitality groups</li>
+</ul>
+
+<h2>Built for Nigerian Hospitality</h2>
+<p>StayQuora is not a rebadged international hotel system. It was built by Harzotech specifically for the Nigerian hospitality market — accounting for local payment methods, the operational realities of Nigerian properties, power supply considerations, and the importance of WhatsApp as a guest communication channel.</p>
+<p>It is affordable for independent Nigerian hotel operators and powerful enough to scale with groups managing multiple properties.</p>
+
+<p>To book a demo or get started with StayQuora for your property, visit <a href="https://stayquora.com" target="_blank" rel="noopener noreferrer">stayquora.com</a> or <a href="/contact?intent=consultation">speak with our team</a>.</p>
+`,
+  },
+
+  // ── 21 ────────────────────────────────────────────────────────────
+  {
+    slug: "cliqpos-number-one-point-of-sale-system-nigeria-retail",
+    title: "CliqPOS: Nigeria's Number One Point of Sale System for Retail, Minimart, Mall & Wholesale",
+    excerpt:
+      "Whether you run a minimart in Lagos, a wholesale store in Kano, or a retail outlet in a shopping mall — CliqPOS is the POS and inventory system built for how Nigerian retail actually works.",
+    category: "Industry Insights",
+    tags: ["CliqPOS", "POS System", "Nigeria", "Retail", "Inventory", "Minimart"],
+    publishedAt: "2026-05-09",
+    readingTime: 7,
+    author: { name: "Azeez Agbona", title: "Founder & Lead Developer" },
+    body: `
+<p>A minimart owner in Lekki knows exactly one thing for certain at the end of every business day: how much cash is in the till. What they do not know — without hours of manual counting — is which products sold, which are running low, what their profit margin was, whether any staff made errors on the register, or what their actual revenue was versus what cash they should have. That information gap is costing Nigerian retailers real money every single day.</p>
+
+<p><strong>CliqPOS</strong> closes that gap. It is Nigeria's leading point of sale and inventory management system — built for retail stores, minimarts, supermarkets, wholesale shops, mall outlets, and any business that sells physical products across a counter.</p>
+
+<h2>What CliqPOS Handles</h2>
+
+<h3>Fast, Reliable Point of Sale</h3>
+<p>Process sales quickly with barcode scanning, manual product search, or quick-select buttons for your top items. Handle cash, POS card payments, bank transfer, and Paystack in the same transaction. Apply discounts, process returns, and issue receipts — digital or printed — in seconds.</p>
+<p>CliqPOS is designed to keep working even when internet connection is intermittent — a critical requirement for Nigerian retail environments where connectivity cannot always be guaranteed.</p>
+
+<h3>Real-Time Inventory Management</h3>
+<p>Every sale automatically deducts from stock. Set reorder levels so you get alerts before you run out of your best-selling products. Track stock movement, identify fast and slow movers, and manage expiry dates for perishable goods. Know exactly what is on your shelves without a manual stock count.</p>
+
+<h3>Barcode and Product Management</h3>
+<p>Import your full product catalogue with barcodes, categories, costs, and selling prices. Manage variants — sizes, colours, pack sizes. Support for both retail and wholesale pricing on the same product, switching automatically based on customer type or quantity purchased.</p>
+
+<h3>Wholesale and Bulk Pricing</h3>
+<p>For wholesale operations, CliqPOS handles tier pricing — different rates for different customer categories or order quantities — automatically. No manual price calculations, no disputes over what was agreed.</p>
+
+<h3>Multi-Outlet Support</h3>
+<p>If you operate more than one location — a main store and a branch, or outlets across multiple malls — CliqPOS gives you centralised inventory visibility and consolidated sales reporting across all outlets. Transfer stock between branches and manage each location independently while seeing everything from one dashboard.</p>
+
+<h3>Staff and Shift Management</h3>
+<p>Each staff member logs in with their own credentials. Sales are tracked by staff member. End-of-shift reconciliation compares expected cash against actual cash in the till, flagging discrepancies immediately. Know exactly who sold what and when.</p>
+
+<h3>Sales Reports and Business Intelligence</h3>
+<p>Daily, weekly, and monthly sales reports. Best-selling products, low-margin items, peak trading hours, revenue by category, and gross profit analysis — available in real time from any device. Manage your business from data, not guesswork.</p>
+
+<h2>Who CliqPOS Is For</h2>
+<ul>
+  <li>Minimarts and convenience stores</li>
+  <li>Supermarkets and large-format retail</li>
+  <li>Wholesale and distribution businesses</li>
+  <li>Mall retail outlets and boutiques</li>
+  <li>Pharmacies and health product stores</li>
+  <li>Electronics and appliance retailers</li>
+  <li>FMCG distribution operations</li>
+  <li>Any Nigerian business selling products across a counter</li>
+</ul>
+
+<h2>Why Nigerian Retailers Choose CliqPOS</h2>
+<p>Most POS systems available in Nigeria are imported products designed for other markets — they do not handle Nigerian payment methods well, require expensive hardware, come with high foreign currency subscription fees, and have support teams with no understanding of Nigerian business operations.</p>
+<p>CliqPOS is Nigerian-built, naira-priced, and supported by a local team that understands your environment. It runs on affordable hardware, integrates with local payment processors, and has been designed specifically for the operational patterns of Nigerian retail.</p>
+
+<p>To get a demo of CliqPOS for your store or wholesale operation, <a href="/contact?intent=consultation">speak with our team here</a> or visit the <a href="/products">Harzotech products page</a> for more information.</p>
+`,
+  },
+
+  // ── 22 ────────────────────────────────────────────────────────────
+  {
+    slug: "factorypulse-number-one-agro-manufacturing-erp-nigeria",
+    title: "FactoryPulse: Nigeria's Number One ERP for Agro-Processing and Manufacturing Businesses",
+    excerpt:
+      "Nigerian agro-processing and manufacturing businesses run complex operations — raw material sourcing, production scheduling, quality control, packaging, and distribution. FactoryPulse is the ERP built for them.",
+    category: "Industry Insights",
+    tags: ["FactoryPulse", "ERP", "Nigeria", "Agro Processing", "Manufacturing", "Inventory"],
+    publishedAt: "2026-05-10",
+    readingTime: 8,
+    author: { name: "Azeez Agbona", title: "Founder & Lead Developer" },
+    body: `
+<p>Nigeria is Africa's largest agricultural producer and one of its fastest-growing manufacturing economies. Yet the technology infrastructure running most Nigerian agro-processing and manufacturing businesses remains stuck in spreadsheets, WhatsApp groups, and manual paper trails. Production supervisors track output in notebooks. Raw material managers run stock counts by eye. Finance teams compile reports from five different files. Quality control happens informally, with no documented process.</p>
+<p>The result is invisible losses — spoilage that is not measured, production inefficiencies that are not identified, raw material purchases made on guesswork rather than data, and compliance documentation that is impossible to produce when buyers or auditors ask for it.</p>
+
+<p><a href="https://factorypulse.com" target="_blank" rel="noopener noreferrer"><strong>FactoryPulse</strong></a> is Nigeria's leading ERP platform for agro-processing and manufacturing businesses — a complete operational system that gives you real-time visibility and control over your entire production chain.</p>
+
+<h2>The Challenges FactoryPulse Solves</h2>
+
+<h3>Raw Material Tracking and Procurement</h3>
+<p>Know exactly how much of every raw material you have in stock at any moment. Set minimum stock levels and receive alerts before you run out. Track the cost and source of every raw material purchase. FactoryPulse connects your procurement data to your production data — so you always know your true cost of goods.</p>
+
+<h3>Production Scheduling and Management</h3>
+<p>Plan production runs against available raw materials and equipment capacity. Assign work orders to production lines and staff. Track production output in real time — how many units were produced, what materials were consumed, how long each run took. Compare planned versus actual output to identify bottlenecks.</p>
+
+<h3>Bill of Materials (BOM)</h3>
+<p>Define the exact recipe or formula for every product — what raw materials go in, in what quantities, to produce one unit of output. FactoryPulse uses your BOMs to automatically calculate raw material requirements for planned production, cost of goods manufactured, and variance reporting when actual usage differs from planned.</p>
+
+<h3>Quality Control</h3>
+<p>Define quality checkpoints at each stage of production — raw material intake, in-process checks, and finished goods inspection. Log test results, approve or reject batches, and maintain a full quality record for every production run. When a buyer or certification body asks for your quality documentation, it is ready instantly.</p>
+
+<h3>Finished Goods and Warehouse Management</h3>
+<p>Track finished product stock by batch, production date, and expiry date. Manage storage locations within your warehouse. Record stock transfers, consignments, and distributions. Know exactly what you have available to sell at any moment — and what is committed to existing orders.</p>
+
+<h3>Sales and Distribution</h3>
+<p>Manage customer orders, allocate finished goods from available stock, generate delivery notes and invoices, and track payment status — all within the same system. Sales orders automatically update your finished goods inventory when goods are dispatched.</p>
+
+<h3>Reporting and Analytics</h3>
+<p>Daily production summaries, raw material consumption reports, cost of goods manufactured, production efficiency metrics, yield analysis, and profit margin by product — generated automatically from operational data. Stop compiling reports manually from multiple sources.</p>
+
+<h2>Who FactoryPulse Is For</h2>
+<ul>
+  <li>Agro-processing businesses — milling, oil processing, cassava processing, fruit processing</li>
+  <li>Food and beverage manufacturers</li>
+  <li>Cosmetics and personal care manufacturers</li>
+  <li>Pharmaceutical and nutraceutical producers</li>
+  <li>Packaging and plastics manufacturers</li>
+  <li>Animal feed producers</li>
+  <li>Any Nigerian manufacturing business with raw material inputs and production outputs</li>
+</ul>
+
+<h2>Why FactoryPulse Works for Nigerian Manufacturing</h2>
+<p>International ERP systems like SAP and Oracle are built for large multinational operations with large IT teams and implementation budgets to match. They are not designed for the operational realities of Nigerian agro-processing and manufacturing — variable power supply, mixed manual and digital processes, naira-denominated operations, and the need for systems that non-technical staff can use without extensive training.</p>
+<p>FactoryPulse was designed with Nigerian manufacturing operations in mind. It is practical, affordable, and supported by a local team that understands the industry context.</p>
+
+<p>To see FactoryPulse in action or discuss how it fits your production operation, visit <a href="https://factorypulse.com" target="_blank" rel="noopener noreferrer">factorypulse.com</a> or <a href="/contact?intent=consultation">book a demo with our team</a>.</p>
+`,
+  },
 ];
