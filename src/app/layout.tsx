@@ -10,6 +10,7 @@ import { FloatingWidgets } from "@/components/FloatingWidgets";
 import { ScrollPrompt } from "@/components/ScrollPrompt";
 
 const META_PIXEL_ID = "945821809664924";
+const GA_ID = "G-D9LL0BH829";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -105,6 +106,15 @@ export default function RootLayout({
         <Footer />
         <FloatingWidgets />
         <ScrollPrompt />
+
+        {/* Google Analytics 4 */}
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+        <Script id="ga4" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+        `}</Script>
 
         {/* Meta Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">{`
