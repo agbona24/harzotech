@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { trackLead } from "@/lib/pixel";
 import { ArrowUp, MessageCircle, X, ChevronRight, Send } from "lucide-react";
 
 const WHATSAPP_NUMBER = "2347069716822";
@@ -51,6 +52,7 @@ export function FloatingWidgets() {
     if (!validate()) return;
     setStep("sending");
 
+    trackLead();
     fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

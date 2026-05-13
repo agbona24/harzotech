@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import { MessageCircle, Mail } from "lucide-react";
+import { trackLead } from "@/lib/pixel";
 
 const WA_NUMBER = "2347069716822";
 
@@ -27,6 +28,7 @@ export function ContactForm({
   function saveLead() {
     if (submitted.current) return;
     submitted.current = true;
+    trackLead();
     fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

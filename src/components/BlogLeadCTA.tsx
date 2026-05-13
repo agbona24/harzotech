@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { MessageCircle, CheckCircle2, Loader2 } from "lucide-react";
+import { trackLead } from "@/lib/pixel";
 
 const WA_NUMBER = "2347069716822";
 
@@ -26,6 +27,7 @@ export function BlogLeadCTA({ topic }: { topic: string }) {
       body: JSON.stringify({ name, phone, source: "blog-cta", message: `Read: ${topic}` }),
     }).catch(() => {});
 
+    trackLead();
     setDone(true);
     setLoading(false);
 

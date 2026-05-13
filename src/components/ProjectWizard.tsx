@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import { trackLead } from "@/lib/pixel";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Globe, Code2, Bot, DatabaseZap, LineChart, Headset,
@@ -153,6 +154,7 @@ export function ProjectWizard({ toEmail, intent }: { toEmail: string; intent?: s
     if (submitted.current) return;
     submitted.current = true;
     setSubmitting(true);
+    trackLead();
     try {
       await fetch("/api/leads", {
         method: "POST",

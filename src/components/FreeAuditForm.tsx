@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CheckCircle2, Loader2, MessageCircle } from "lucide-react";
+import { trackLead } from "@/lib/pixel";
 
 const WA_NUMBER = "2347069716822";
 
@@ -48,6 +49,7 @@ export function FreeAuditForm() {
       // non-blocking
     }
 
+    trackLead();
     setDone(true);
     setLoading(false);
 
