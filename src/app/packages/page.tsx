@@ -5,6 +5,7 @@ import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
+import { PackageInquiryForm } from "@/components/PackageInquiryForm";
 
 export const metadata: Metadata = {
   title: "Website & Software Packages — Clear Pricing for Nigerian Businesses | Harzotech",
@@ -234,12 +235,13 @@ export default function PackagesPage() {
               })}
             </div>
 
-            <p className="text-center text-sm text-slate-500">
-              Need something custom?{" "}
-              <Link href="/contact?intent=start-project" className="font-semibold text-brand-blue-700 hover:underline">
-                Start a project brief →
-              </Link>
-            </p>
+            <div className="mx-auto w-full max-w-xl rounded-2xl border border-slate-200 bg-slate-50 p-7">
+              <p className="mb-1 text-sm font-bold text-slate-900">Not sure which package fits?</p>
+              <p className="mb-5 text-sm text-slate-500">
+                Tell us about your business in two sentences — we'll reply with a clear recommendation and a quote within a few hours.
+              </p>
+              <PackageInquiryForm />
+            </div>
           </div>
         </Container>
       </Section>

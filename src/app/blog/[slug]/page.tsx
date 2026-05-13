@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Clock, Tag, Calendar, User } from "lucide-react"
 import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
 import { SpeakableSchema } from "@/components/SpeakableSchema";
+import { BlogLeadCTA } from "@/components/BlogLeadCTA";
 import { blogPosts } from "@/data/blog";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -270,6 +271,8 @@ export default async function BlogPostPage({ params }: Props) {
               prose-strong:text-slate-900"
             dangerouslySetInnerHTML={{ __html: post.body }}
           />
+
+          <BlogLeadCTA topic={post.title} />
 
           {/* Sidebar */}
           <aside className="mt-12 space-y-6 lg:mt-0">

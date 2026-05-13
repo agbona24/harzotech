@@ -30,12 +30,20 @@ export function MidPageCTA({
               <p className="mt-0.5 text-xs text-slate-500">Free 30-minute strategy call · No lock-in commitment</p>
             </div>
           </div>
-          <Link
-            href={ctaHref}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-brand-blue-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-blue-600"
-          >
-            {label} <ArrowRight className="h-4 w-4" />
-          </Link>
+          <div className="flex shrink-0 flex-col items-start gap-2 sm:items-end">
+            <Link
+              href={ctaHref}
+              className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-blue-600"
+            >
+              {label} <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/free-audit"
+              className="text-xs font-medium text-brand-blue-600 hover:underline"
+            >
+              Or get a free website audit first →
+            </Link>
+          </div>
         </div>
       </Container>
     </div>
