@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { MessageCircle, Mail } from "lucide-react";
 
 const WA_NUMBER = "2347069716822";
@@ -22,6 +22,17 @@ export function ContactForm({
   const [email, setEmail]     = useState("");
   const [phone, setPhone]     = useState("");
   const [message, setMessage] = useState("");
+  const submitted = useRef(false);
+
+  function saveLead() {
+    if (submitted.current) return;
+    submitted.current = true;
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone, email, message, source: "contact" }),
+    }).catch(() => {});
+  }
 
   const waHref = useMemo(() => {
     const text =
@@ -78,7 +89,7 @@ export function ContactForm({
       <div className="flex flex-col gap-3 sm:flex-row">
         <a
           href={name && message ? waHref : undefined}
-          onClick={(e) => { if (!name || !message) e.preventDefault(); }}
+          onClick={(e) => { if (!name || !message) { e.preventDefault(); return; } saveLead(); }}
           target="_blank"
           rel="noopener noreferrer"
           className={`inline-flex flex-1 items-center justify-center gap-2 rounded-full py-3 px-5 text-sm font-semibold transition ${
@@ -92,7 +103,7 @@ export function ContactForm({
         </a>
         <a
           href={name && message ? mailtoHref : undefined}
-          onClick={(e) => { if (!name || !message) e.preventDefault(); }}
+          onClick={(e) => { if (!name || !message) { e.preventDefault(); return; } saveLead(); }}
           className={`inline-flex flex-1 items-center justify-center gap-2 rounded-full border py-3 px-5 text-sm font-semibold transition ${
             name && message
               ? "border-slate-200 bg-white text-slate-700 hover:bg-slate-50 shadow-sm"
