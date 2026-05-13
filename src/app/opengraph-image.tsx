@@ -129,7 +129,7 @@ export default function OGImage() {
             </div>
           ))}
           <div style={{ marginLeft: "auto", alignSelf: "flex-end", color: "rgba(148,163,184,0.5)", fontSize: 13 }}>
-            harzotech.com.ng
+            harzotech.com
           </div>
         </div>
       </div>

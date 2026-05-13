@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   title: "Managed IT Support & Maintenance Services in Lagos, Nigeria",
   description:
     "Harzotech provides managed IT support in Lagos — help desk, security monitoring, cloud backup, email setup, and proactive system maintenance to keep your business running without interruption.",
-  alternates: { canonical: "https://harzotech.com.ng/it-support-maintenance" },
+  alternates: { canonical: "https://harzotech.com/it-support-maintenance" },
 };
 
 const SUPPORT_SERVICES = [
@@ -123,9 +123,9 @@ export default function ITSupportMaintenancePage() {
     <div>
       <PageSchema
         service="Managed IT Support & Maintenance"
-        url="https://harzotech.com.ng/it-support-maintenance"
+        url="https://harzotech.com/it-support-maintenance"
         description="Managed IT support in Lagos — help desk, security monitoring, cloud backup, email setup, and proactive maintenance for Nigerian businesses."
-        breadcrumbs={[{ name: "Managed IT Support & Maintenance", url: "https://harzotech.com.ng/it-support-maintenance" }]}
+        breadcrumbs={[{ name: "Managed IT Support & Maintenance", url: "https://harzotech.com/it-support-maintenance" }]}
       />
       <PageHeader
         eyebrow="IT Support & Maintenance"

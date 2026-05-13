@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Our Products — SaaS Platforms Built by Harzotech",
   description:
     "Harzotech builds and operates its own SaaS products: Restovax (restaurants), CliqPOS (retail & POS), StayQuora (hotels), and Factory Pulse (agro & production). Live, subscription-based platforms serving businesses across Africa.",
-  alternates: { canonical: "https://harzotech.com.ng/products" },
+  alternates: { canonical: "https://harzotech.com/products" },
 };
 
 const verticalColor: Record<string, string> = {

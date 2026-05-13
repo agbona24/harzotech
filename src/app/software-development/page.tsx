@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Custom Software Development Company in Nigeria — CRM, Portals & SaaS",
     description:
       "Harzotech builds custom business software in Nigeria — CRM systems, dashboards, booking platforms, SaaS apps, POS, and inventory tools designed to fit how your business actually works.",
-    url: "https://harzotech.com.ng/software-development",
+    url: "https://harzotech.com/software-development",
     siteName: "Harzotech Nig Ltd",
     locale: "en_NG",
     type: "website",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
       "Custom CRM, portals, SaaS, booking systems, and operational software for Nigerian businesses.",
     images: ["/software-development/opengraph-image"],
   },
-  alternates: { canonical: "https://harzotech.com.ng/software-development" },
+  alternates: { canonical: "https://harzotech.com/software-development" },
 };
 
 const SOFTWARE_TYPES = [
@@ -160,24 +160,24 @@ export default function SoftwareDevelopmentPage() {
     <div>
       <PageSchema
         service="Custom Software Development"
-        url="https://harzotech.com.ng/software-development"
+        url="https://harzotech.com/software-development"
         description="Custom business software in Nigeria — CRM systems, dashboards, booking platforms, SaaS apps, POS, and inventory tools built for how your business works."
-        breadcrumbs={[{ name: "Custom Software Development", url: "https://harzotech.com.ng/software-development" }]}
+        breadcrumbs={[{ name: "Custom Software Development", url: "https://harzotech.com/software-development" }]}
       />
       <FAQPageSchema
         title="Custom Software Development FAQs"
-        url="https://harzotech.com.ng/software-development"
+        url="https://harzotech.com/software-development"
         faqs={FAQS}
       />
       <SpeakableSchema
         text="Custom Software Development. We build custom business software in Nigeria — CRM systems, dashboards, booking platforms, SaaS apps, POS, and inventory tools designed to fit how your business actually works."
-        url="https://harzotech.com.ng/software-development"
+        url="https://harzotech.com/software-development"
         cssSelector="h1, [data-speakable]"
       />
       <BookingServiceSchema
         serviceName="Software Development Consultation"
-        url="https://harzotech.com.ng/software-development"
-        serviceUrl="https://harzotech.com.ng/contact?intent=start-project"
+        url="https://harzotech.com/software-development"
+        serviceUrl="https://harzotech.com/contact?intent=start-project"
       />
       <PageHeader
         eyebrow="Software Development"

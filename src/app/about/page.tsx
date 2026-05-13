@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "custom software firm Nigeria",
     "tech partner Nigeria",
   ],
-  alternates: { canonical: "https://harzotech.com.ng/about" },
+  alternates: { canonical: "https://harzotech.com/about" },
 };
 
 /* ── Data ──────────────────────────────────────────────────────── */
@@ -113,9 +113,9 @@ export default function AboutPage() {
   return (
     <div>      <AboutPageSchema />      <PageSchema
         service="About Harzotech"
-        url="https://harzotech.com.ng/about"
+        url="https://harzotech.com/about"
         description="Harzotech Nig Ltd is a technology solutions company in Lagos, Nigeria. We build websites, software, AI automation, and IT systems that help businesses grow."
-        breadcrumbs={[{ name: "About", url: "https://harzotech.com.ng/about" }]}
+        breadcrumbs={[{ name: "About", url: "https://harzotech.com/about" }]}
       />
 
       {/* ── HERO ───────────────────────────────────────────────── */}

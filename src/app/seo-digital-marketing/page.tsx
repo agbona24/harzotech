@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   title: "SEO & Digital Marketing Agency in Lagos, Nigeria — Google Rankings & Leads",
   description:
     "Harzotech's SEO and digital marketing services help Nigerian businesses rank on Google, attract qualified leads, and grow their online visibility — technical SEO, local SEO, and content strategy.",
-  alternates: { canonical: "https://harzotech.com.ng/seo-digital-marketing" },
+  alternates: { canonical: "https://harzotech.com/seo-digital-marketing" },
 };
 
 const SEO_SERVICES = [
@@ -128,9 +128,9 @@ export default function SEODigitalMarketingPage() {
     <div>
       <PageSchema
         service="SEO & Digital Marketing"
-        url="https://harzotech.com.ng/seo-digital-marketing"
+        url="https://harzotech.com/seo-digital-marketing"
         description="Technical SEO, local SEO, and digital marketing services that help Nigerian businesses rank on Google and attract qualified leads."
-        breadcrumbs={[{ name: "SEO & Digital Marketing", url: "https://harzotech.com.ng/seo-digital-marketing" }]}
+        breadcrumbs={[{ name: "SEO & Digital Marketing", url: "https://harzotech.com/seo-digital-marketing" }]}
       />
       <PageHeader
         eyebrow="SEO & Digital Marketing"

@@ -26,6 +26,6 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "Amazonbot",         allow: "/" }, // Amazon AI
       { userAgent: "CCBot",             allow: "/" }, // Common Crawl (used by many LLMs)
     ],
-    sitemap: "https://harzotech.com.ng/sitemap.xml",
+    sitemap: "https://harzotech.com/sitemap.xml",
   };
 }

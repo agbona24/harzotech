@@ -1,4 +1,4 @@
-const BASE = "https://harzotech.com.ng";
+const BASE = "https://harzotech.com";
 const ORG_ID = `${BASE}/#organization`;
 
 interface PageSchemaProps {

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "AI Automation Live Demos | Harzotech Nig Ltd",
   description:
     "Try all 7 AI automation systems live: voice agent, WhatsApp bot, lead qualification, appointment booking, CRM pipeline, invoice automation, and customer support. See exactly what your business will get.",
-  alternates: { canonical: "https://harzotech.com.ng/ai-automation/demos" },
+  alternates: { canonical: "https://harzotech.com/ai-automation/demos" },
 };
 
 export default function AIDemoPage() {

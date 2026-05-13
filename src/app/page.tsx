@@ -60,7 +60,7 @@ export const metadata = {
     "tech company Lagos",
     "Harzotech",
   ],
-  alternates: { canonical: "https://harzotech.com.ng" },
+  alternates: { canonical: "https://harzotech.com" },
 };
 
 const marqueeStats = [
@@ -99,7 +99,7 @@ const processSteps = [
 const aggregateRatingSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://harzotech.com.ng/#organization",
+  "@id": "https://harzotech.com/#organization",
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5",
@@ -113,7 +113,7 @@ const aggregateRatingSchema = {
 const reviewsSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://harzotech.com.ng/#organization",
+  "@id": "https://harzotech.com/#organization",
   name: "Harzotech Nig Ltd",
   review: testimonials.map((t) => ({
     "@type": "Review",

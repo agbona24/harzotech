@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "AI Automation Live Demos — Try Every Tool | Harzotech Nigeria",
   description:
     "Experience all 7 AI automation tools live — voice agents, WhatsApp bots, lead capture, appointment booking, CRM, invoice flows, and customer support. Built for Nigerian businesses.",
-  alternates: { canonical: "https://harzotech.com.ng/ai-automation/demos" },
+  alternates: { canonical: "https://harzotech.com/ai-automation/demos" },
 };
 
 export default function AIDemosPage() {
@@ -16,11 +16,11 @@ export default function AIDemosPage() {
     <main className="bg-[#030712]">
       <PageSchema
         service="AI Automation Live Demos"
-        url="https://harzotech.com.ng/ai-automation/demos"
+        url="https://harzotech.com/ai-automation/demos"
         description="Try all 7 AI automation tools live — voice agents, WhatsApp bots, lead capture, booking, CRM, invoicing, and support automation."
         breadcrumbs={[
-          { name: "AI & Automation", url: "https://harzotech.com.ng/ai-automation" },
-          { name: "Live Demos", url: "https://harzotech.com.ng/ai-automation/demos" },
+          { name: "AI & Automation", url: "https://harzotech.com/ai-automation" },
+          { name: "Live Demos", url: "https://harzotech.com/ai-automation/demos" },
         ]}
       />
 

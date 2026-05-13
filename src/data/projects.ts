@@ -272,7 +272,7 @@ export const projects: Project[] = [
       "IT consulting and software development company website showcasing services, portfolio, and technology expertise.",
     image: "/project/harzotech.png",
     tags: ["WordPress", "IT Services", "Corporate"],
-    url: "https://harzotech.com.ng",
+    url: "https://harzotech.com",
   },
   {
     slug: "suap",

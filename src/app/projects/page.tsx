@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Our Work | Website, Software & AI Projects by Harzotech in Nigeria",
   description:
     "Browse Harzotech's portfolio of delivered websites, custom software, and AI automation projects across healthcare, real estate, retail, fintech, and more in Nigeria.",
-  alternates: { canonical: "https://harzotech.com.ng/projects" },
+  alternates: { canonical: "https://harzotech.com/projects" },
 };
 
 export default function ProjectsPage() {

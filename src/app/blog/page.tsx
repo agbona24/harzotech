@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "AI automation firm Nigeria",
     "business technology Nigeria",
   ],
-  alternates: { canonical: "https://harzotech.com.ng/blog" },
+  alternates: { canonical: "https://harzotech.com/blog" },
 };
 
 const CATEGORIES = ["All", ...Array.from(new Set(blogPosts.map((p) => p.category)))];

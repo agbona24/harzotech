@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: post.excerpt,
     keywords: post.tags,
-    alternates: { canonical: `https://harzotech.com.ng/blog/${slug}` },
+    alternates: { canonical: `https://harzotech.com/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.publishedAt,
       authors: [post.author.name],
       tags: post.tags,
-      url: `https://harzotech.com.ng/blog/${slug}`,
+      url: `https://harzotech.com/blog/${slug}`,
       siteName: "Harzotech Nig Ltd",
     },
     twitter: {
@@ -169,33 +169,33 @@ export default async function BlogPostPage({ params }: Props) {
       worksFor: {
         "@type": "Organization",
         name: "Harzotech Nig Ltd",
-        url: "https://harzotech.com.ng",
+        url: "https://harzotech.com",
       },
     },
     publisher: {
       "@type": "Organization",
       name: "Harzotech Nig Ltd",
-      url: "https://harzotech.com.ng",
+      url: "https://harzotech.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://harzotech.com.ng/logo.gif",
+        url: "https://harzotech.com/logo.gif",
       },
     },
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://harzotech.com.ng/blog/${slug}`,
+      "@id": `https://harzotech.com/blog/${slug}`,
     },
-    url: `https://harzotech.com.ng/blog/${slug}`,
+    url: `https://harzotech.com/blog/${slug}`,
     keywords: post.tags.join(", "),
     articleSection: post.category,
     inLanguage: "en-NG",
     isPartOf: {
       "@type": "Blog",
-      "@id": "https://harzotech.com.ng/blog",
+      "@id": "https://harzotech.com/blog",
       name: "Harzotech Blog — Technology, Business & Digital Growth",
-      publisher: { "@id": "https://harzotech.com.ng/#organization" },
+      publisher: { "@id": "https://harzotech.com/#organization" },
     },
   };
 
@@ -207,7 +207,7 @@ export default async function BlogPostPage({ params }: Props) {
       />
       <SpeakableSchema
         text={post.excerpt}
-        url={`https://harzotech.com.ng/blog/${slug}`}
+        url={`https://harzotech.com/blog/${slug}`}
         cssSelector="h1, p[data-speakable]"
       />
       {/* Article header */}

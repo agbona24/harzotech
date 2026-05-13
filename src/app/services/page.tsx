@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "Technology Services — Website, Software, AI & IT Solutions in Nigeria",
     description:
       "Harzotech offers end-to-end technology services in Nigeria: website design, custom software, AI automation, managed IT support, SEO, and branding.",
-    url: "https://harzotech.com.ng/services",
+    url: "https://harzotech.com/services",
     siteName: "Harzotech Nig Ltd",
     locale: "en_NG",
     type: "website",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
       "Website, software, AI automation, IT support, and SEO services built for business growth in Nigeria.",
     images: ["/services/opengraph-image"],
   },
-  alternates: { canonical: "https://harzotech.com.ng/services" },
+  alternates: { canonical: "https://harzotech.com/services" },
 };
 
 const PROCESS_STEPS = [
@@ -116,9 +116,9 @@ export default function ServicesPage() {
     <div>
       <PageSchema
         service="Technology Services"
-        url="https://harzotech.com.ng/services"
+        url="https://harzotech.com/services"
         description="End-to-end technology services in Nigeria: website design, custom software, AI automation, managed IT support, SEO, and branding."
-        breadcrumbs={[{ name: "Services", url: "https://harzotech.com.ng/services" }]}
+        breadcrumbs={[{ name: "Services", url: "https://harzotech.com/services" }]}
       />
       <PageHeader
         title={<>Technology Services{" "}<span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">Designed for</span>{" "}Business{" "}<span className="text-brand-blue-300">Growth</span></>}

@@ -35,7 +35,7 @@ export default function OGImage() {
             Your Business.
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 8 }}>
-            {["info@harzotech.com.ng", "+234 70 6971 6822", "Lekki, Lagos, Nigeria"].map((item) => (
+            {["info@harzotech.com", "+234 70 6971 6822", "Lekki, Lagos, Nigeria"].map((item) => (
               <span key={item} style={{ color: "rgba(148,163,184,0.8)", fontSize: 18 }}>{item}</span>
             ))}
           </div>
@@ -47,7 +47,7 @@ export default function OGImage() {
             <div style={{ width: 42, height: 42, background: "linear-gradient(135deg,#2196f3,#0d47a1)", borderRadius: 9, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 900, color: "white" }}>H</div>
             <span style={{ color: "rgba(255,255,255,0.85)", fontSize: 18, fontWeight: 700 }}>Harzotech Nig Ltd</span>
           </div>
-          <span style={{ color: "rgba(148,163,184,0.45)", fontSize: 14 }}>harzotech.com.ng</span>
+          <span style={{ color: "rgba(148,163,184,0.45)", fontSize: 14 }}>harzotech.com</span>
         </div>
       </div>
     ),

@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "Website Design & Development Company in Lagos, Nigeria",
     description:
       "Harzotech builds premium business websites, e-commerce stores, and landing pages in Lagos, Nigeria — conversion-focused, SEO-ready, and mobile-first.",
-    url: "https://harzotech.com.ng/website-development",
+    url: "https://harzotech.com/website-development",
     siteName: "Harzotech Nig Ltd",
     locale: "en_NG",
     type: "website",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
       "Conversion-focused, SEO-ready, mobile-first websites for Nigerian businesses.",
     images: ["/website-development/opengraph-image"],
   },
-  alternates: { canonical: "https://harzotech.com.ng/website-development" },
+  alternates: { canonical: "https://harzotech.com/website-development" },
 };
 
 const WEBSITE_TYPES = [
@@ -159,24 +159,24 @@ export default function WebsiteDevelopmentPage() {
     <div>
       <PageSchema
         service="Website Design & Development"
-        url="https://harzotech.com.ng/website-development"
+        url="https://harzotech.com/website-development"
         description="Premium business websites, e-commerce stores, and landing pages in Lagos, Nigeria — conversion-focused, SEO-ready, and mobile-first."
-        breadcrumbs={[{ name: "Website Design & Development", url: "https://harzotech.com.ng/website-development" }]}
+        breadcrumbs={[{ name: "Website Design & Development", url: "https://harzotech.com/website-development" }]}
       />
       <FAQPageSchema
         title="Website Development FAQs"
-        url="https://harzotech.com.ng/website-development"
+        url="https://harzotech.com/website-development"
         faqs={FAQS}
       />
       <SpeakableSchema
         text="Website Design and Development. We build premium business websites, e-commerce stores, and landing pages in Lagos, Nigeria — conversion-focused, SEO-ready, and mobile-first."
-        url="https://harzotech.com.ng/website-development"
+        url="https://harzotech.com/website-development"
         cssSelector="h1, [data-speakable]"
       />
       <BookingServiceSchema
         serviceName="Website Development Consultation"
-        url="https://harzotech.com.ng/website-development"
-        serviceUrl="https://harzotech.com.ng/contact?intent=start-project"
+        url="https://harzotech.com/website-development"
+        serviceUrl="https://harzotech.com/contact?intent=start-project"
       />
       <PageHeader
         eyebrow="Website Development"

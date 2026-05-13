@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "AI Automation & WhatsApp Workflow Systems for Nigerian Businesses",
     description:
       "Harzotech builds AI voice agents, WhatsApp automation, appointment booking workflows, CRM automation, and business process systems that reduce manual work and scale your operations.",
-    url: "https://harzotech.com.ng/ai-automation",
+    url: "https://harzotech.com/ai-automation",
     siteName: "Harzotech Nig Ltd",
     locale: "en_NG",
     type: "website",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
       "AI voice agents, WhatsApp automation, booking workflows, and CRM automation built for Nigerian businesses.",
     images: ["/ai-automation/opengraph-image"],
   },
-  alternates: { canonical: "https://harzotech.com.ng/ai-automation" },
+  alternates: { canonical: "https://harzotech.com/ai-automation" },
 };
 
 const AUTOMATION_TYPES = [
@@ -142,24 +142,24 @@ export default function AIAutomationPage() {
     <div>
       <PageSchema
         service="AI Automation & Workflow Systems"
-        url="https://harzotech.com.ng/ai-automation"
+        url="https://harzotech.com/ai-automation"
         description="AI voice agents, WhatsApp automation, appointment booking workflows, CRM automation, and business process systems for Nigerian businesses."
-        breadcrumbs={[{ name: "AI Automation & Workflow Systems", url: "https://harzotech.com.ng/ai-automation" }]}
+        breadcrumbs={[{ name: "AI Automation & Workflow Systems", url: "https://harzotech.com/ai-automation" }]}
       />
       <FAQPageSchema
         title="AI Automation FAQs"
-        url="https://harzotech.com.ng/ai-automation"
+        url="https://harzotech.com/ai-automation"
         faqs={FAQS}
       />
       <SpeakableSchema
         text="AI Automation and WhatsApp Workflow Systems. We build AI voice agents, WhatsApp automation, appointment booking workflows, CRM automation, and business process systems that reduce manual work and scale your operations."
-        url="https://harzotech.com.ng/ai-automation"
+        url="https://harzotech.com/ai-automation"
         cssSelector="h1, [data-speakable]"
       />
       <BookingServiceSchema
         serviceName="AI Automation Consultation"
-        url="https://harzotech.com.ng/ai-automation"
-        serviceUrl="https://harzotech.com.ng/contact?intent=consultation"
+        url="https://harzotech.com/ai-automation"
+        serviceUrl="https://harzotech.com/contact?intent=consultation"
       />
       <PageHeader
         eyebrow="AI & Automation"

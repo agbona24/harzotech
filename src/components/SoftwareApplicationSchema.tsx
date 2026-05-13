@@ -9,7 +9,7 @@ export function SoftwareApplicationSchema({ products }: SoftwareApplicationSchem
     "@context": "https://schema.org",
     "@graph": products.map((product, i) => ({
       "@type": "SoftwareApplication",
-      "@id": `https://harzotech.com.ng/products#${product.slug}`,
+      "@id": `https://harzotech.com/products#${product.slug}`,
       name: product.name,
       description: product.description,
       url: product.url,
@@ -31,12 +31,12 @@ export function SoftwareApplicationSchema({ products }: SoftwareApplicationSchem
         worstRating: "1",
       },
       image: [
-        `https://harzotech.com.ng/og-image.png`,
+        `https://harzotech.com/og-image.png`,
       ],
       creator: {
         "@type": "Organization",
         name: "Harzotech Nig Ltd",
-        url: "https://harzotech.com.ng",
+        url: "https://harzotech.com",
       },
       featureList: product.features || [],
       softwareVersion: "1.0",

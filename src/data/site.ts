@@ -1,13 +1,13 @@
 export const site = {
   name: "Harzotech Nig Ltd",
   legalName: "Harzotech Nig Ltd",
-  domain: "harzotech.com.ng",
+  domain: "harzotech.com",
   tagline: "Technology Solutions Built to Help Businesses Grow, Automate, and Scale.",
   description:
     "Harzotech helps businesses build premium websites, custom software, AI automation systems, IT solutions, SEO visibility, and digital growth systems designed to improve operations, attract customers, and support long-term business growth.",
   contact: {
     phone: "+234 70 6971 6822",
-    email: "info@harzotech.com.ng",
+    email: "info@harzotech.com",
     addressLines: [
       "The Waterside,",
       "5 Admiralty Road off Admiralty Way,",

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Contact Harzotech | Start a Project or Book a Consultation in Nigeria",
   description:
     "Ready to build? Contact Harzotech Nig Ltd in Lagos, Nigeria — start a website, software, or AI project, or book a free strategy consultation. We respond within 24 hours.",
-  alternates: { canonical: "https://harzotech.com.ng/contact" },
+  alternates: { canonical: "https://harzotech.com/contact" },
 };
 
 function getIntentCopy(intent?: string) {
@@ -56,14 +56,14 @@ export default async function ContactPage({
       <ContactPageSchema />
       <PageSchema
         service="Contact Harzotech"
-        url="https://harzotech.com.ng/contact"
+        url="https://harzotech.com/contact"
         description="Start a website, software, or AI project with Harzotech Nig Ltd in Lagos, Nigeria, or book a free strategy consultation."
-        breadcrumbs={[{ name: "Contact", url: "https://harzotech.com.ng/contact" }]}
+        breadcrumbs={[{ name: "Contact", url: "https://harzotech.com/contact" }]}
       />
       <PageHeader
         title={title}
         description={description}
-        primaryCta={{ href: "mailto:info@harzotech.com.ng", label: "Email Us" }}
+        primaryCta={{ href: "mailto:info@harzotech.com", label: "Email Us" }}
         illustration={<ContactHeroIllustration />}
         bgImage="/hero.png"
       />

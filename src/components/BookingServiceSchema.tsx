@@ -13,7 +13,7 @@ export function BookingServiceSchema({ serviceName, url, serviceUrl }: BookingSe
     url: serviceUrl || `${url}#booking`,
     serviceType: "Consultation & Project Booking",
     provider: {
-      "@id": "https://harzotech.com.ng/#organization",
+      "@id": "https://harzotech.com/#organization",
     },
     areaServed: [
       { "@type": "Country", name: "Nigeria" },
@@ -22,17 +22,17 @@ export function BookingServiceSchema({ serviceName, url, serviceUrl }: BookingSe
     ],
     availableChannel: {
       "@type": "ServiceChannel",
-      serviceUrl: "https://harzotech.com.ng/contact",
+      serviceUrl: "https://harzotech.com/contact",
       servicePhone: "+234 70 6971 6822",
       serviceSmsNumber: "+234 70 6971 6822",
     },
-    termsOfService: "https://harzotech.com.ng/terms-of-service",
+    termsOfService: "https://harzotech.com/terms-of-service",
     potentialAction: {
       "@type": "ReserveAction",
       name: "Book a Consultation",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://harzotech.com.ng/contact?intent=consultation",
+        urlTemplate: "https://harzotech.com/contact?intent=consultation",
         actionPlatform: ["DesktopWebPlatform", "MobileWebPlatform"],
       },
     },

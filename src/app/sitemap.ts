@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://harzotech.com.ng";
+  const base = "https://harzotech.com";
   const now = new Date();
 
   const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({

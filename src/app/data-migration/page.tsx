@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     title: "Data Migration Services in Nigeria — Hosting, Spreadsheet & Legacy System Migration",
     description:
       "Harzotech migrates business data from spreadsheets, legacy software, hosting servers, and old systems into modern platforms in Nigeria. Zero data loss, zero downtime.",
-    url: "https://harzotech.com.ng/data-migration",
+    url: "https://harzotech.com/data-migration",
     siteName: "Harzotech Nig Ltd",
     locale: "en_NG",
     type: "website",
@@ -105,7 +105,7 @@ export const metadata: Metadata = {
       "Zero data loss migration from spreadsheets, legacy systems, and old software to modern platforms — by Harzotech Nigeria.",
     images: ["/data-migration/opengraph-image"],
   },
-  alternates: { canonical: "https://harzotech.com.ng/data-migration" },
+  alternates: { canonical: "https://harzotech.com/data-migration" },
 };
 
 const MIGRATION_TYPES = [
@@ -207,24 +207,24 @@ export default function DataMigrationPage() {
     <div>
       <PageSchema
         service="Data Migration & Integration"
-        url="https://harzotech.com.ng/data-migration"
+        url="https://harzotech.com/data-migration"
         description="Data migration services in Nigeria — moving business data from spreadsheets, legacy systems, and old platforms into modern software. Zero data loss."
-        breadcrumbs={[{ name: "Data Migration", url: "https://harzotech.com.ng/data-migration" }]}
+        breadcrumbs={[{ name: "Data Migration", url: "https://harzotech.com/data-migration" }]}
       />
       <FAQPageSchema
         title="Data Migration Services FAQs"
-        url="https://harzotech.com.ng/data-migration"
+        url="https://harzotech.com/data-migration"
         faqs={FAQS}
       />
       <SpeakableSchema
         text="Data Migration & Integration. Harzotech moves business data from spreadsheets, legacy systems, and old platforms into modern software in Nigeria — with zero data loss, full validation, and minimal downtime."
-        url="https://harzotech.com.ng/data-migration"
+        url="https://harzotech.com/data-migration"
         cssSelector="h1, [data-speakable]"
       />
       <BookingServiceSchema
         serviceName="Data Migration Consultation"
-        url="https://harzotech.com.ng/data-migration"
-        serviceUrl="https://harzotech.com.ng/contact?intent=start-project"
+        url="https://harzotech.com/data-migration"
+        serviceUrl="https://harzotech.com/contact?intent=start-project"
       />
 
       <PageHeader

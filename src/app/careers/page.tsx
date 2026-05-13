@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   title: "Careers at Harzotech | Join Our Growing Team",
   description:
     "Join Harzotech and be part of Nigeria's leading technology and business growth partner. We're hiring talented individuals for roles in business development and content creation.",
-  alternates: { canonical: "https://harzotech.com.ng/careers" },
+  alternates: { canonical: "https://harzotech.com/careers" },
 };
 
 export default function CareersPage() {
@@ -34,9 +34,9 @@ export default function CareersPage() {
     <main>
       <PageSchema
         service="Careers at Harzotech"
-        url="https://harzotech.com.ng/careers"
+        url="https://harzotech.com/careers"
         description="Join Harzotech and be part of Nigeria's leading technology and business growth partner. We're hiring talented individuals for roles in business development and content creation."
-        breadcrumbs={[{ name: "Careers", url: "https://harzotech.com.ng/careers" }]}
+        breadcrumbs={[{ name: "Careers", url: "https://harzotech.com/careers" }]}
       />
 
       <PageHeader
@@ -427,17 +427,17 @@ export default function CareersPage() {
               
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <a
-                  href="mailto:hr@harzotech.com.ng"
+                  href="mailto:hr@harzotech.com"
                   className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold text-brand-blue-700 shadow-lg transition hover:scale-105 hover:shadow-xl"
                 >
                   Send Your CV
                   <ArrowRight className="h-5 w-5" />
                 </a>
                 <a
-                  href="mailto:hr@harzotech.com.ng"
+                  href="mailto:hr@harzotech.com"
                   className="text-sm font-medium text-blue-100 underline decoration-2 underline-offset-4 transition hover:text-white"
                 >
-                  hr@harzotech.com.ng
+                  hr@harzotech.com
                 </a>
               </div>
               

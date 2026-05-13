@@ -55,7 +55,7 @@ export default async function OGImage({ params }: Props) {
             <div style={{ width: 40, height: 40, background: "linear-gradient(135deg,#2196f3,#0d47a1)", borderRadius: 9, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, fontWeight: 900, color: "white" }}>H</div>
             <span style={{ color: "rgba(255,255,255,0.85)", fontSize: 17, fontWeight: 700 }}>Harzotech Nig Ltd</span>
           </div>
-          <span style={{ color: "rgba(148,163,184,0.45)", fontSize: 13 }}>harzotech.com.ng/blog</span>
+          <span style={{ color: "rgba(148,163,184,0.45)", fontSize: 13 }}>harzotech.com/blog</span>
         </div>
       </div>
     ),

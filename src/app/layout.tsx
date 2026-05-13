@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://harzotech.com.ng"),
+  metadataBase: new URL("https://harzotech.com"),
   title: {
     default: `${site.name} | Website, Software & AI Solutions in Nigeria`,
     template: `%s | ${site.name}`,
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${site.name} | Website, Software & AI Solutions in Nigeria`,
     description: site.description,
-    url: "https://harzotech.com.ng",
+    url: "https://harzotech.com",
     siteName: site.name,
     locale: "en_NG",
     type: "website",
