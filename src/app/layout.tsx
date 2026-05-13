@@ -9,7 +9,7 @@ import { OrganizationSchema } from "@/components/OrganizationSchema";
 import { FloatingWidgets } from "@/components/FloatingWidgets";
 import { ScrollPrompt } from "@/components/ScrollPrompt";
 
-const META_PIXEL_ID = "140105936498432";
+const META_PIXEL_ID = "945821809664924";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
