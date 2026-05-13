@@ -50,6 +50,18 @@ export function FloatingWidgets() {
   const openWhatsApp = () => {
     if (!validate()) return;
     setStep("sending");
+
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: form.name,
+        service: form.service,
+        message: form.message,
+        source: "whatsapp-widget",
+      }),
+    }).catch(() => {});
+
     const text = encodeURIComponent(
       `Hi Harzotech! 👋\n\nMy name is *${form.name}*.\n\nI'm interested in: *${form.service}*\n\nHere's what I need:\n${form.message}\n\nLooking forward to hearing from you!`
     );

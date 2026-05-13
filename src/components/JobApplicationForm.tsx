@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { MessageCircle, Mail, Upload, X } from "lucide-react";
 
 const WA_NUMBER = "2347069716822";
@@ -17,6 +17,24 @@ export function JobApplicationForm({
   const [phone, setPhone] = useState("");
   const [coverLetter, setCoverLetter] = useState("");
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const submitted = useRef(false);
+
+  function saveLead() {
+    if (submitted.current) return;
+    submitted.current = true;
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        phone,
+        email,
+        message: `Job Application: ${jobTitle}\n\n${coverLetter}`,
+        source: "job-application",
+        service: jobTitle,
+      }),
+    }).catch(() => {});
+  }
 
   const waHref = useMemo(() => {
     const text =
@@ -174,7 +192,8 @@ export function JobApplicationForm({
         <a
           href={isValid ? waHref : undefined}
           onClick={(e) => {
-            if (!isValid) e.preventDefault();
+            if (!isValid) { e.preventDefault(); return; }
+            saveLead();
           }}
           target="_blank"
           rel="noopener noreferrer"
@@ -190,7 +209,8 @@ export function JobApplicationForm({
         <a
           href={isValid ? mailtoHref : undefined}
           onClick={(e) => {
-            if (!isValid) e.preventDefault();
+            if (!isValid) { e.preventDefault(); return; }
+            saveLead();
           }}
           className={`inline-flex flex-1 items-center justify-center gap-2 rounded-full border py-3 px-5 text-sm font-semibold transition ${
             isValid
