@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { trackLead } from "@/lib/pixel";
-import { ArrowUp, Bot, ChevronRight, MessageCircle, Send, Sparkles, X } from "lucide-react";
+import { ArrowUp, Bot, ChevronRight, Maximize2, MessageCircle, Minimize2, Send, Sparkles, X } from "lucide-react";
 
 const WHATSAPP_NUMBER = "2347069716822";
 
@@ -24,14 +25,51 @@ const STARTERS = [
   "I need a real estate website",
 ];
 
-type Mode = "closed" | "launcher" | "whatsapp" | "ai";
+const PAGE_LABELS: Record<string, string> = {
+  "/packages": "View Packages & Pricing",
+  "/contact": "Contact Us",
+  "/services": "Our Services",
+  "/projects": "View Projects",
+  "/free-audit": "Free Website Audit",
+  "/ai-automation": "AI Automation",
+  "/website-development": "Website Development",
+  "/software-development": "Software Development",
+  "/seo-digital-marketing": "SEO & Digital Marketing",
+  "/about": "About Harzotech",
+  "/blog": "Blog",
+  "/products": "Products",
+  "/careers": "Careers",
+};
 
+function renderMessageText(text: string) {
+  // Split on /path patterns (with optional ?query), render as styled links
+  const parts = text.split(/(\/[a-z][a-z0-9-]*(?:\?[^\s,.)]*)?)/g);
+  return parts.map((part, i) => {
+    if (/^\/[a-z][a-z0-9-]/.test(part)) {
+      const basePath = part.split("?")[0];
+      const label = PAGE_LABELS[basePath] ?? part;
+      return (
+        <Link
+          key={i}
+          href={part}
+          className="inline-flex items-center gap-1 rounded-md bg-brand-blue-600 px-2 py-0.5 text-[11px] font-semibold text-white hover:bg-brand-blue-700 transition mx-0.5"
+        >
+          {label} →
+        </Link>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
+type Mode = "closed" | "launcher" | "whatsapp" | "ai";
 interface WaForm { name: string; service: string; message: string; }
 interface ChatMsg { role: "user" | "ai"; text: string; }
 
 export function FloatingWidgets() {
   const [showTop, setShowTop] = useState(false);
   const [mode, setMode] = useState<Mode>("closed");
+  const [expanded, setExpanded] = useState(false);
 
   // WhatsApp form state
   const [waForm, setWaForm] = useState<WaForm>({ name: "", service: "", message: "" });
@@ -58,12 +96,23 @@ export function FloatingWidgets() {
     }
   }, [messages, mode]);
 
+  // Lock body scroll when expanded on mobile
+  useEffect(() => {
+    if (expanded && mode === "ai") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [expanded, mode]);
+
   const close = () => {
     setMode("closed");
+    setExpanded(false);
     setWaErrors({});
   };
 
-  // ── WhatsApp ────────────────────────────────────────────────────
+  // ── WhatsApp ──────────────────────────────────────────────────────
   const validateWa = (): boolean => {
     const e: Partial<WaForm> = {};
     if (!waForm.name.trim()) e.name = "Please enter your name";
@@ -94,16 +143,14 @@ export function FloatingWidgets() {
     }, 800);
   };
 
-  // ── AI Chat ─────────────────────────────────────────────────────
+  // ── AI Chat ───────────────────────────────────────────────────────
   const sendMessage = async (text?: string) => {
     const userText = (text ?? input).trim();
     if (!userText || aiLoading) return;
-
     const next: ChatMsg[] = [...messages, { role: "user", text: userText }];
     setMessages(next);
     setInput("");
     setAiLoading(true);
-
     try {
       const res = await fetch("/api/ai/chat", {
         method: "POST",
@@ -121,6 +168,11 @@ export function FloatingWidgets() {
     }
   };
 
+  // ── AI panel sizing ───────────────────────────────────────────────
+  const aiPanelClass = expanded
+    ? "fixed inset-0 z-50 flex flex-col bg-white shadow-2xl sm:inset-auto sm:bottom-24 sm:right-4 sm:rounded-2xl sm:border sm:border-slate-200 sm:w-[580px] sm:h-[680px]"
+    : "fixed bottom-24 right-4 z-50 flex w-[340px] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl";
+
   return (
     <>
       {/* Back to top */}
@@ -134,7 +186,12 @@ export function FloatingWidgets() {
         <ArrowUp className="h-5 w-5" />
       </button>
 
-      {/* ── Launcher panel (mode === launcher) ────────────────────── */}
+      {/* Backdrop for mobile expanded */}
+      {expanded && mode === "ai" && (
+        <div className="fixed inset-0 z-40 bg-black/40 sm:hidden" onClick={close} />
+      )}
+
+      {/* ── Launcher panel ─────────────────────────────────────────── */}
       {mode === "launcher" && (
         <div className="fixed bottom-24 right-4 z-50 w-64 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
           <div className="flex items-center justify-between bg-[#0c1e3b] px-4 py-3">
@@ -244,9 +301,12 @@ export function FloatingWidgets() {
 
       {/* ── AI Chat panel ──────────────────────────────────────────── */}
       {mode === "ai" && (
-        <div className="fixed bottom-24 right-4 z-50 flex w-[340px] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl" style={{ maxHeight: "480px" }}>
+        <div
+          className={aiPanelClass}
+          style={!expanded ? { maxHeight: "480px" } : undefined}
+        >
           {/* Header */}
-          <div className="flex items-center justify-between bg-[#0c1e3b] px-4 py-3">
+          <div className="flex shrink-0 items-center justify-between bg-[#0c1e3b] px-4 py-3">
             <div className="flex items-center gap-2">
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-blue-600">
                 <Sparkles className="h-3.5 w-3.5 text-white" />
@@ -256,28 +316,50 @@ export function FloatingWidgets() {
                 <p className="text-[11px] text-brand-blue-300">Always online · Instant answers</p>
               </div>
             </div>
-            <button onClick={close} className="flex h-7 w-7 items-center justify-center rounded-full text-white/70 hover:bg-white/10 transition">
-              <X className="h-4 w-4" />
-            </button>
+            <div className="flex items-center gap-1">
+              {/* Expand / collapse */}
+              <button
+                onClick={() => setExpanded((v) => !v)}
+                aria-label={expanded ? "Collapse chat" : "Expand chat"}
+                className="flex h-7 w-7 items-center justify-center rounded-full text-white/70 hover:bg-white/10 transition"
+              >
+                {expanded ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+              </button>
+              <button
+                onClick={close}
+                aria-label="Close chat"
+                className="flex h-7 w-7 items-center justify-center rounded-full text-white/70 hover:bg-white/10 transition"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
           </div>
 
           {/* Messages */}
           <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4" style={{ minHeight: 0 }}>
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                {msg.role === "ai" && (
+                  <span className="mr-2 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-blue-600">
+                    <Sparkles className="h-3 w-3 text-white" />
+                  </span>
+                )}
                 <div
-                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-6 ${
+                  className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-6 ${
                     msg.role === "user"
                       ? "rounded-br-sm bg-brand-blue-600 text-white"
                       : "rounded-bl-sm border border-slate-100 bg-slate-50 text-slate-800"
                   }`}
                 >
-                  {msg.text}
+                  {msg.role === "ai" ? renderMessageText(msg.text) : msg.text}
                 </div>
               </div>
             ))}
             {aiLoading && (
               <div className="flex justify-start">
+                <span className="mr-2 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-blue-600">
+                  <Sparkles className="h-3 w-3 text-white" />
+                </span>
                 <div className="rounded-2xl rounded-bl-sm border border-slate-100 bg-slate-50 px-4 py-3">
                   <span className="flex gap-1">
                     {[0, 1, 2].map((i) => (
@@ -290,9 +372,9 @@ export function FloatingWidgets() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Starter prompts */}
+          {/* Starter prompts — only on first message */}
           {messages.length === 1 && (
-            <div className="flex flex-wrap gap-1.5 border-t border-slate-100 px-4 py-2">
+            <div className="shrink-0 flex flex-wrap gap-1.5 border-t border-slate-100 px-4 py-2.5">
               {STARTERS.map((s) => (
                 <button
                   key={s}
@@ -306,7 +388,7 @@ export function FloatingWidgets() {
           )}
 
           {/* Input */}
-          <div className="flex items-center gap-2 border-t border-slate-100 px-3 py-3">
+          <div className="shrink-0 flex items-center gap-2 border-t border-slate-100 px-3 py-3">
             <input
               type="text"
               value={input}
@@ -328,7 +410,9 @@ export function FloatingWidgets() {
 
       {/* ── Main FAB ───────────────────────────────────────────────── */}
       <button
-        onClick={() => mode === "closed" || mode === "launcher" ? setMode(mode === "launcher" ? "closed" : "launcher") : close()}
+        onClick={() => mode === "closed" || mode === "launcher"
+          ? setMode(mode === "launcher" ? "closed" : "launcher")
+          : close()}
         aria-label={mode === "closed" ? "Get help" : "Close"}
         className="fixed bottom-6 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition-all duration-200 hover:bg-[#1ebe5d] hover:scale-105 active:scale-95"
       >
