@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AIDemoShowcase } from "@/components/AIDemoShowcase";
+import { AIVoiceDemoAgent } from "@/components/AIVoiceDemoAgent";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -53,6 +54,29 @@ export default function AIDemoPage() {
                 {item}
               </span>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Live AI Voice Agent ────────────────────────────── */}
+      <div className="border-b border-white/[0.06] px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-8 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-green-700/40 bg-green-900/20 px-3 py-1 mb-4">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
+              <span className="text-[10px] font-semibold tracking-[0.22em] uppercase text-green-300">
+                Real AI · Powered by GPT-4o-mini
+              </span>
+            </div>
+            <h2 className="text-2xl font-black text-white sm:text-3xl">
+              Talk to a Live AI Voice Agent
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-slate-400 max-w-lg mx-auto">
+              Pick a business scenario, tap Call, and speak naturally. The AI responds in real time — no script, no recording. This is exactly what we deploy for your customers.
+            </p>
+          </div>
+          <div className="mx-auto max-w-sm">
+            <AIVoiceDemoAgent />
           </div>
         </div>
       </div>

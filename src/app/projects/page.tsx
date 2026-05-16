@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { ProjectsHeroIllustration } from "@/components/ProjectsHeroIllustration";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
+import { AIProjectMatcher } from "@/components/AIProjectMatcher";
+import { Section } from "@/components/Section";
+import { Container } from "@/components/Container";
 
 export const metadata: Metadata = {
   title: "Our Work | Website, Software & AI Projects by Harzotech in Nigeria",
@@ -20,6 +23,15 @@ export default function ProjectsPage() {
         illustration={<ProjectsHeroIllustration />}
         bgImage="/about2.png"
       />
+
+      {/* AI Portfolio Matcher */}
+      <Section className="bg-slate-950 py-10">
+        <Container>
+          <div className="mx-auto max-w-4xl">
+            <AIProjectMatcher />
+          </div>
+        </Container>
+      </Section>
 
       <ProjectsGrid />
     </div>
