@@ -3,7 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { trackLead } from "@/lib/pixel";
-import { ArrowUp, Bot, ChevronRight, Maximize2, MessageCircle, Minimize2, Send, Sparkles, X } from "lucide-react";
+import {
+  ArrowUp, Bot, ChevronRight, Maximize2, MessageCircle, Mic, MicOff,
+  Minimize2, Send, Sparkles, Volume2, VolumeX, X,
+} from "lucide-react";
 
 const WHATSAPP_NUMBER = "2347069716822";
 
@@ -44,8 +47,7 @@ const PAGE_LABELS: Record<string, string> = {
 };
 
 function renderMessageText(text: string) {
-  // Split on /path patterns (with optional ?query), render as styled links
-  const parts = text.split(/(\/[a-z][a-z0-9-]*(?:\?[^\s,.)]*)?)/g);
+  const parts = text.split(/(\/[a-z][a-z0-9-]*(?:\/[a-z][a-z0-9-]*)*(?:\?[^\s,.)]*)?)/g);
   return parts.map((part, i) => {
     if (/^\/[a-z][a-z0-9-]/.test(part)) {
       const basePath = part.split("?")[0];
@@ -64,26 +66,61 @@ function renderMessageText(text: string) {
   });
 }
 
+function textForSpeech(text: string): string {
+  return text.replace(/(\/[a-z][a-z0-9-]*(?:\/[a-z][a-z0-9-]*)*(?:\?[^\s,.)]*)?)/g, (match) => {
+    const basePath = match.split("?")[0];
+    return PAGE_LABELS[basePath] ?? match;
+  });
+}
+
 type Mode = "closed" | "launcher" | "whatsapp" | "ai";
 interface WaForm { name: string; service: string; message: string; }
 interface ChatMsg { role: "user" | "ai"; text: string; }
 
-export function FloatingWidgets() {
-  const [showTop, setShowTop] = useState(false);
-  const [mode, setMode] = useState<Mode>("closed");
-  const [expanded, setExpanded] = useState(false);
+// Browser speech types
+interface ISpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start(): void;
+  stop(): void;
+  onresult: ((e: SpeechRecognitionEvent) => void) | null;
+  onerror: ((e: Event) => void) | null;
+  onend: (() => void) | null;
+}
+interface SpeechRecognitionEvent extends Event {
+  results: SpeechRecognitionResultList;
+}
+declare global {
+  interface Window {
+    SpeechRecognition?: new () => ISpeechRecognition;
+    webkitSpeechRecognition?: new () => ISpeechRecognition;
+  }
+}
 
-  // WhatsApp form state
-  const [waForm, setWaForm] = useState<WaForm>({ name: "", service: "", message: "" });
-  const [waErrors, setWaErrors] = useState<Partial<WaForm>>({});
+export function FloatingWidgets() {
+  const [showTop, setShowTop]     = useState(false);
+  const [mode, setMode]           = useState<Mode>("closed");
+  const [expanded, setExpanded]   = useState(false);
+
+  // WhatsApp
+  const [waForm, setWaForm]       = useState<WaForm>({ name: "", service: "", message: "" });
+  const [waErrors, setWaErrors]   = useState<Partial<WaForm>>({});
   const [waSending, setWaSending] = useState(false);
 
-  // AI chat state
-  const [messages, setMessages] = useState<ChatMsg[]>([
-    { role: "ai", text: "Hi! I'm Harzo, Harzotech's AI assistant. Ask me anything about our services, pricing, or projects — I'll point you in the right direction." },
+  // AI chat
+  const [messages, setMessages]   = useState<ChatMsg[]>([
+    { role: "ai", text: "Hi! I'm Harzo, Harzotech's AI assistant. Ask me anything about our services, pricing, or projects — or tap the mic and speak to me!" },
   ]);
-  const [input, setInput] = useState("");
+  const [input, setInput]         = useState("");
   const [aiLoading, setAiLoading] = useState(false);
+
+  // Voice
+  const [isListening, setIsListening] = useState(false);
+  const [ttsEnabled, setTtsEnabled]   = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(false);
+  const recognitionRef = useRef<ISpeechRecognition | null>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -93,12 +130,9 @@ export function FloatingWidgets() {
   }, []);
 
   useEffect(() => {
-    if (mode === "ai") {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
+    if (mode === "ai") messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, mode]);
 
-  // Lock body scroll when expanded on mobile
   useEffect(() => {
     if (expanded && mode === "ai") {
       document.body.style.overflow = "hidden";
@@ -108,17 +142,75 @@ export function FloatingWidgets() {
     return () => { document.body.style.overflow = ""; };
   }, [expanded, mode]);
 
+  // Detect speech support after mount (client only)
+  useEffect(() => {
+    setSpeechSupported(
+      typeof window !== "undefined" &&
+      !!(window.SpeechRecognition ?? window.webkitSpeechRecognition)
+    );
+  }, []);
+
+  // Stop recognition when chat closes
+  useEffect(() => {
+    if (mode !== "ai") {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      window.speechSynthesis?.cancel();
+    }
+  }, [mode]);
+
   const close = () => {
     setMode("closed");
     setExpanded(false);
     setWaErrors({});
+    recognitionRef.current?.stop();
+    setIsListening(false);
+    window.speechSynthesis?.cancel();
   };
 
-  // ── WhatsApp ──────────────────────────────────────────────────────
+  // ── Voice input ─────────────────────────────────────────────────
+  const toggleListening = () => {
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+    const SpeechAPI = window.SpeechRecognition ?? window.webkitSpeechRecognition;
+    if (!SpeechAPI) return;
+
+    const rec = new SpeechAPI();
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.lang = "en-US";
+
+    rec.onresult = (e: SpeechRecognitionEvent) => {
+      const transcript = e.results[0]?.[0]?.transcript ?? "";
+      if (transcript.trim()) void sendMessage(transcript.trim());
+      setIsListening(false);
+    };
+    rec.onerror = () => setIsListening(false);
+    rec.onend   = () => setIsListening(false);
+
+    recognitionRef.current = rec;
+    rec.start();
+    setIsListening(true);
+  };
+
+  // ── Voice output ────────────────────────────────────────────────
+  const speak = (text: string) => {
+    if (!ttsEnabled || typeof window === "undefined" || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(textForSpeech(text));
+    utterance.rate  = 1;
+    utterance.pitch = 1;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  // ── WhatsApp ────────────────────────────────────────────────────
   const validateWa = (): boolean => {
     const e: Partial<WaForm> = {};
-    if (!waForm.name.trim()) e.name = "Please enter your name";
-    if (!waForm.service) e.service = "Please select a service";
+    if (!waForm.name.trim())    e.name    = "Please enter your name";
+    if (!waForm.service)        e.service = "Please select a service";
     if (!waForm.message.trim()) e.message = "Please describe what you need";
     setWaErrors(e);
     return Object.keys(e).length === 0;
@@ -145,14 +237,16 @@ export function FloatingWidgets() {
     }, 800);
   };
 
-  // ── AI Chat ───────────────────────────────────────────────────────
+  // ── AI Chat ─────────────────────────────────────────────────────
   const sendMessage = async (text?: string) => {
     const userText = (text ?? input).trim();
     if (!userText || aiLoading) return;
+
     const next: ChatMsg[] = [...messages, { role: "user", text: userText }];
     setMessages(next);
     setInput("");
     setAiLoading(true);
+
     try {
       const res = await fetch("/api/ai/chat", {
         method: "POST",
@@ -162,15 +256,19 @@ export function FloatingWidgets() {
         }),
       });
       const data = await res.json() as { reply?: string };
-      setMessages((prev) => [...prev, { role: "ai", text: data.reply ?? "Sorry, I couldn't process that. Try /contact for direct help." }]);
+      const reply = data.reply ?? "Sorry, I couldn't process that. Try /contact for direct help.";
+      setMessages((prev) => [...prev, { role: "ai", text: reply }]);
+      speak(reply);
     } catch {
-      setMessages((prev) => [...prev, { role: "ai", text: "Something went wrong. Please try again or visit /contact." }]);
+      const err = "Something went wrong. Please try again or visit /contact.";
+      setMessages((prev) => [...prev, { role: "ai", text: err }]);
+      speak(err);
     } finally {
       setAiLoading(false);
     }
   };
 
-  // ── AI panel sizing ───────────────────────────────────────────────
+  // ── Panel sizing ────────────────────────────────────────────────
   const aiPanelClass = expanded
     ? "fixed inset-0 z-50 flex flex-col bg-white shadow-2xl sm:inset-auto sm:bottom-24 sm:right-4 sm:rounded-2xl sm:border sm:border-slate-200 sm:w-[580px] sm:h-[680px]"
     : "fixed bottom-24 right-4 z-50 flex w-[340px] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl";
@@ -188,38 +286,30 @@ export function FloatingWidgets() {
         <ArrowUp className="h-5 w-5" />
       </button>
 
-      {/* Backdrop for mobile expanded */}
+      {/* Mobile backdrop */}
       {expanded && mode === "ai" && (
         <div className="fixed inset-0 z-40 bg-black/40 sm:hidden" onClick={close} />
       )}
 
-      {/* ── Launcher panel ─────────────────────────────────────────── */}
+      {/* ── Launcher ───────────────────────────────────────────── */}
       {mode === "launcher" && (
         <div className="fixed bottom-24 right-4 z-50 w-64 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
           <div className="flex items-center justify-between bg-[#0c1e3b] px-4 py-3">
             <p className="text-sm font-semibold text-white">How can we help?</p>
-            <button onClick={close} className="text-white/70 hover:text-white transition">
-              <X className="h-4 w-4" />
-            </button>
+            <button onClick={close} className="text-white/70 hover:text-white transition"><X className="h-4 w-4" /></button>
           </div>
           <div className="p-3 space-y-2">
-            <button
-              onClick={() => setMode("ai")}
-              className="flex w-full items-center gap-3 rounded-xl border border-brand-blue-100 bg-brand-blue-50 px-4 py-3 text-left transition hover:bg-brand-blue-100"
-            >
+            <button onClick={() => setMode("ai")} className="flex w-full items-center gap-3 rounded-xl border border-brand-blue-100 bg-brand-blue-50 px-4 py-3 text-left transition hover:bg-brand-blue-100">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue-600">
                 <Bot className="h-4 w-4 text-white" />
               </span>
               <div>
                 <p className="text-sm font-bold text-slate-900">Ask AI</p>
-                <p className="text-[11px] text-slate-500">Instant answers, 24/7</p>
+                <p className="text-[11px] text-slate-500">Chat or speak — instant answers</p>
               </div>
               <ChevronRight className="ml-auto h-4 w-4 text-slate-400" />
             </button>
-            <button
-              onClick={() => setMode("whatsapp")}
-              className="flex w-full items-center gap-3 rounded-xl border border-green-100 bg-green-50 px-4 py-3 text-left transition hover:bg-green-100"
-            >
+            <button onClick={() => setMode("whatsapp")} className="flex w-full items-center gap-3 rounded-xl border border-green-100 bg-green-50 px-4 py-3 text-left transition hover:bg-green-100">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#25D366]">
                 <MessageCircle className="h-4 w-4 text-white" />
               </span>
@@ -233,7 +323,7 @@ export function FloatingWidgets() {
         </div>
       )}
 
-      {/* ── WhatsApp panel ─────────────────────────────────────────── */}
+      {/* ── WhatsApp panel ─────────────────────────────────────── */}
       {mode === "whatsapp" && (
         <div className="fixed bottom-24 right-4 z-50 w-[320px] overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-2xl">
           <div className="flex items-center justify-between bg-[#25D366] px-4 py-3">
@@ -250,24 +340,17 @@ export function FloatingWidgets() {
               <X className="h-4 w-4" />
             </button>
           </div>
-
           <div className="space-y-3 px-4 pb-5 pt-4">
             <p className="text-sm text-slate-600">Hi! Tell us about yourself and we'll connect you on WhatsApp. 👇</p>
-
             <div>
-              <input
-                type="text"
-                placeholder="Your name *"
-                value={waForm.name}
+              <input type="text" placeholder="Your name *" value={waForm.name}
                 onChange={(e) => { setWaForm((f) => ({ ...f, name: e.target.value })); if (waErrors.name) setWaErrors((er) => ({ ...er, name: undefined })); }}
                 className={`w-full rounded-lg border px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-[#25D366]/40 transition ${waErrors.name ? "border-red-400" : "border-slate-200"}`}
               />
               {waErrors.name && <p className="mt-1 text-[11px] text-red-500">{waErrors.name}</p>}
             </div>
-
             <div>
-              <select
-                value={waForm.service}
+              <select value={waForm.service}
                 onChange={(e) => { setWaForm((f) => ({ ...f, service: e.target.value })); if (waErrors.service) setWaErrors((er) => ({ ...er, service: undefined })); }}
                 className={`w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#25D366]/40 transition bg-white ${waErrors.service ? "border-red-400 text-slate-900" : "border-slate-200"} ${!waForm.service ? "text-slate-400" : "text-slate-900"}`}
               >
@@ -276,21 +359,14 @@ export function FloatingWidgets() {
               </select>
               {waErrors.service && <p className="mt-1 text-[11px] text-red-500">{waErrors.service}</p>}
             </div>
-
             <div>
-              <textarea
-                rows={3}
-                placeholder="Briefly describe what you need *"
-                value={waForm.message}
+              <textarea rows={3} placeholder="Briefly describe what you need *" value={waForm.message}
                 onChange={(e) => { setWaForm((f) => ({ ...f, message: e.target.value })); if (waErrors.message) setWaErrors((er) => ({ ...er, message: undefined })); }}
                 className={`w-full resize-none rounded-lg border px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-[#25D366]/40 transition ${waErrors.message ? "border-red-400" : "border-slate-200"}`}
               />
               {waErrors.message && <p className="mt-1 text-[11px] text-red-500">{waErrors.message}</p>}
             </div>
-
-            <button
-              onClick={openWhatsApp}
-              disabled={waSending}
+            <button onClick={openWhatsApp} disabled={waSending}
               className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-2.5 text-sm font-semibold text-white hover:bg-[#1ebe5d] transition active:scale-95 disabled:opacity-60"
             >
               <Send className="h-4 w-4" />
@@ -301,12 +377,10 @@ export function FloatingWidgets() {
         </div>
       )}
 
-      {/* ── AI Chat panel ──────────────────────────────────────────── */}
+      {/* ── AI Chat panel ──────────────────────────────────────── */}
       {mode === "ai" && (
-        <div
-          className={aiPanelClass}
-          style={!expanded ? { maxHeight: "480px" } : undefined}
-        >
+        <div className={aiPanelClass} style={!expanded ? { maxHeight: "480px" } : undefined}>
+
           {/* Header */}
           <div className="flex shrink-0 items-center justify-between bg-[#0c1e3b] px-4 py-3">
             <div className="flex items-center gap-2">
@@ -315,23 +389,29 @@ export function FloatingWidgets() {
               </span>
               <div>
                 <p className="text-sm font-bold text-white leading-tight">Harzo AI</p>
-                <p className="text-[11px] text-brand-blue-300">Always online · Instant answers</p>
+                <p className="text-[11px] text-brand-blue-300">Chat or speak — always online</p>
               </div>
             </div>
             <div className="flex items-center gap-1">
-              {/* Expand / collapse */}
+              {/* TTS toggle */}
               <button
-                onClick={() => setExpanded((v) => !v)}
-                aria-label={expanded ? "Collapse chat" : "Expand chat"}
+                onClick={() => {
+                  if (ttsEnabled) window.speechSynthesis?.cancel();
+                  setTtsEnabled((v) => !v);
+                }}
+                aria-label={ttsEnabled ? "Mute voice" : "Enable voice responses"}
+                title={ttsEnabled ? "Mute AI voice" : "Let AI speak responses"}
                 className="flex h-7 w-7 items-center justify-center rounded-full text-white/70 hover:bg-white/10 transition"
               >
+                {ttsEnabled ? <Volume2 className="h-4 w-4 text-brand-blue-300" /> : <VolumeX className="h-4 w-4" />}
+              </button>
+              {/* Expand */}
+              <button onClick={() => setExpanded((v) => !v)} aria-label={expanded ? "Collapse" : "Expand"}
+                className="flex h-7 w-7 items-center justify-center rounded-full text-white/70 hover:bg-white/10 transition">
                 {expanded ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
               </button>
-              <button
-                onClick={close}
-                aria-label="Close chat"
-                className="flex h-7 w-7 items-center justify-center rounded-full text-white/70 hover:bg-white/10 transition"
-              >
+              {/* Close */}
+              <button onClick={close} aria-label="Close" className="flex h-7 w-7 items-center justify-center rounded-full text-white/70 hover:bg-white/10 transition">
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -346,13 +426,11 @@ export function FloatingWidgets() {
                     <Sparkles className="h-3 w-3 text-white" />
                   </span>
                 )}
-                <div
-                  className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-6 ${
-                    msg.role === "user"
-                      ? "rounded-br-sm bg-brand-blue-600 text-white"
-                      : "rounded-bl-sm border border-slate-100 bg-slate-50 text-slate-800"
-                  }`}
-                >
+                <div className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-6 ${
+                  msg.role === "user"
+                    ? "rounded-br-sm bg-brand-blue-600 text-white"
+                    : "rounded-bl-sm border border-slate-100 bg-slate-50 text-slate-800"
+                }`}>
                   {msg.role === "ai" ? renderMessageText(msg.text) : msg.text}
                 </div>
               </div>
@@ -374,43 +452,73 @@ export function FloatingWidgets() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Starter prompts — only on first message */}
+          {/* Starter prompts */}
           {messages.length === 1 && (
             <div className="shrink-0 flex flex-wrap gap-1.5 border-t border-slate-100 px-4 py-2.5">
               {STARTERS.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => void sendMessage(s)}
-                  className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-600 transition hover:border-brand-blue-300 hover:text-brand-blue-700"
-                >
+                <button key={s} onClick={() => void sendMessage(s)}
+                  className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-600 transition hover:border-brand-blue-300 hover:text-brand-blue-700">
                   {s}
                 </button>
               ))}
             </div>
           )}
 
-          {/* Input */}
+          {/* Input row */}
           <div className="shrink-0 flex items-center gap-2 border-t border-slate-100 px-3 py-3">
+            {/* Mic button */}
+            {speechSupported && (
+              <button
+                onClick={toggleListening}
+                aria-label={isListening ? "Stop listening" : "Speak to AI"}
+                className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition ${
+                  isListening
+                    ? "bg-red-500 text-white"
+                    : "border border-slate-200 bg-white text-slate-500 hover:border-brand-blue-300 hover:text-brand-blue-600"
+                }`}
+              >
+                {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                {isListening && (
+                  <span className="absolute inset-0 rounded-xl animate-ping bg-red-400 opacity-40 pointer-events-none" />
+                )}
+              </button>
+            )}
+
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void sendMessage(); } }}
-              placeholder="Ask anything…"
-              className="flex-1 rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-400/20 transition"
+              placeholder={isListening ? "Listening…" : "Ask anything or tap mic…"}
+              disabled={isListening}
+              className="flex-1 rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-400/20 transition disabled:bg-slate-50 disabled:text-slate-400"
             />
             <button
               onClick={() => void sendMessage()}
-              disabled={!input.trim() || aiLoading}
+              disabled={!input.trim() || aiLoading || isListening}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-blue-600 text-white transition hover:bg-brand-blue-700 disabled:opacity-40"
             >
               <Send className="h-4 w-4" />
             </button>
           </div>
+
+          {/* Voice status bar */}
+          {isListening && (
+            <div className="shrink-0 flex items-center justify-center gap-2 border-t border-slate-100 bg-red-50 py-2">
+              <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
+              <p className="text-xs font-semibold text-red-600">Listening — speak now…</p>
+            </div>
+          )}
+          {ttsEnabled && !isListening && (
+            <div className="shrink-0 flex items-center justify-center gap-2 border-t border-slate-100 bg-brand-blue-50 py-1.5">
+              <Volume2 className="h-3 w-3 text-brand-blue-500" />
+              <p className="text-[11px] font-medium text-brand-blue-600">Voice responses on</p>
+            </div>
+          )}
         </div>
       )}
 
-      {/* ── Main FAB ───────────────────────────────────────────────── */}
+      {/* ── Main FAB ────────────────────────────────────────────── */}
       <button
         onClick={() => mode === "closed" || mode === "launcher"
           ? setMode(mode === "launcher" ? "closed" : "launcher")
