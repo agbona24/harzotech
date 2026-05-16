@@ -32,12 +32,14 @@ const PAGE_LABELS: Record<string, string> = {
   "/projects": "View Projects",
   "/free-audit": "Free Website Audit",
   "/ai-automation": "AI Automation",
+  "/ai-automation/demo": "Try Live AI Demos",
+  "/ai-automation/demos": "AI Demos Gallery",
   "/website-development": "Website Development",
   "/software-development": "Software Development",
   "/seo-digital-marketing": "SEO & Digital Marketing",
   "/about": "About Harzotech",
-  "/blog": "Blog",
-  "/products": "Products",
+  "/blog": "Blog & Insights",
+  "/products": "Our Products",
   "/careers": "Careers",
 };
 
