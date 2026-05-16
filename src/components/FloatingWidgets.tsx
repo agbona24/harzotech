@@ -183,12 +183,14 @@ export function FloatingWidgets() {
     rec.interimResults = false;
     rec.lang = "en-US";
 
+    let sent = false;
     rec.onresult = (e: SpeechRecognitionEvent) => {
-      const transcript = e.results[0]?.[0]?.transcript ?? "";
-      if (transcript.trim()) void sendMessage(transcript.trim());
+      if (sent) return;
+      const transcript = e.results[e.results.length - 1]?.[0]?.transcript ?? "";
+      if (transcript.trim()) { sent = true; void sendMessage(transcript.trim()); }
       setIsListening(false);
     };
-    rec.onerror = () => setIsListening(false);
+    rec.onerror = () => { sent = true; setIsListening(false); };
     rec.onend   = () => setIsListening(false);
 
     recognitionRef.current = rec;
@@ -252,7 +254,8 @@ export function FloatingWidgets() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: next.map((m) => ({ role: m.role === "ai" ? "assistant" : "user", content: m.text })),
+          // Keep only the last 6 messages (3 turns) to limit token usage
+          messages: next.slice(-6).map((m) => ({ role: m.role === "ai" ? "assistant" : "user", content: m.text })),
         }),
       });
       const data = await res.json() as { reply?: string };
