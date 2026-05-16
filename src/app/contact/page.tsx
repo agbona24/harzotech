@@ -124,33 +124,41 @@ export default async function ContactPage({
               </div>
             </div>
 
-            <div className="space-y-6">
-              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <ProjectWizard
-                  toEmail={site.contact.email}
-                  intent={intent}
-                />
-              </div>
-
-              {/* AI Project Brief Generator */}
-              <div className="rounded-3xl border border-brand-blue-100 bg-gradient-to-br from-[#0c1e3b] to-navy-950 p-6">
-                <div className="mb-4 flex items-center gap-2.5">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue-600">
-                    <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </span>
-                  <div>
-                    <p className="text-sm font-bold text-white">AI Project Brief Generator</p>
-                    <p className="text-[11px] text-brand-blue-300">Prefer to let AI structure your brief?</p>
-                  </div>
-                </div>
-                <p className="mb-4 text-xs leading-5 text-slate-400">
-                  Describe your project in plain language and our AI will generate a structured brief — scope, approach, phases, and recommended next step — that you can review and send to us.
-                </p>
-                <AIProjectScoping toEmail={site.contact.email} />
-              </div>
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+              <ProjectWizard
+                toEmail={site.contact.email}
+                intent={intent}
+              />
             </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* ── AI Project Brief Generator ─────────────────────── */}
+      <Section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-[#0c1e3b] to-navy-900" id="ai-brief">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="pointer-events-none absolute top-0 right-0 h-72 w-72 rounded-full bg-brand-blue-600/15 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-brand-red-700/10 blur-3xl" />
+        <Container>
+          <div className="relative mx-auto max-w-2xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-blue-300">
+              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              AI Project Brief Generator
+            </span>
+            <h2 className="mt-4 text-2xl font-black leading-snug text-white sm:text-3xl">
+              Let AI structure your brief{" "}
+              <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">
+                before you send it.
+              </span>
+            </h2>
+            <p className="mt-4 text-base leading-8 text-slate-400">
+              Describe your business, your challenge, and what outcome you need. The AI turns it into a clear, structured project brief — with approach, phases, and next steps — that you can send to us directly.
+            </p>
+          </div>
+          <div className="relative mt-10">
+            <AIProjectScoping toEmail={site.contact.email} />
           </div>
         </Container>
       </Section>

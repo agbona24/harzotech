@@ -32,21 +32,17 @@ export function AIHeroAdvisor() {
   const [result, setResult] = useState<AdvisorResult>(FALLBACK_RESULT);
 
   async function handleSubmit(nextPrompt?: string) {
-    const text = (nextPrompt || prompt).trim();
+    const text = (nextPrompt ?? prompt).trim();
     if (!text) return;
-
     setLoading(true);
-
     try {
       const response = await fetch("/api/ai/advisor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: text }),
       });
-
       if (!response.ok) throw new Error("Request failed");
-      const data = (await response.json()) as AdvisorResult;
-      setResult(data);
+      setResult((await response.json()) as AdvisorResult);
     } catch {
       setResult(FALLBACK_RESULT);
     } finally {
@@ -55,84 +51,105 @@ export function AIHeroAdvisor() {
   }
 
   return (
-    <div className="relative lg:pl-4">
-      <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-gradient-to-br from-brand-blue-700/10 via-transparent to-brand-red-700/10 blur-2xl" />
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-navy-900 to-navy-950 p-6 shadow-2xl ring-1 ring-white/[0.06]">
-        <div className="h-[3px] w-full bg-gradient-to-r from-brand-blue-700 via-brand-blue-500 to-brand-red-700" />
-        <div className="mt-5 flex items-start justify-between gap-4">
-          <div>
+    <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-navy-900 to-navy-950 shadow-2xl ring-1 ring-white/[0.06]">
+      {/* Top accent bar */}
+      <div className="h-[3px] w-full bg-gradient-to-r from-brand-blue-700 via-brand-blue-500 to-brand-red-700" />
+
+      <div className="grid lg:grid-cols-2 lg:divide-x lg:divide-white/[0.08]">
+
+        {/* ── Left: input ────────────────────────── */}
+        <div className="flex flex-col gap-5 p-6 sm:p-8">
+          <div className="flex items-center justify-between gap-4">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-blue-300">
               <Sparkles className="h-3.5 w-3.5" />
               AI Business Advisor
             </div>
-            <p className="mt-4 text-xl font-semibold text-white">Ask what your business should build next.</p>
-            <p className="mt-2 text-sm leading-6 text-slate-400">
-              Describe the challenge and get a sharper service recommendation tied to growth, automation, or execution.
+            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-2.5">
+              <Bot className="h-4 w-4 text-brand-blue-300" />
+            </div>
+          </div>
+
+          <div>
+            <p className="text-lg font-semibold text-white">Ask what your business should build next.</p>
+            <p className="mt-1.5 text-sm leading-6 text-slate-400">
+              Choose a prompt below or describe your own challenge.
             </p>
           </div>
-          <div className="hidden rounded-2xl border border-white/10 bg-white/[0.04] p-3 sm:block">
-            <Bot className="h-5 w-5 text-brand-blue-300" />
+
+          {/* Prompt chips */}
+          <div className="flex flex-wrap gap-2">
+            {PROMPTS.map((item) => (
+              <button
+                key={item}
+                type="button"
+                onClick={() => { setPrompt(item); void handleSubmit(item); }}
+                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                  prompt === item
+                    ? "border-brand-blue-400/60 bg-brand-blue-500/20 text-brand-blue-200"
+                    : "border-white/10 bg-white/[0.04] text-slate-300 hover:border-brand-blue-400/40 hover:bg-white/[0.07]"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
           </div>
-        </div>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          {PROMPTS.map((item) => (
-            <button
-              key={item}
-              type="button"
-              onClick={() => {
-                setPrompt(item);
-                void handleSubmit(item);
-              }}
-              className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-medium text-slate-300 transition hover:border-brand-blue-400/40 hover:bg-white/[0.07]"
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-          <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-            Your prompt
-          </label>
+          {/* Text input */}
           <textarea
-            className="mt-3 min-h-28 w-full resize-none rounded-2xl border border-white/10 bg-navy-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-500/20"
+            rows={3}
+            className="w-full resize-none rounded-2xl border border-white/10 bg-navy-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-500/20 placeholder:text-slate-500"
             value={prompt}
-            onChange={(event) => setPrompt(event.target.value)}
-            placeholder="Example: I run a real estate company and want more enquiries from my website."
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="E.g. I run a real estate company and want more enquiries from my website."
           />
-          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-            <Button variant="cta" className="flex-1" onClick={() => void handleSubmit()} disabled={loading}>
-              {loading ? "Thinking..." : "Get My Recommendation"}
+
+          {/* Actions */}
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button
+              variant="cta"
+              className="flex-1"
+              onClick={() => void handleSubmit()}
+              disabled={loading}
+            >
+              {loading ? "Thinking…" : "Get My Recommendation"}
             </Button>
-            <ButtonLink href="/services" variant="outline-white" className="flex-1">
+            <ButtonLink href="/services" variant="outline-white" className="flex-1 justify-center">
               Explore Services
             </ButtonLink>
           </div>
         </div>
 
-        <div className="mt-5 rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-5">
+        {/* ── Right: result ──────────────────────── */}
+        <div className="flex flex-col gap-4 border-t border-white/[0.08] bg-white/[0.02] p-6 sm:p-8 lg:border-t-0">
           <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-blue-300">
             Suggested direction
           </p>
-          <h3 className="mt-3 text-xl font-semibold text-white">{result.headline}</h3>
-          <div className="mt-3 inline-flex rounded-full border border-brand-blue-500/30 bg-brand-blue-500/10 px-3 py-1 text-xs font-semibold text-brand-blue-200">
-            {result.service}
+
+          <div>
+            <h3 className="text-xl font-semibold text-white leading-snug">{result.headline}</h3>
+            <div className="mt-3 inline-flex rounded-full border border-brand-blue-500/30 bg-brand-blue-500/10 px-3 py-1 text-xs font-semibold text-brand-blue-200">
+              {result.service}
+            </div>
           </div>
-          <p className="mt-4 text-sm leading-7 text-slate-300">{result.reason}</p>
-          <div className="mt-4 space-y-2">
+
+          <p className="text-sm leading-7 text-slate-300">{result.reason}</p>
+
+          <div className="space-y-2 rounded-2xl border border-white/[0.07] bg-white/[0.03] p-4">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-500">Quick wins</p>
             {result.quickWins.map((item) => (
-              <div key={item} className="flex items-start gap-2 text-sm text-slate-300">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-brand-blue-300" />
+              <div key={item} className="flex items-start gap-2.5 text-sm text-slate-300">
+                <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue-400" />
                 <span>{item}</span>
               </div>
             ))}
           </div>
-          <ButtonLink href={result.ctaHref} variant="secondary" className="mt-5 w-full sm:w-auto">
+
+          <ButtonLink href={result.ctaHref} variant="secondary" className="mt-auto w-full sm:w-auto">
             {result.ctaLabel}
             <ArrowRight className="ml-2 h-4 w-4" />
           </ButtonLink>
         </div>
+
       </div>
     </div>
   );

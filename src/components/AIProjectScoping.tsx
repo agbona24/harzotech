@@ -113,20 +113,9 @@ export function AIProjectScoping({ toEmail }: { toEmail: string }) {
     "h-12 w-full rounded-2xl border border-slate-200 bg-white px-4 text-sm text-slate-900 outline-none transition focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-100";
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
-      <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-blue-300">
-          <Sparkles className="h-3.5 w-3.5" />
-          AI Project Scoping
-        </div>
-        <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-          Generate a project brief before you book
-        </h2>
-        <p className="mt-4 max-w-2xl text-base leading-8 text-slate-300">
-          Tell Harzotech what you do, what is blocking growth, and what outcome you want. The assistant will turn that into a tighter brief your team can act on.
-        </p>
-
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-6 lg:grid-cols-2 lg:items-start lg:gap-8">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-7 backdrop-blur-sm">
+        <div className="grid gap-4 sm:grid-cols-2">
           <label className="grid gap-1.5">
             <span className="text-xs font-semibold text-slate-300">Business type</span>
             <input
@@ -225,12 +214,12 @@ export function AIProjectScoping({ toEmail }: { toEmail: string }) {
           </label>
         </div>
 
-        <Button variant="cta" className="mt-6 w-full" onClick={() => void handleGenerate()} disabled={!canGenerate || loading}>
-          {loading ? "Generating Brief..." : "Generate My Project Brief"}
+        <Button variant="cta" className="mt-5 w-full" onClick={() => void handleGenerate()} disabled={!canGenerate || loading}>
+          {loading ? "Generating Brief…" : "Generate My Project Brief"}
         </Button>
       </div>
 
-      <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-6 backdrop-blur-sm">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-5 sm:p-7 backdrop-blur-sm">
         <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-blue-300">
           Draft brief
         </p>
