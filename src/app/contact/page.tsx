@@ -9,6 +9,7 @@ import { PageSchema } from "@/components/PageSchema";
 import { ContactPageSchema } from "@/components/ContactPageSchema";
 import { CheckCircle2, Clock, Lock, Award, MapPin } from "lucide-react";
 import { ProjectWizard } from "@/components/ProjectWizard";
+import { AIProjectScoping } from "@/components/AIProjectScoping";
 
 export const metadata: Metadata = {
   title: "Contact Harzotech | Start a Project or Book a Consultation in Nigeria",
@@ -123,11 +124,32 @@ export default async function ContactPage({
               </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <ProjectWizard
-                toEmail={site.contact.email}
-                intent={intent}
-              />
+            <div className="space-y-6">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+                <ProjectWizard
+                  toEmail={site.contact.email}
+                  intent={intent}
+                />
+              </div>
+
+              {/* AI Project Brief Generator */}
+              <div className="rounded-3xl border border-brand-blue-100 bg-gradient-to-br from-[#0c1e3b] to-navy-950 p-6">
+                <div className="mb-4 flex items-center gap-2.5">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue-600">
+                    <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <p className="text-sm font-bold text-white">AI Project Brief Generator</p>
+                    <p className="text-[11px] text-brand-blue-300">Prefer to let AI structure your brief?</p>
+                  </div>
+                </div>
+                <p className="mb-4 text-xs leading-5 text-slate-400">
+                  Describe your project in plain language and our AI will generate a structured brief — scope, approach, phases, and recommended next step — that you can review and send to us.
+                </p>
+                <AIProjectScoping toEmail={site.contact.email} />
+              </div>
             </div>
           </div>
         </Container>

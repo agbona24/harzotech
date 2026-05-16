@@ -16,7 +16,7 @@ export type AdvisorResult = {
 };
 
 const OPENAI_URL = "https://api.openai.com/v1/responses";
-const DEFAULT_MODEL = process.env.OPENAI_MODEL || "gpt-5.4-mini";
+const DEFAULT_MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
 
 function keywordIncludes(text: string, words: string[]) {
   return words.some((word) => text.includes(word));

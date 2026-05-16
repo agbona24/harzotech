@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
 import { SoftwareApplicationSchema } from "@/components/SoftwareApplicationSchema";
+import { ProductsHeroIllustration } from "@/components/ProductsHeroIllustration";
 import { saasProducts } from "@/data/products";
 
 export const metadata: Metadata = {
@@ -29,7 +31,16 @@ export default function ProductsPage() {
     <div className="bg-white">
       <SoftwareApplicationSchema products={saasProducts} />
       {/* ── Header ─────────────────────────────────────────────── */}
-      <div className="relative overflow-hidden bg-[#0c1e3b] py-16 sm:py-20 lg:py-24">
+      <div className="relative overflow-hidden bg-[#0c1e3b]">
+        {/* Faded background photo */}
+        <Image
+          src="/hero.png"
+          alt=""
+          fill
+          priority
+          aria-hidden
+          className="object-cover object-center opacity-[0.18]"
+        />
         {/* Glow accents */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_-10%_-10%,rgba(21,101,192,0.45),transparent_60%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_110%_110%,rgba(198,40,40,0.3),transparent_60%)]" />
@@ -37,43 +48,53 @@ export default function ProductsPage() {
         <div className="pointer-events-none absolute bottom-0 inset-x-0 h-px bg-[linear-gradient(90deg,transparent_0%,rgba(21,101,192,0.5)_35%,rgba(198,40,40,0.4)_65%,transparent_100%)]" />
 
         <Container>
-          <div className="relative max-w-3xl">
-            <span className="mb-4 inline-block rounded-full border border-brand-blue-700/30 bg-brand-blue-700/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-brand-blue-300">
-              Our SaaS Products
-            </span>
-            <h1 className="text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
-              We Don&apos;t Just Build.{" "}
-              <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">
-                We Ship.
+          <div className="relative grid gap-8 py-16 sm:py-20 lg:py-24 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-center lg:gap-12">
+            {/* Text */}
+            <div className="max-w-2xl">
+              <span className="mb-4 inline-block rounded-full border border-brand-blue-700/30 bg-brand-blue-700/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-brand-blue-300">
+                Our SaaS Products
               </span>
-            </h1>
-            <p className="mt-5 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
-              Harzotech owns and operates four live SaaS platforms — serving restaurants, retailers,
-              hotels, and agro-production firms across Africa. These are not case studies. They are
-              live products you can subscribe to today.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="#products" variant="cta">
-                Explore Products
-              </ButtonLink>
-              <ButtonLink href="/contact?intent=white-label" variant="outline-white">
-                White-label Enquiry
-              </ButtonLink>
+              <h1 className="text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+                We Don&apos;t Just Build.{" "}
+                <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">
+                  We Ship.
+                </span>
+              </h1>
+              <p className="mt-5 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
+                Harzotech owns and operates four live SaaS platforms — serving restaurants, retailers,
+                hotels, and agro-production firms across Africa. These are not case studies. They are
+                live products you can subscribe to today.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <ButtonLink href="#products" variant="cta">
+                  Explore Products
+                </ButtonLink>
+                <ButtonLink href="/contact?intent=white-label" variant="outline-white">
+                  White-label Enquiry
+                </ButtonLink>
+              </div>
+
+              {/* Quick trust strip */}
+              <div className="mt-10 flex flex-wrap gap-6 text-sm text-slate-400">
+                {[
+                  "4 live products",
+                  "500+ businesses served",
+                  "3 countries",
+                  "Subscription-based",
+                ].map((s) => (
+                  <span key={s} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand-blue-400" />
+                    {s}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            {/* Quick trust strip */}
-            <div className="mt-10 flex flex-wrap gap-6 text-sm text-slate-400">
-              {[
-                "4 live products",
-                "500+ businesses served",
-                "3 countries",
-                "Subscription-based",
-              ].map((s) => (
-                <span key={s} className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-brand-blue-400" />
-                  {s}
-                </span>
-              ))}
+            {/* Illustration */}
+            <div className="hidden lg:flex lg:items-center lg:justify-center">
+              <div className="w-[360px] h-[360px]">
+                <ProductsHeroIllustration />
+              </div>
             </div>
           </div>
         </Container>

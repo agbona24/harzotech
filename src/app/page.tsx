@@ -14,6 +14,7 @@ import { testimonials } from "@/data/testimonials";
 import { site } from "@/data/site";
 import { ScrollCarousel } from "@/components/ScrollCarousel";
 import { AIAutomationWidget } from "@/components/AIAutomationWidget";
+import { AIHeroAdvisor } from "@/components/AIHeroAdvisor";
 import { ServiceCard } from "@/components/ServiceCard";
 import { WebsiteTypesWidget } from "@/components/WebsiteTypesWidget";
 import { SoftwareSystemsWidget } from "@/components/SoftwareSystemsWidget";
@@ -33,6 +34,7 @@ import {
   Landmark,
   Rocket,
   ShoppingBag,
+  Sparkles,
   Truck,
   Zap,
 } from "lucide-react";
@@ -331,6 +333,40 @@ export default function Home() {
 
       {/* ── 2b. Happy Clients — logo marquee ────────────────── */}
       <ClientsMarquee />
+
+      {/* ── 2c. AI Business Advisor ───────────────────────────── */}
+      <Section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-[#0c1e3b] to-navy-900">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="pointer-events-none absolute top-0 left-0 h-64 w-64 rounded-full bg-brand-blue-600/20 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-brand-red-700/15 blur-3xl" />
+        <Container>
+          <div className="relative grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+            <div>
+              <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-blue-300">
+                <Sparkles className="h-3.5 w-3.5" /> AI-Powered
+              </span>
+              <h2 className="text-2xl font-black leading-snug text-white sm:text-3xl lg:text-4xl">
+                Not sure what your business needs?{" "}
+                <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">
+                  Ask AI.
+                </span>
+              </h2>
+              <p className="mt-4 text-base leading-8 text-slate-400">
+                Describe your business challenge in plain language. Our AI advisor analyses your goal and recommends the exact Harzotech service path — with specific quick wins you can act on today.
+              </p>
+              <ul className="mt-6 space-y-2.5 text-sm text-slate-400">
+                {["Instant service recommendation", "Tailored to your business goal", "3 specific quick wins per response"].map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand-blue-400" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <AIHeroAdvisor />
+          </div>
+        </Container>
+      </Section>
 
       {/* ── 3. About Preview ──────────────────────────────────── */}
       <Section className="relative overflow-hidden bg-gradient-to-br from-brand-blue-800 via-navy-900 to-navy-950">

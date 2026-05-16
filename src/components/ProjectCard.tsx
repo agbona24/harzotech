@@ -6,6 +6,13 @@ import type { Project } from "@/data/projects";
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+      {/* Full-card link to detail page — sits below interactive children */}
+      <Link
+        href={`/projects/${project.slug}`}
+        className="absolute inset-0 z-0"
+        aria-label={`View ${project.name} project details`}
+      />
+
       {/* Brand gradient top strip */}
       <div className="h-1 w-full bg-gradient-to-r from-brand-blue-700 to-brand-red-700" />
 
@@ -26,7 +33,6 @@ export function ProjectCard({ project }: { project: Project }) {
             </div>
           </div>
         )}
-        {/* Overlay gradient for text contrast */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent" />
       </div>
 
@@ -40,8 +46,9 @@ export function ProjectCard({ project }: { project: Project }) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 text-slate-400 transition hover:text-brand-blue-600"
-              aria-label={`Visit ${project.name}`}
+              className="relative z-10 shrink-0 text-slate-400 transition hover:text-brand-blue-600"
+              aria-label={`Visit ${project.name} live site`}
+              onClick={(e) => e.stopPropagation()}
             >
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
@@ -65,28 +72,12 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
 
         <div className="mt-4 border-t border-slate-100 pt-4">
-          {project.url ? (
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 transition hover:text-slate-900 group-hover:gap-2.5"
-            >
-              Visit Live Site{" "}
-              <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
-          ) : (
-            <Link
-              href={`/projects#${project.slug}`}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 transition hover:text-slate-900 group-hover:gap-2.5"
-            >
-              View Project{" "}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          )}
+          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 transition group-hover:text-brand-blue-700 group-hover:gap-2.5">
+            View Project{" "}
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </span>
         </div>
       </div>
     </div>
   );
 }
-

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog";
+import { projects } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://harzotech.com";
@@ -10,6 +11,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(post.publishedAt),
     changeFrequency: "monthly",
     priority: 0.75,
+  }));
+
+  const projectEntries: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: `${base}/projects/${project.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
   }));
 
   return [
@@ -31,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/projects`,                          lastModified: now, changeFrequency: "weekly",  priority: 0.75 },
     { url: `${base}/blog`,                              lastModified: now, changeFrequency: "weekly",  priority: 0.75 },
     ...blogEntries,
+    ...projectEntries,
     { url: `${base}/privacy-policy`,                    lastModified: now, changeFrequency: "yearly",  priority: 0.2  },
     { url: `${base}/terms-of-service`,                  lastModified: now, changeFrequency: "yearly",  priority: 0.2  },
   ];

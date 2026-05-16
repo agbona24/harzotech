@@ -112,6 +112,10 @@ export const saasProducts: SaasProduct[] = [
       "Multi-site operations from one dashboard",
       "Export-ready reporting for audits and investors",
     ],
-    stats: [],
+    stats: [
+      { value: "6+", label: "Core modules" },
+      { value: "3", label: "Countries active" },
+      { value: "25%", label: "Waste reduction" },
+    ],
   },
 ];

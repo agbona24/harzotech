@@ -4,6 +4,7 @@ import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { PageSchema } from "@/components/PageSchema";
 import { JobApplicationForm } from "@/components/JobApplicationForm";
+import { CareersHeroIllustration } from "@/components/CareersHeroIllustration";
 import { activeJobs } from "@/data/jobs";
 import {
   Briefcase,
@@ -43,6 +44,9 @@ export default function CareersPage() {
         eyebrow="Join Our Team"
         title="Build Your Career at Harzotech"
         description="We're looking for talented, driven individuals who want to grow with us and help businesses transform through technology."
+        primaryCta={{ href: "#open-positions", label: "See Open Positions" }}
+        illustration={<CareersHeroIllustration />}
+        bgImage="/about2.png"
       />
 
       {/* Stats Section */}
@@ -209,7 +213,7 @@ export default function CareersPage() {
       </Section>
 
       {/* Open Positions */}
-      <Section>
+      <Section id="open-positions">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-1.5 text-sm font-semibold text-green-700">

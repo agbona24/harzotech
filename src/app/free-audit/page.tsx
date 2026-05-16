@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FreeAuditForm } from "@/components/FreeAuditForm";
+import { AIAuditPreview } from "@/components/AIAuditPreview";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { CheckCircle2, Search, TrendingUp, Smartphone, Zap, Shield, MessageCircle } from "lucide-react";
@@ -64,8 +65,17 @@ export default function FreeAuditPage() {
         </Container>
       </div>
 
+      {/* AI Instant Preview */}
+      <Section className="bg-slate-50 py-10">
+        <Container>
+          <div className="mx-auto max-w-2xl">
+            <AIAuditPreview />
+          </div>
+        </Container>
+      </Section>
+
       {/* What we check + Form */}
-      <Section>
+      <Section id="audit-form">
         <Container>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left: what we check */}
