@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Mail, MessageCircle, Sparkles } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/Button";
 import type { ScopeResult } from "@/lib/ai-leads";
 
@@ -16,7 +16,25 @@ const SERVICE_OPTIONS = [
 ] as const;
 
 const TIMELINES = ["Urgent", "2-4 Weeks", "1-2 Months", "Flexible"] as const;
-const BUDGETS = ["Under ₦500k", "₦500k - ₦2m", "₦2m - ₦5m", "Not sure yet"] as const;
+const BUDGETS = ["Under $500", "$500 - $2,000", "$2,000 - $5,000", "$5,000 - $15,000", "$15,000+", "Not sure yet"] as const;
+
+const PAIN_POINT_OPTIONS = [
+  "Not getting enough leads or enquiries online",
+  "Website looks outdated or unprofessional",
+  "Manual processes wasting too much staff time",
+  "Poor visibility on Google — customers can't find us",
+  "No system to manage customers or orders",
+  "We have no online presence at all",
+] as const;
+
+const GOAL_OPTIONS = [
+  "Get more customers and increase sales",
+  "Build or completely redesign the website",
+  "Automate repetitive tasks and save time",
+  "Rank higher on Google and get more traffic",
+  "Launch a custom app, portal, or software",
+  "Improve how the team manages operations",
+] as const;
 
 const EMPTY_SCOPE: ScopeResult = {
   summary: "Complete the project scoping form to generate a draft brief.",
@@ -26,6 +44,77 @@ const EMPTY_SCOPE: ScopeResult = {
   nextStep: "Generate your brief to continue.",
 };
 
+// ── Chip picker ───────────────────────────────────────────────────
+function ChipPicker({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: readonly string[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [customMode, setCustomMode] = useState(
+    value !== "" && !options.includes(value as typeof options[number]),
+  );
+
+  const selectChip = (opt: string) => {
+    setCustomMode(false);
+    onChange(opt);
+  };
+
+  const activateCustom = () => {
+    setCustomMode(true);
+    onChange("");
+  };
+
+  return (
+    <div className="grid gap-2.5 sm:col-span-2">
+      <span className="text-xs font-semibold text-slate-300">{label}</span>
+      <div className="flex flex-wrap gap-2">
+        {options.map((opt) => (
+          <button
+            key={opt}
+            type="button"
+            onClick={() => selectChip(opt)}
+            className={`rounded-xl border px-3 py-2 text-left text-xs font-medium transition ${
+              value === opt && !customMode
+                ? "border-brand-blue-400 bg-brand-blue-500/20 text-brand-blue-200"
+                : "border-white/10 bg-white/[0.04] text-slate-300 hover:border-white/20 hover:bg-white/[0.07]"
+            }`}
+          >
+            {opt}
+          </button>
+        ))}
+        <button
+          type="button"
+          onClick={activateCustom}
+          className={`rounded-xl border px-3 py-2 text-xs font-medium transition ${
+            customMode
+              ? "border-brand-blue-400 bg-brand-blue-500/20 text-brand-blue-200"
+              : "border-white/10 bg-white/[0.04] text-slate-300 hover:border-white/20 hover:bg-white/[0.07]"
+          }`}
+        >
+          ✏️ Custom…
+        </button>
+      </div>
+      {customMode && (
+        <textarea
+          autoFocus
+          rows={3}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Type in your own words…"
+          className="w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-100"
+        />
+      )}
+    </div>
+  );
+}
+
+// ── Main component ────────────────────────────────────────────────
 export function AIProjectScoping({ toEmail }: { toEmail: string }) {
   const [form, setForm] = useState<{
     businessType: string;
@@ -43,7 +132,7 @@ export function AIProjectScoping({ toEmail }: { toEmail: string }) {
     painPoint: "",
     goal: "",
     timeline: TIMELINES[1],
-    budget: BUDGETS[3],
+    budget: BUDGETS[5],
     name: "",
     email: "",
     phone: "",
@@ -55,16 +144,13 @@ export function AIProjectScoping({ toEmail }: { toEmail: string }) {
 
   async function handleGenerate() {
     if (!canGenerate) return;
-
     setLoading(true);
-
     try {
       const response = await fetch("/api/ai/scope", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
       if (!response.ok) throw new Error("Request failed");
       setResult((await response.json()) as ScopeResult);
     } finally {
@@ -102,10 +188,7 @@ export function AIProjectScoping({ toEmail }: { toEmail: string }) {
   );
 
   const mailtoHref = useMemo(() => {
-    const params = new URLSearchParams({
-      subject: "AI Project Brief",
-      body: briefText,
-    });
+    const params = new URLSearchParams({ subject: "AI Project Brief", body: briefText });
     return `mailto:${toEmail}?${params.toString()}`;
   }, [briefText, toEmail]);
 
@@ -114,115 +197,113 @@ export function AIProjectScoping({ toEmail }: { toEmail: string }) {
 
   return (
     <div className="grid gap-6 lg:grid-cols-2 lg:items-start lg:gap-8">
+
+      {/* ── Left: form ──────────────────────────────────────────── */}
       <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-7 backdrop-blur-sm">
         <div className="grid gap-4 sm:grid-cols-2">
+
           <label className="grid gap-1.5">
             <span className="text-xs font-semibold text-slate-300">Business type</span>
             <input
               className={inputClass}
               value={form.businessType}
-              onChange={(event) => setForm((current) => ({ ...current, businessType: event.target.value }))}
-              placeholder="Real estate, healthcare, logistics..."
+              onChange={(e) => setForm((f) => ({ ...f, businessType: e.target.value }))}
+              placeholder="Real estate, healthcare, logistics…"
             />
           </label>
+
           <label className="grid gap-1.5">
             <span className="text-xs font-semibold text-slate-300">Service needed</span>
             <select
               className={inputClass}
               value={form.serviceNeeded}
-              onChange={(event) => setForm((current) => ({ ...current, serviceNeeded: event.target.value as typeof SERVICE_OPTIONS[number] }))}
+              onChange={(e) => setForm((f) => ({ ...f, serviceNeeded: e.target.value as typeof SERVICE_OPTIONS[number] }))}
             >
-              {SERVICE_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
+              {SERVICE_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
             </select>
           </label>
-          <label className="grid gap-1.5 sm:col-span-2">
-            <span className="text-xs font-semibold text-slate-300">Biggest pain point</span>
-            <textarea
-              className="min-h-28 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-100"
-              value={form.painPoint}
-              onChange={(event) => setForm((current) => ({ ...current, painPoint: event.target.value }))}
-              placeholder="What is slowing the business down right now?"
-            />
-          </label>
-          <label className="grid gap-1.5 sm:col-span-2">
-            <span className="text-xs font-semibold text-slate-300">Main goal</span>
-            <textarea
-              className="min-h-28 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-100"
-              value={form.goal}
-              onChange={(event) => setForm((current) => ({ ...current, goal: event.target.value }))}
-              placeholder="More leads, better operations, online bookings, stronger brand presence..."
-            />
-          </label>
+
+          {/* Chip pickers */}
+          <ChipPicker
+            label="Biggest pain point"
+            options={PAIN_POINT_OPTIONS}
+            value={form.painPoint}
+            onChange={(v) => setForm((f) => ({ ...f, painPoint: v }))}
+          />
+
+          <ChipPicker
+            label="Main goal"
+            options={GOAL_OPTIONS}
+            value={form.goal}
+            onChange={(v) => setForm((f) => ({ ...f, goal: v }))}
+          />
+
           <label className="grid gap-1.5">
             <span className="text-xs font-semibold text-slate-300">Timeline</span>
             <select
               className={inputClass}
               value={form.timeline}
-              onChange={(event) => setForm((current) => ({ ...current, timeline: event.target.value as typeof TIMELINES[number] }))}
+              onChange={(e) => setForm((f) => ({ ...f, timeline: e.target.value as typeof TIMELINES[number] }))}
             >
-              {TIMELINES.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
+              {TIMELINES.map((o) => <option key={o} value={o}>{o}</option>)}
             </select>
           </label>
+
           <label className="grid gap-1.5">
             <span className="text-xs font-semibold text-slate-300">Budget</span>
             <select
               className={inputClass}
               value={form.budget}
-              onChange={(event) => setForm((current) => ({ ...current, budget: event.target.value as typeof BUDGETS[number] }))}
+              onChange={(e) => setForm((f) => ({ ...f, budget: e.target.value as typeof BUDGETS[number] }))}
             >
-              {BUDGETS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
+              {BUDGETS.map((o) => <option key={o} value={o}>{o}</option>)}
             </select>
           </label>
+
           <label className="grid gap-1.5">
             <span className="text-xs font-semibold text-slate-300">Name</span>
             <input
               className={inputClass}
               value={form.name}
-              onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
+              onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
               placeholder="Your name"
             />
           </label>
+
           <label className="grid gap-1.5">
             <span className="text-xs font-semibold text-slate-300">Email</span>
             <input
               className={inputClass}
               value={form.email}
-              onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
+              onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
               placeholder="you@company.com"
             />
           </label>
+
           <label className="grid gap-1.5 sm:col-span-2">
             <span className="text-xs font-semibold text-slate-300">Phone / WhatsApp</span>
             <input
               className={inputClass}
               value={form.phone}
-              onChange={(event) => setForm((current) => ({ ...current, phone: event.target.value }))}
+              onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
               placeholder="+234 800 000 0000"
             />
           </label>
         </div>
 
-        <Button variant="cta" className="mt-5 w-full" onClick={() => void handleGenerate()} disabled={!canGenerate || loading}>
+        <Button
+          variant="cta"
+          className="mt-5 w-full"
+          onClick={() => void handleGenerate()}
+          disabled={!canGenerate || loading}
+        >
           {loading ? "Generating Brief…" : "Generate My Project Brief"}
         </Button>
       </div>
 
+      {/* ── Right: result ────────────────────────────────────────── */}
       <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-5 sm:p-7 backdrop-blur-sm">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-blue-300">
-          Draft brief
-        </p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-blue-300">Draft brief</p>
         <h3 className="mt-3 text-2xl font-semibold text-white">{result.recommendedSolution}</h3>
         <p className="mt-4 text-sm leading-7 text-slate-300">{result.summary}</p>
 
@@ -257,9 +338,7 @@ export function AIProjectScoping({ toEmail }: { toEmail: string }) {
         <div className="mt-6 flex flex-col gap-3">
           <a
             href={result.phases.length > 0 ? waHref : undefined}
-            onClick={(event) => {
-              if (result.phases.length === 0) event.preventDefault();
-            }}
+            onClick={(e) => { if (result.phases.length === 0) e.preventDefault(); }}
             target="_blank"
             rel="noopener noreferrer"
             className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition ${
@@ -273,9 +352,7 @@ export function AIProjectScoping({ toEmail }: { toEmail: string }) {
           </a>
           <a
             href={result.phases.length > 0 ? mailtoHref : undefined}
-            onClick={(event) => {
-              if (result.phases.length === 0) event.preventDefault();
-            }}
+            onClick={(e) => { if (result.phases.length === 0) e.preventDefault(); }}
             className={`inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold transition ${
               result.phases.length > 0
                 ? "border-white/15 bg-white text-slate-900 hover:bg-slate-100"

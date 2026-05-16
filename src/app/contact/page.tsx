@@ -9,7 +9,6 @@ import { PageSchema } from "@/components/PageSchema";
 import { ContactPageSchema } from "@/components/ContactPageSchema";
 import { CheckCircle2, Clock, Lock, Award, MapPin } from "lucide-react";
 import { ProjectWizard } from "@/components/ProjectWizard";
-import { AIProjectScoping } from "@/components/AIProjectScoping";
 
 export const metadata: Metadata = {
   title: "Contact Harzotech | Start a Project or Book a Consultation in Nigeria",
@@ -134,34 +133,6 @@ export default async function ContactPage({
         </Container>
       </Section>
 
-      {/* ── AI Project Brief Generator ─────────────────────── */}
-      <Section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-[#0c1e3b] to-navy-900" id="ai-brief">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(rgba(255,255,255,0.8)_1px,transparent_1px)] [background-size:24px_24px]" />
-        <div className="pointer-events-none absolute top-0 right-0 h-72 w-72 rounded-full bg-brand-blue-600/15 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-brand-red-700/10 blur-3xl" />
-        <Container>
-          <div className="relative mx-auto max-w-2xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-blue-300">
-              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              AI Project Brief Generator
-            </span>
-            <h2 className="mt-4 text-2xl font-black leading-snug text-white sm:text-3xl">
-              Let AI structure your brief{" "}
-              <span className="bg-gradient-to-r from-brand-blue-300 to-brand-red-400 bg-clip-text text-transparent">
-                before you send it.
-              </span>
-            </h2>
-            <p className="mt-4 text-base leading-8 text-slate-400">
-              Describe your business, your challenge, and what outcome you need. The AI turns it into a clear, structured project brief — with approach, phases, and next steps — that you can send to us directly.
-            </p>
-          </div>
-          <div className="relative mt-10">
-            <AIProjectScoping toEmail={site.contact.email} />
-          </div>
-        </Container>
-      </Section>
     </div>
   );
 }
